@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 
-#include <point.h>
+#include <checkpoint.h>
 #include <maptranslator.h>
 #include <QJsonObject>
 #include <QStringView>
@@ -11,34 +11,24 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
-    QJsonDocument doc;
-    QJsonObject obj;
-    QJsonArray points;
-    QJsonObject point;
-    point.insert("id", 0);
-    point.insert("x", 100);
-    point.insert("y", 200);
-    points.append(point);
-    obj.insert("checkpoints", points);
-    QJsonArray obsts;
-    QJsonObject obst;
-    obst.insert("id", 0);
-    obst.insert("x", 200);
-    obst.insert("y", 200);
-    obst.insert("angle", 0.4);
-    obsts.append(obst);
-    obj.insert("obstacles", obsts);
-    doc.setObject(obj);
-
     mscene = new QGraphicsScene();
     mscene->setSceneRect(0, 0, 1000, 1000);
     QGraphicsView* view = new QGraphicsView();
 
     minfo = new MapInfo();
     connect(minfo, &MapInfo::objectAdded, this, &MainWindow::onObjectAdded);
+    connect(minfo, &MapInfo::objectRemoved, this, &MainWindow::onObjectRemoved);
 
-    MapTranslator trans(minfo);
-    trans.update(doc);
+    mclient = new QMqttClient(this);
+    connect(mclient, &QMqttClient::connected, this, &MainWindow::onMqttConnected);
+    connect(mclient, &QMqttClient::messageReceived, this, &MainWindow::onMessageRecieve);
+    mclient->setHostname("10.3.0.218");
+    mclient->setPort(1883);
+    mclient->setUsername("phoenix");
+    mclient->setPassword("ardent");
+
+    mclient->connectToHost();
+
     QHBoxLayout* layout = new QHBoxLayout(this);
     view->setScene(mscene);
     layout->addWidget(view);
@@ -51,13 +41,35 @@ MainWindow::~MainWindow()
 
 void MainWindow::onObjectRemoved(CircuitElement *e)
 {
-    qDebug()<<"removed "<<e->getId();
     mscene->removeItem(e);
 }
 
 void MainWindow::onObjectAdded(CircuitElement *e)
 {
-    qDebug()<<"added "<<e->getId();
     mscene->addItem(e);
+}
+
+void MainWindow::onMqttConnected()
+{
+    mclient->subscribe(QMqttTopicFilter("/map"));
+}
+
+void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicName &topic)
+{
+    QJsonParseError error;
+    QJsonDocument doc = QJsonDocument::fromJson(message, &error);
+    if(error.error == QJsonParseError::NoError)
+    {
+        qDebug()<<doc;
+        if(topic.name() == "/map")
+        {
+            MapTranslator trans(minfo);
+            trans.update(doc);
+        }
+    }
+    else
+    {
+        qDebug()<<error.errorString();
+    }
 }
 

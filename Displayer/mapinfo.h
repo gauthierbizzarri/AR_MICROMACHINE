@@ -1,71 +1,53 @@
 #ifndef MAPINFO_H
 #define MAPINFO_H
 
-#include <point.h>
-#include <obstacle.h>
+#include <checkpoint.h>
+#include <rectangle.h>
 #include <stdlib.h>
 #include <QVBoxLayout>
+#include <QDebug>
 
 class MapInfo: public QObject{
     Q_OBJECT
 private:
-    std::map<int, Point*> points;
-    std::map<int, Obstacle*> obstacles;
+    std::map<QString, CircuitElement*> objects;
 public:
     MapInfo():QObject(){
-        this->points = std::map<int, Point*>();
-        this->obstacles = std::map<int, Obstacle*>();
+        this->objects = std::map<QString, CircuitElement*>();
     }
 
-    void addPoint(Point* point){
-        this->points.insert_or_assign(point->getId(), point);
-        emit objectAdded(point);
+    void addObject(QString id, CircuitElement* object){
+        this->objects.insert_or_assign(id, object);
+        emit objectAdded(object);
     }
 
-    void addObstacle(Obstacle* obstacle){
-        this->obstacles.insert_or_assign(obstacle->getId(), obstacle);
-        emit objectAdded(obstacle);
+    void removeObject(QString id){
+        CircuitElement* object = this->objects[id];
+        this->objects.erase(id);
+        emit objectRemoved(object);
     }
 
-    void removePoint(Point* point){
-        this->points.erase(point->getId());
-        emit objectRemoved(point);
-    }
-
-    void removeObstacle(Obstacle* obstacle){
-        this->obstacles.erase(obstacle->getId());
-        emit objectRemoved(obstacle);
-    }
-
-    bool containsPoint(int id)
+    bool contains(QString id)
     {
-        return this->points.count(id);
+        return this->objects.count(id);
     }
 
-    bool containsObstacle(int id)
+    std::map<QString, CircuitElement*> getObjects()
     {
-        return this->obstacles.count(id);
+        return this->objects;
     }
 
-    void movePoint(int id, Position* newPos)
+    CircuitElement* getObject(QString id)
     {
-        this->points[id]->setPosition(newPos);
+        return this->objects[id];
     }
 
-    void moveObstacle(int id, Position* newPos, float angle)
+    void clear()
     {
-        this->obstacles[id]->setPosition(newPos);
-        this->obstacles[id]->setAngle(angle);
-    }
-
-    std::map<int, Point*> getPoints()
-    {
-        return this->points;
-    }
-
-    std::map<int, Obstacle*> getObstacles()
-    {
-        return this->obstacles;
+        for(std::map<QString, CircuitElement*>::iterator it = this->objects.begin(); it != this->objects.end(); ++it)
+        {
+            this->removeObject(it->first);
+        }
     }
 
 signals:

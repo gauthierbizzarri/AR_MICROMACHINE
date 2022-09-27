@@ -144,6 +144,8 @@ Makefile: RoadAI.pro D:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf D:/Qt/
 		D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_help_private.pri \
 		D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_location.pri \
 		D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_location_private.pri \
+		D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_mqtt.pri \
+		D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_mqtt_private.pri \
 		D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimedia.pri \
 		D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimedia_private.pri \
 		D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimediawidgets.pri \
@@ -275,6 +277,8 @@ Makefile: RoadAI.pro D:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf D:/Qt/
 		RoadAI.pro \
 		D:/Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl \
 		D:/Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl \
+		D:/Qt/5.15.2/mingw81_64/lib/Qt5Mqtt.prl \
+		D:/Qt/5.15.2/mingw81_64/lib/Qt5Network.prl \
 		D:/Qt/5.15.2/mingw81_64/lib/Qt5Core.prl \
 		D:/Qt/5.15.2/mingw81_64/lib/qtmain.prl \
 		D:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf
@@ -353,6 +357,8 @@ D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_help.pri:
 D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_help_private.pri:
 D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_location.pri:
 D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_location_private.pri:
+D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_mqtt.pri:
+D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_mqtt_private.pri:
 D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimedia.pri:
 D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimedia_private.pri:
 D:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimediawidgets.pri:
@@ -484,6 +490,8 @@ D:/Qt/5.15.2/mingw81_64/mkspecs/features/lex.prf:
 RoadAI.pro:
 D:/Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl:
 D:/Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl:
+D:/Qt/5.15.2/mingw81_64/lib/Qt5Mqtt.prl:
+D:/Qt/5.15.2/mingw81_64/lib/Qt5Network.prl:
 D:/Qt/5.15.2/mingw81_64/lib/Qt5Core.prl:
 D:/Qt/5.15.2/mingw81_64/lib/qtmain.prl:
 D:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:

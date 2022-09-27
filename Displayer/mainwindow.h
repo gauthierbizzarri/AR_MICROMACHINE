@@ -7,6 +7,7 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include <mapinfo.h>
+#include <QMqttClient>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,8 +26,11 @@ private:
     QGraphicsScene* mscene;
     QGraphicsScene* mScene;
     QGraphicsView* mView;
+    QMqttClient* mclient;
 private slots:
     void onObjectRemoved(CircuitElement*);
     void onObjectAdded(CircuitElement*);
+    void onMqttConnected();
+    void onMessageRecieve(const QByteArray&, const QMqttTopicName&);
 };
 #endif // MAINWINDOW_H

@@ -1,6 +1,7 @@
 #include "maptranslator.h"
 #include <QJsonArray>
 #include <QJsonObject>
+#include <circle.h>
 
 MapTranslator::MapTranslator(MapInfo* info)
 {
@@ -12,52 +13,28 @@ void MapTranslator::update(QJsonDocument message)
     QJsonObject base = message.object();
     QJsonArray points = base.value("checkpoints").toArray();
     QJsonArray obstacles = base.value("obstacles").toArray();
-    std::vector<int> currentObst;
-    std::vector<int> currentPts;
+    info->clear();
     for(int i = 0; i<points.size(); i++)
     {
         QJsonObject pointObj = points[i].toObject();
-        Position* pos = new Position(pointObj.value("x").toInt(), pointObj.value("y").toInt());
-        int id = pointObj.value("id").toInt();
-        if(!info->containsPoint(id))
-        {
-            Point* point = new Point(id, pos);
-            info->addPoint(point);
-        }
-        else
-            info->movePoint(id, pos);
-        currentPts.push_back(id);
+        QString id = pointObj.value("id").toString();
+        Checkpoint* point = new Checkpoint(pointObj.value("x").toInt(), pointObj.value("y").toInt());
+        info->addObject(id, point);
     }
-    for(int i = 0; i<points.size(); i++)
+    for(int i = 0; i<obstacles.size(); i++)
     {
         QJsonObject obtclObj = obstacles[i].toObject();
-        Position* pos = new Position(obtclObj.value("x").toInt(), obtclObj.value("y").toInt());
-        float angle = obtclObj.value("angle").toDouble();
-        int id = obtclObj.value("id").toInt();
-
-        if(!info->containsObstacle(id))
+        QString id = obtclObj.value("id").toString();
+        if(obtclObj.value("id").toInt() %2 == 0)
         {
-            Obstacle* obstacle = new Obstacle(id, pos, angle);
-            info->addObstacle(obstacle);
+            Circle* circle = new Circle(obtclObj.value("x").toInt(), obtclObj.value("y").toInt());
+            info->addObject(id, circle);
         }
         else
-            info->moveObstacle(id, pos, angle);
-        currentObst.push_back(id);
-    }
-    std::map<int, Point*> pvalues = info->getPoints();
-    for(std::map<int,Point*>::iterator iter = pvalues.begin(); iter != pvalues.end(); ++iter)
-    {
-        if(std::find(currentPts.begin(), currentObst.end(), iter->second->getId()) == currentPts.end())
         {
-            info->removePoint(iter->second);
-        }
-    }
-    std::map<int, Obstacle*> ovalues = info->getObstacles();
-    for(std::map<int,Obstacle*>::iterator iter = ovalues.begin(); iter != ovalues.end(); ++iter)
-    {
-        if(std::find(currentPts.begin(), currentObst.end(), iter->second->getId()) == currentPts.end())
-        {
-            info->removeObstacle(iter->second);
+            float angle = obtclObj.value("angle").toDouble();
+            Rectangle* obstacle = new Rectangle(obtclObj.value("x").toInt(), obtclObj.value("y").toInt(), angle);
+            info->addObject(id, obstacle);
         }
     }
 }

@@ -10,28 +10,8 @@
 class CircuitElement : public QGraphicsObject
 {
 protected:
-    int id;
-    Position* pos;
-    CircuitElement(int id, Position* pos, QGraphicsItem* parent = nullptr):QGraphicsObject(parent){
-        this->id = id;
-        this->pos = pos;
-        this->setPos(pos->getX(), pos->getY());
-    }
-public:
-    Position* getPosition(){
-        return this->pos;
-    }
-    void setPosition(Position* pos)
-    {
-        this->pos = pos;
-        this->setPos(pos->getX(), pos->getY());
-    }
-    int getId(){
-        return this->id;
-    }
-    ~CircuitElement()
-    {
-        delete this->pos;
+    CircuitElement(int x, int y, QGraphicsItem* parent = nullptr):QGraphicsObject(parent){
+        this->setPos(x, y);
     }
 };
 
