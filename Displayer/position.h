@@ -13,6 +13,11 @@ public:
     int getY();
 
     Position* translate(int x = 0, int y = 0);
+
+    bool operator==(Position p)
+    {
+        return p.getX() == this->x && p.getY() == this->y;
+    }
 };
 
 #endif // POSITION_H

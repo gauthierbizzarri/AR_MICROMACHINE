@@ -21,6 +21,11 @@ public:
     Position* getPosition(){
         return this->pos;
     }
+    void setPosition(Position* pos)
+    {
+        this->pos = pos;
+        this->setPos(pos->getX(), pos->getY());
+    }
     int getId(){
         return this->id;
     }

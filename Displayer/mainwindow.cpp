@@ -30,27 +30,34 @@ MainWindow::MainWindow(QWidget *parent)
     obj.insert("obstacles", obsts);
     doc.setObject(obj);
 
-    MapTranslator trans(doc);
-
-    QGraphicsScene* scene = new QGraphicsScene();
-    scene->setSceneRect(0, 0, 1000, 1000);
+    mscene = new QGraphicsScene();
+    mscene->setSceneRect(0, 0, 1000, 1000);
     QGraphicsView* view = new QGraphicsView();
-    MapInfo* info = trans.translate();
-    for(uint i = 0; i<info->getPoints().size(); i++)
-    {
-        scene->addItem(info->getPoints()[i]);
-    }
-    for(uint i = 0; i<info->getObstacles().size(); i++)
-    {
-        scene->addItem(info->getObstacles()[i]);
-    }
+
+    minfo = new MapInfo();
+    connect(minfo, &MapInfo::objectAdded, this, &MainWindow::onObjectAdded);
+
+    MapTranslator trans(minfo);
+    trans.update(doc);
     QHBoxLayout* layout = new QHBoxLayout(this);
-    view->setScene(scene);
+    view->setScene(mscene);
     layout->addWidget(view);
     setLayout(layout);
 }
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::onObjectRemoved(CircuitElement *e)
+{
+    qDebug()<<"removed "<<e->getId();
+    mscene->removeItem(e);
+}
+
+void MainWindow::onObjectAdded(CircuitElement *e)
+{
+    qDebug()<<"added "<<e->getId();
+    mscene->addItem(e);
 }
 

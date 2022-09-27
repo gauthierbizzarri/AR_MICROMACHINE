@@ -15,6 +15,10 @@ public:
 public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+    bool operator==(CircuitElement* el){
+        return el->getId() == this->id;
+    }
 };
 
 #endif // POINT_H

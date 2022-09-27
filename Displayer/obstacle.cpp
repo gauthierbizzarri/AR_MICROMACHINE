@@ -11,6 +11,11 @@ float Obstacle::getAngle()
     return this->angle;
 }
 
+void Obstacle::setAngle(float angle)
+{
+    this->angle = angle;
+}
+
 QRectF Obstacle::boundingRect() const
 {
     if(this->id%2 == 0)
