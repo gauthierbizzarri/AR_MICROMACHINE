@@ -7,15 +7,13 @@
 #include <mapinfo.h>
 #include <QJsonDocument>
 
-class MapTranslator : QWidget
+class MapTranslator
 {
-    Q_OBJECT
 private:
     QJsonDocument original;
 public:
     MapTranslator(QJsonDocument jsonmessage);
-    MapInfo translate();
-    virtual void paintEvent(QPaintEvent* event);
+    MapInfo* translate();
 };
 
 #endif // MAPTRANSLATOR_H

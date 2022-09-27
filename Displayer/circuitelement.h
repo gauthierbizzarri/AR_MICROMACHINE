@@ -23,7 +23,7 @@ public:
     int getId(){
         return this->id;
     }
-    virtual void paintEvent(QPaintEvent* event);
+    virtual void paintEvent(QPaintEvent* event){}
 };
 
 #endif // CIRCUITELEMENT_H

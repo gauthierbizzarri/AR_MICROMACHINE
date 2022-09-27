@@ -4,27 +4,27 @@
 #include <point.h>
 #include <obstacle.h>
 #include <stdlib.h>
+#include <QVBoxLayout>
 
-class MapInfo{
+class MapInfo: public QVBoxLayout{
+    Q_OBJECT
 private:
     std::vector<Point*> points;
     std::vector<Obstacle*> obstacles;
 public:
-    MapInfo(std::vector<Point*> points, std::vector<Obstacle*> obstacles){
-        this->points = points;
-        this->obstacles = obstacles;
-    }
     MapInfo(){
         this->points = std::vector<Point*>();
         this->obstacles = std::vector<Obstacle*>();
     }
 
     void addPoint(Point* point){
+        this->addWidget(point);
         this->points.push_back(point);
     }
 
-    void addObstacle(Point* point){
-        this->points.push_back(point);
+    void addObstacle(Obstacle* obstacle){
+        this->addWidget(obstacle);
+        this->obstacles.push_back(obstacle);
     }
 
     std::vector<Point*> getPoints()

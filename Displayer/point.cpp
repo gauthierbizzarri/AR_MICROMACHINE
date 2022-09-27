@@ -16,5 +16,6 @@ void Point::paintEvent(QPaintEvent* event)
     pen.setColor(Qt::green);
 
     painter.setPen(pen);
-    painter.drawEllipse(0, 0, 50, 100);
+    int size = 20;
+    painter.drawEllipse(this->pos->getX()-size/2, this->pos->getY()-size/2, size, size);
 }
