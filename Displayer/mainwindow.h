@@ -22,15 +22,33 @@ public:
     ~MainWindow();
 
 private:
+    /**
+     * @brief minfo map informations
+     */
     MapInfo* minfo;
     QGraphicsScene* mscene;
     QGraphicsScene* mScene;
     QGraphicsView* mView;
+    /**
+     * @brief mclient mqtt client
+     */
     QMqttClient* mclient;
 private slots:
+    /**
+     * @brief onObjectRemoved called whenever an object gets removed from the map
+     */
     void onObjectRemoved(CircuitElement*);
+    /**
+     * @brief onObjectAdded called whenever an object gets added to the map
+     */
     void onObjectAdded(CircuitElement*);
+    /**
+     * @brief onMqttConnected called on mqtt brocker connection
+     */
     void onMqttConnected();
+    /**
+     * @brief onMessageRecieve called on message arrival
+     */
     void onMessageRecieve(const QByteArray&, const QMqttTopicName&);
 };
 #endif // MAINWINDOW_H

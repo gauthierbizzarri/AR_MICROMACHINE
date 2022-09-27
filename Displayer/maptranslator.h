@@ -10,9 +10,20 @@
 class MapTranslator
 {
 private:
-    MapInfo* info;
+    /**
+     * @brief info the map to be updated
+     */
+    MapInfo* minfo;
 public:
+    /**
+     * @brief MapTranslator updates a map with a json
+     * @param info the map to update
+     */
     MapTranslator(MapInfo* info);
+    /**
+     * @brief update updates the map with the data givent bu the json message
+     * @param message the json message
+     */
     void update(QJsonDocument message);
 };
 

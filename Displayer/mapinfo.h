@@ -3,48 +3,76 @@
 
 #include <checkpoint.h>
 #include <rectangle.h>
-#include <stdlib.h>
 #include <QVBoxLayout>
 #include <QDebug>
 
 class MapInfo: public QObject{
     Q_OBJECT
 private:
-    std::map<QString, CircuitElement*> objects;
+    /**
+     * @brief objects mapping of object on the map, with their id
+     */
+    std::map<QString, CircuitElement*> mobjects;
 public:
     MapInfo():QObject(){
-        this->objects = std::map<QString, CircuitElement*>();
+        mobjects = std::map<QString, CircuitElement*>();
     }
 
+    /**
+     * @brief addObject adds an object to the map
+     * @param id id of the object
+     * @param object object to be added
+     */
     void addObject(QString id, CircuitElement* object){
-        this->objects.insert_or_assign(id, object);
+        mobjects.insert_or_assign(id, object);
         emit objectAdded(object);
     }
 
+    /**
+     * @brief removeObject removed an object from the map
+     * @param id id of the object to be removed
+     */
     void removeObject(QString id){
-        CircuitElement* object = this->objects[id];
-        this->objects.erase(id);
+        CircuitElement* object = mobjects[id];
+        mobjects.erase(id);
         emit objectRemoved(object);
     }
 
+    /**
+     * @brief contains check if the map holds an object with the given id
+     * @param id id of the object
+     * @return true if objec on the map, false overwise
+     */
     bool contains(QString id)
     {
-        return this->objects.count(id);
+        return mobjects.count(id);
     }
 
-    std::map<QString, CircuitElement*> getObjects()
+    /**
+     * @brief getObjects gets all the objects on the map
+     * @return the map object representing the mapping between ids and objects
+     */
+    std::map<QString, CircuitElement*> getObjects() const
     {
-        return this->objects;
+        return mobjects;
     }
 
+    /**
+     * @brief getObject gets the object corresponding to the id
+     * @param id id of the object
+     * @return the object, or nullptr
+     */
     CircuitElement* getObject(QString id)
     {
-        return this->objects[id];
+        return mobjects[id];
     }
 
+    /**
+     * @brief clear removes all objects from the map
+     */
     void clear()
     {
-        for(std::map<QString, CircuitElement*>::iterator it = this->objects.begin(); it != this->objects.end(); ++it)
+        for(std::map<QString, CircuitElement*>::iterator it = mobjects.begin(); it != mobjects.end(); ++it)
         {
             this->removeObject(it->first);
         }

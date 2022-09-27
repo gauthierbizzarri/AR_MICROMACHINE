@@ -8,6 +8,12 @@
 class Circle : public CircuitElement
 {
 public:
+    /**
+     * @brief Circle graphical representation of a circle obstacle
+     * @param x x central position of the circle
+     * @param y y central position of the circle
+     * @param parent graphical item's parent
+     */
     Circle(int x, int y, QGraphicsItem* parent = nullptr);
 
     // QGraphicsItem interface

@@ -10,6 +10,12 @@
 class CircuitElement : public QGraphicsObject
 {
 protected:
+    /**
+     * @brief CircuitElement Base class for graphical representation of circuit elements
+     * @param x circuit element's center x
+     * @param y circuit element's center y
+     * @param parent graphical item's parent
+     */
     CircuitElement(int x, int y, QGraphicsItem* parent = nullptr):QGraphicsObject(parent){
         this->setPos(x, y);
     }

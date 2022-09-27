@@ -8,10 +8,14 @@
 class Checkpoint : public CircuitElement
 {
 public:
-    Checkpoint(int x, int y);
-
-    // QGraphicsItem interface
-public:
+    /**
+     * @brief Checkpoint graphical representation of a checkpoint
+     * @param x x center position of checkpoint
+     * @param y y center position of checkpoint
+     * @param parent graphical item's parent
+     */
+    Checkpoint(int x, int y, QGraphicsItem* parent = nullptr);
+//********interface***********//
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };

@@ -7,9 +7,16 @@
 class Rectangle : public CircuitElement
 {
 public:
+    /**
+     * @brief Rectangle graphical representation of a rectangle obstacle
+     * @param x x center position of the rectangle
+     * @param y y center porision of the rectangle
+     * @param angle rotation of the rectangle
+     * @param parent graphical item's parent
+     */
     Rectangle(int x, int y, float angle, QGraphicsItem* parent = nullptr);
 
-    // QGraphicsItem interface
+//********interface***********//
 public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
