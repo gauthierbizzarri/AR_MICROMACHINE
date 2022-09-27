@@ -16,13 +16,13 @@ MapInfo* MapTranslator::translate()
    for(int i = 0; i<points.size(); i++)
    {
        QJsonObject pointObj = points[i].toObject();
-       Point* point = new Point(info, pointObj.value("id").toInt(), new Position(pointObj.value("x").toInt(), pointObj.value("y").toInt()));
+       Point* point = new Point(pointObj.value("id").toInt(), new Position(pointObj.value("x").toInt(), pointObj.value("y").toInt()));
        info->addPoint(point);
    }
    for(int i = 0; i<points.size(); i++)
    {
        QJsonObject obtclObj = obstacles[i].toObject();
-       Obstacle* obstacle = new Obstacle(info, obtclObj.value("id").toInt(), new Position(obtclObj.value("x").toInt(), obtclObj.value("y").toInt(), obtclObj.value("angle").toDouble()));
+       Obstacle* obstacle = new Obstacle(obtclObj.value("id").toInt(), new Position(obtclObj.value("x").toInt(), obtclObj.value("y").toInt()), obtclObj.value("angle").toDouble());
        info->addObstacle(obstacle);
    }
    return info;

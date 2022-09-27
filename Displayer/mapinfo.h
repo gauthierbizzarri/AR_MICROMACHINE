@@ -6,8 +6,7 @@
 #include <stdlib.h>
 #include <QVBoxLayout>
 
-class MapInfo: public QVBoxLayout{
-    Q_OBJECT
+class MapInfo{
 private:
     std::vector<Point*> points;
     std::vector<Obstacle*> obstacles;
@@ -18,12 +17,10 @@ public:
     }
 
     void addPoint(Point* point){
-        this->addWidget(point);
         this->points.push_back(point);
     }
 
     void addObstacle(Obstacle* obstacle){
-        this->addWidget(obstacle);
         this->obstacles.push_back(obstacle);
     }
 

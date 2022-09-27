@@ -1,6 +1,7 @@
 #include "obstacle.h"
+#include <QGraphicsEllipseItem>
 
-Obstacle::Obstacle(QWidget* parent, int id, Position* pos, float angle): CircuitElement(parent, id, pos)
+Obstacle::Obstacle(int id, Position* pos, float angle): CircuitElement(id, pos)
 {
     this->angle=angle;
 }
@@ -10,16 +11,24 @@ float Obstacle::getAngle()
     return this->angle;
 }
 
-void Obstacle::paintEvent(QPaintEvent* event)
+QRectF Obstacle::boundingRect() const
 {
-    QPainter painter(this);
-    QBrush brush(Qt::BrushStyle::SolidPattern);
-    brush.setColor(Qt::green);
-    painter.setBrush(brush);
+    if(this->id%2 == 0)
+    {
+        return QRectF(-50, -50, 100., 100.);
+    }
+    return QRectF(-60, -50, 120., 100.);
+}
 
-    QPen pen;
-    pen.setColor(Qt::green);
-
-    painter.setPen(pen);
-    painter.drawEllipse(0, 0, 50, 100);
+void Obstacle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    painter->setBrush(Qt::green);
+    if(this->id%2 == 0)
+    {
+        painter->drawEllipse(0, 0, 100, 100);
+    }
+    else
+    {
+        painter->drawRect(0, 0, 120, 100);
+    }
 }

@@ -1,21 +1,18 @@
 #include "point.h"
+#include <QGraphicsEllipseItem>
 
-Point::Point(QWidget* parent, int id, Position* pos) : CircuitElement(parent, id, pos)
+Point::Point(int id, Position* pos) : CircuitElement(id, pos)
 {
 
 }
 
-void Point::paintEvent(QPaintEvent* event)
+QRectF Point::boundingRect() const
 {
-    QPainter painter(this);
-    QBrush brush(Qt::BrushStyle::SolidPattern);
-    brush.setColor(Qt::green);
-    painter.setBrush(brush);
+    return QRectF(-50, -50, 100., 100.);
+}
 
-    QPen pen;
-    pen.setColor(Qt::green);
-
-    painter.setPen(pen);
-    int size = 20;
-    painter.drawEllipse(this->pos->getX()-size/2, this->pos->getY()-size/2, size, size);
+void Point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    painter->setBrush(Qt::green);
+    painter->drawEllipse(this->pos->getX(), this->pos->getY(), 100, 100);
 }

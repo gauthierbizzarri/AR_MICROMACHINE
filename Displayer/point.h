@@ -9,8 +9,12 @@
 class Point : public CircuitElement
 {
 public:
-    Point(QWidget* parent, int id, Position* pos);
-    virtual void paintEvent(QPaintEvent* event);
+    Point(int id, Position* pos);
+
+    // QGraphicsItem interface
+public:
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif // POINT_H

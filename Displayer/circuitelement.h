@@ -5,16 +5,17 @@
 #include <quuid.h>
 #include <QWidget>
 #include <QPaintEvent>
+#include <QGraphicsItem>
 
-class CircuitElement: public QWidget
+class CircuitElement : public QGraphicsObject
 {
-    Q_OBJECT
 protected:
     int id;
     Position* pos;
-    CircuitElement(QWidget* parent, int id, Position* pos):QWidget(parent){
+    CircuitElement(int id, Position* pos, QGraphicsItem* parent = nullptr):QGraphicsObject(parent){
         this->id = id;
         this->pos = pos;
+        this->setPos(pos->getX(), pos->getY());
     }
 public:
     Position* getPosition(){
@@ -23,7 +24,10 @@ public:
     int getId(){
         return this->id;
     }
-    virtual void paintEvent(QPaintEvent* event){}
+    ~CircuitElement()
+    {
+        delete this->pos;
+    }
 };
 
 #endif // CIRCUITELEMENT_H

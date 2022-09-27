@@ -9,9 +9,13 @@ class Obstacle : public CircuitElement
 private:
     float angle;
 public:
-    Obstacle(QWidget* parent, int id, Position* pos, float angle);
+    Obstacle(int id, Position* pos, float angle);
     float getAngle();
-    virtual void paintEvent(QPaintEvent* event);
+
+    // QGraphicsItem interface
+public:
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif // OBSTACLE_H
