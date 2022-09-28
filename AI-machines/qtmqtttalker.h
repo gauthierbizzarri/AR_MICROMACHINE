@@ -8,10 +8,15 @@ class QtMqttTalker : public QObject
 {
     Q_OBJECT
 public:
+    QUuid m_uuid;
+
     QMqttClient* m_client;
 
-    QMqttTopicFilter m_topicFilter;
-    QMqttTopicName m_topicName;
+    QMqttTopicFilter m_topicProperties;
+    QMqttTopicName m_topicRegister;
+
+    QMqttTopicFilter m_topicGame;
+    QMqttTopicName m_topicController;
 
     quint8 m_qos;
 

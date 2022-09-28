@@ -3,8 +3,15 @@
 QtMqttTalker::QtMqttTalker(QObject *parent)
     : QObject{parent}
 {
-    m_topicFilter = QMqttTopicFilter("/game");
-    m_topicName = QMqttTopicName("/player/control");
+    m_uuid = QUuid::createUuid();
+
+    qDebug() << m_uuid;
+
+    m_topicProperties = QMqttTopicFilter("/game/properties");
+    m_topicRegister =   QMqttTopicName("/player/register");
+    m_topicGame =       QMqttTopicFilter("/game");
+    m_topicController = QMqttTopicName("/player/control");
+
     m_qos = 0;
 
     m_client = new QMqttClient(this);
@@ -23,7 +30,7 @@ QtMqttTalker::QtMqttTalker(QObject *parent)
 }
 
 void QtMqttTalker::QtMqttSub() {
-    auto subscription = m_client->subscribe(m_topicFilter, m_qos);
+    auto subscription = m_client->subscribe(m_topicGame, m_qos);
     if (!subscription) {
         qDebug() << "Could not subscribe. Is there a valid connection?";
         return;
@@ -35,7 +42,7 @@ void QtMqttTalker::QtMqttSub() {
 }
 
 void QtMqttTalker::QtMqttPub(QByteArray message) {
-    m_client->publish(m_topicName, message, m_qos);
+    m_client->publish(m_topicController, message, m_qos);
 
     qDebug("MqttPub!");
 }
@@ -44,9 +51,16 @@ void QtMqttTalker::TalkerMessageReceived(const QByteArray &message, const QMqttT
     qDebug() << message;
     qDebug() << topicName;
 
-    QJsonDocument jsonMessage = QJsonDocument::fromJson(message);
+    QJsonParseError error;
+    QJsonDocument jsonMessage = QJsonDocument::fromJson(message, &error);
+
+    if (error.error != QJsonParseError::NoError) {
+        qDebug() << error.errorString();
+        return;
+    }
 
     qDebug() << jsonMessage;
+    qDebug() << jsonMessage.toJson();
 
     emit jsonAI(jsonMessage);
 }
