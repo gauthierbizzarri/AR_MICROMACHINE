@@ -30,8 +30,14 @@ QtMqttTalker::QtMqttTalker(QObject *parent)
 }
 
 void QtMqttTalker::QtMqttSub() {
-    auto subscription = m_client->subscribe(m_topicGame, m_qos);
-    if (!subscription) {
+    auto propertiesSubscription = m_client->subscribe(m_topicProperties, m_qos);
+    auto gameSubscription = m_client->subscribe(m_topicGame, m_qos);
+
+    if (!propertiesSubscription) {
+        qDebug() << "Could not subscribe. Is there a valid connection?";
+        return;
+    }
+    if (!gameSubscription) {
         qDebug() << "Could not subscribe. Is there a valid connection?";
         return;
     }
@@ -41,16 +47,24 @@ void QtMqttTalker::QtMqttSub() {
     qDebug("MqttSub!");
 }
 
-void QtMqttTalker::QtMqttPub(QByteArray message) {
-    m_client->publish(m_topicController, message, m_qos);
+void QtMqttTalker::QtMqttPub(QMqttTopicName topic, QByteArray message) {
+    m_client->publish(topic, message, m_qos);
 
     qDebug("MqttPub!");
 }
 
-void QtMqttTalker::TalkerMessageReceived(const QByteArray &message, const QMqttTopicName &topicName) {
-    qDebug() << message;
-    qDebug() << topicName;
+void QtMqttTalker::QtMqttProperties(QJsonDocument properties) {
+    qDebug() << "properties";
+    qDebug() << properties;
+    TalkerRegister();
+}
+void QtMqttTalker::QtMqttGame(QJsonDocument game) {
+    qDebug() << "game";
+    qDebug() << game;
+    emit jsonAI(game);
+}
 
+void QtMqttTalker::TalkerMessageReceived(const QByteArray &message, const QMqttTopicName &topicName) {
     QJsonParseError error;
     QJsonDocument jsonMessage = QJsonDocument::fromJson(message, &error);
 
@@ -59,10 +73,34 @@ void QtMqttTalker::TalkerMessageReceived(const QByteArray &message, const QMqttT
         return;
     }
 
-    qDebug() << jsonMessage;
-    qDebug() << jsonMessage.toJson();
+    if (topicName.name() == m_topicProperties.filter()) {
+        QtMqttProperties(jsonMessage);
+    }
+    if (topicName.name() == m_topicGame.filter()) {
+        QtMqttGame(jsonMessage);
+    }
+}
 
-    emit jsonAI(jsonMessage);
+void QtMqttTalker::TalkerRegister() {
+    QVariantMap loginMap;
+
+    loginMap["uuid"] = m_uuid;
+    loginMap["pseudo"] = "ia" + m_uuid.toString();
+    loginMap["controller"] = "ia";
+    loginMap["vehicle"] = "car";
+    loginMap["team"] = "0";
+
+    QJsonDocument login = QJsonDocument(QJsonObject::fromVariantMap(loginMap));
+
+    qDebug() << login;
+
+    QtMqttPub(m_topicRegister, login.toJson());
+}
+
+void QtMqttTalker::TalkerController(QJsonDocument controller) {
+    qDebug() << controller;
+
+    QtMqttPub(m_topicController, controller.toJson());
 }
 
 void QtMqttTalker::TalkerConnected() {

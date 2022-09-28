@@ -22,7 +22,11 @@ public:
 
     explicit QtMqttTalker(QObject *parent = nullptr);
     void QtMqttSub();
-    void QtMqttPub(QByteArray message);
+    void QtMqttPub(QMqttTopicName, QByteArray);
+
+    void QtMqttProperties(QJsonDocument);
+    void QtMqttGame(QJsonDocument);
+
     void QtMqttDebug();
 
 signals:
@@ -34,6 +38,11 @@ private slots:
     void TalkerConnected();
     void TalkerDebugState(QMqttClient::ClientState);
     void TalkerDebugError(QMqttClient::ClientError);
+
+    void TalkerRegister();
+
+public slots:
+    void TalkerController(QJsonDocument);
 };
 
 #endif // QTMQTTTALKER_H

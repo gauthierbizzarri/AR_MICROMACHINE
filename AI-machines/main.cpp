@@ -2,9 +2,9 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include "qtmqtttalker.h"
+#include "ai_manager.h"
 
-QtMqttTalker* talker;
+AI_Manager* ai_manager;
 
 int main(int argc, char *argv[])
 {
@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     qDebug("Hello World!");
 
-    talker = new QtMqttTalker();
+    ai_manager = new AI_Manager();
 
     return a.exec();
 }
