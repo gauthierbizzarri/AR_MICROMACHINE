@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(minfo, &MapInfo::objectAdded, this, &MainWindow::onObjectAdded);
     connect(minfo, &MapInfo::objectRemoved, this, &MainWindow::onObjectRemoved);
 
+
+
+
     mclient = new QMqttClient(this);
     connect(mclient, &QMqttClient::connected, this, &MainWindow::onMqttConnected);
     connect(mclient, &QMqttClient::messageReceived, this, &MainWindow::onMessageRecieve);
@@ -67,11 +70,13 @@ void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicNam
         if(topic.name() == "/map")
         {
             MapTranslator trans(minfo);
+            //trans.info->clear();
             trans.update(doc);
         }
         if(topic.name() == "/game")
         {
             MapTranslator trans(minfo);
+            //trans.info->clear();
             trans.update_players(doc);
         }
     }

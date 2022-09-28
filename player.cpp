@@ -4,6 +4,7 @@
 Player::Player(int x, int y ) : CircuitElement(x, y)
 
 {
+    this->setProperty("TYPE","Player");
 }
 
 void Player::set_data( char color0,int team,float angle,int speed ,char vehicule)

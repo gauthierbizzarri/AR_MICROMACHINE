@@ -10,8 +10,8 @@
 class MapTranslator
 {
 private:
-    MapInfo* info;
 public:
+    MapInfo* info;
     MapTranslator(MapInfo* info);
     void update(QJsonDocument message);
     void update_players(QJsonDocument message);

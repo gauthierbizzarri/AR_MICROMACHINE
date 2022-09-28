@@ -2,7 +2,7 @@
 
 Circle::Circle(int x, int y, QGraphicsItem* parent) : CircuitElement(x, y, parent)
 {
-
+    this->setProperty("TYPE","Circle");
 }
 
 QRectF Circle::boundingRect() const

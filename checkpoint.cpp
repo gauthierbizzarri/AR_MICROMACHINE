@@ -3,6 +3,7 @@
 
 Checkpoint::Checkpoint(int x, int y) : CircuitElement(x, y)
 {
+    this->setProperty("TYPE","Checkpoint");
 }
 
 QRectF Checkpoint::boundingRect() const

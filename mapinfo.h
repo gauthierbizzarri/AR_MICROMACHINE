@@ -47,8 +47,18 @@ public:
     {
         for(std::map<QString, CircuitElement*>::iterator it = this->objects.begin(); it != this->objects.end(); ++it)
         {
+            if (it->second->property("TYPE")=="Circle" || it->second->property("TYPE")=="Checkpoint"  )
             this->removeObject(it->first);
         }
+    }
+    void clear_players()
+    {
+        for(std::map<QString, CircuitElement*>::iterator it = this->objects.begin(); it != this->objects.end(); ++it)
+        {
+            if (it->second->property("TYPE")=="Player")
+            this->removeObject(it->first);
+        }
+
     }
 
 signals:

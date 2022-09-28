@@ -48,7 +48,7 @@ void MapTranslator::update_players(QJsonDocument message)
     QJsonObject base = message.object();
     QJsonArray players = base.value("players").toArray();
     qDebug()<<"PLAYERS RECEIVED"<<players;
-    info->clear();
+    info->clear_players();
     // UPDATE PLAYER
     for(int i = 0; i<players.size(); i++)
     {
