@@ -18,6 +18,10 @@ public:
         mobjects = std::map<QString, CircuitElement*>();
     }
 
+    ~MapInfo(){
+        clear();
+    }
+
     /**
      * @brief addObject adds an object to the map
      * @param id id of the object
@@ -33,9 +37,11 @@ public:
      * @param id id of the object to be removed
      */
     void removeObject(QString id){
+        if(mobjects.count(id)==0) return;
         CircuitElement* object = mobjects[id];
         mobjects.erase(id);
         emit objectRemoved(object);
+        delete(object);
     }
 
     /**
@@ -72,9 +78,9 @@ public:
      */
     void clear()
     {
-        for(std::map<QString, CircuitElement*>::iterator it = mobjects.begin(); it != mobjects.end(); ++it)
+        for(const auto &pair : std::map<QString, CircuitElement*>(mobjects))
         {
-            this->removeObject(it->first);
+            this->removeObject(pair.first);
         }
     }
 

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[8];
-    char stringdata0[106];
+    QByteArrayData data[11];
+    char stringdata0[148];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,18 +33,23 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 15), // "onObjectRemoved"
-QT_MOC_LITERAL(2, 27, 0), // ""
-QT_MOC_LITERAL(3, 28, 15), // "CircuitElement*"
-QT_MOC_LITERAL(4, 44, 13), // "onObjectAdded"
-QT_MOC_LITERAL(5, 58, 15), // "onMqttConnected"
-QT_MOC_LITERAL(6, 74, 16), // "onMessageRecieve"
-QT_MOC_LITERAL(7, 91, 14) // "QMqttTopicName"
+QT_MOC_LITERAL(1, 11, 20), // "setupStartScreenView"
+QT_MOC_LITERAL(2, 32, 0), // ""
+QT_MOC_LITERAL(3, 33, 13), // "setupGameView"
+QT_MOC_LITERAL(4, 47, 16), // "setupOptionsView"
+QT_MOC_LITERAL(5, 64, 15), // "onMqttConnected"
+QT_MOC_LITERAL(6, 80, 16), // "onMessageRecieve"
+QT_MOC_LITERAL(7, 97, 14), // "QMqttTopicName"
+QT_MOC_LITERAL(8, 112, 12), // "applyOptions"
+QT_MOC_LITERAL(9, 125, 14), // "const Options*"
+QT_MOC_LITERAL(10, 140, 7) // "options"
 
     },
-    "MainWindow\0onObjectRemoved\0\0CircuitElement*\0"
-    "onObjectAdded\0onMqttConnected\0"
-    "onMessageRecieve\0QMqttTopicName"
+    "MainWindow\0setupStartScreenView\0\0"
+    "setupGameView\0setupOptionsView\0"
+    "onMqttConnected\0onMessageRecieve\0"
+    "QMqttTopicName\0applyOptions\0const Options*\0"
+    "options"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,7 +59,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -62,16 +67,20 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x08 /* Private */,
-       4,    1,   37,    2, 0x08 /* Private */,
-       5,    0,   40,    2, 0x08 /* Private */,
-       6,    2,   41,    2, 0x08 /* Private */,
+       1,    0,   44,    2, 0x08 /* Private */,
+       3,    0,   45,    2, 0x08 /* Private */,
+       4,    0,   46,    2, 0x08 /* Private */,
+       5,    0,   47,    2, 0x08 /* Private */,
+       6,    2,   48,    2, 0x08 /* Private */,
+       8,    1,   53,    2, 0x08 /* Private */,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 3,    2,
-    QMetaType::Void, 0x80000000 | 3,    2,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QByteArray, 0x80000000 | 7,    2,    2,
+    QMetaType::Void, 0x80000000 | 9,   10,
 
        0        // eod
 };
@@ -82,16 +91,18 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->onObjectRemoved((*reinterpret_cast< CircuitElement*(*)>(_a[1]))); break;
-        case 1: _t->onObjectAdded((*reinterpret_cast< CircuitElement*(*)>(_a[1]))); break;
-        case 2: _t->onMqttConnected(); break;
-        case 3: _t->onMessageRecieve((*reinterpret_cast< const QByteArray(*)>(_a[1])),(*reinterpret_cast< const QMqttTopicName(*)>(_a[2]))); break;
+        case 0: _t->setupStartScreenView(); break;
+        case 1: _t->setupGameView(); break;
+        case 2: _t->setupOptionsView(); break;
+        case 3: _t->onMqttConnected(); break;
+        case 4: _t->onMessageRecieve((*reinterpret_cast< const QByteArray(*)>(_a[1])),(*reinterpret_cast< const QMqttTopicName(*)>(_a[2]))); break;
+        case 5: _t->applyOptions((*reinterpret_cast< const Options*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 3:
+        case 4:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 1:
@@ -103,7 +114,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
 }
 
 QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = { {
-    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
+    QMetaObject::SuperData::link<QMainWindow::staticMetaObject>(),
     qt_meta_stringdata_MainWindow.data,
     qt_meta_data_MainWindow,
     qt_static_metacall,
@@ -122,22 +133,22 @@ void *MainWindow::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_MainWindow.stringdata0))
         return static_cast<void*>(this);
-    return QWidget::qt_metacast(_clname);
+    return QMainWindow::qt_metacast(_clname);
 }
 
 int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }

@@ -17,14 +17,14 @@ void MapTranslator::update(QJsonDocument message)
     for(int i = 0; i<points.size(); i++)
     {
         QJsonObject pointObj = points[i].toObject();
-        QString id = pointObj.value("id").toString();
+        QString id = QString::number(pointObj["id"].toDouble());
         Checkpoint* point = new Checkpoint(pointObj.value("x").toInt(), pointObj.value("y").toInt());
         minfo->addObject(id, point);
     }
     for(int i = 0; i<obstacles.size(); i++)
     {
         QJsonObject obtclObj = obstacles[i].toObject();
-        QString id = obtclObj.value("id").toString();
+        QString id = QString::number(obtclObj["id"].toDouble());
         if(obtclObj.value("id").toInt() %2 == 0)
         {
             Circle* circle = new Circle(obtclObj.value("x").toInt(), obtclObj.value("y").toInt());

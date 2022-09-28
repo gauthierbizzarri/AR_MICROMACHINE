@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <startscreenlayer.h>
+#include <gamescreen.h>
 #include <QMainWindow>
 #include <QPainter>
 #include <QGraphicsScene>
@@ -8,12 +10,14 @@
 #include <QGraphicsRectItem>
 #include <mapinfo.h>
 #include <QMqttClient>
+#include <options.h>
+#include <optionslayer.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QWidget
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
@@ -26,22 +30,23 @@ private:
      * @brief minfo map informations
      */
     MapInfo* minfo;
-    QGraphicsScene* mscene;
-    QGraphicsScene* mScene;
-    QGraphicsView* mView;
     /**
      * @brief mclient mqtt client
      */
     QMqttClient* mclient;
+
+    QWidget* mmain;
+    StartScreenLayer* mstartLayer;
+    GameScreen* mgameLayer;
+    OptionsLayer* moptions;
+
+    QWidget* currentLayer;
+
+    void setupMqtt();
 private slots:
-    /**
-     * @brief onObjectRemoved called whenever an object gets removed from the map
-     */
-    void onObjectRemoved(CircuitElement*);
-    /**
-     * @brief onObjectAdded called whenever an object gets added to the map
-     */
-    void onObjectAdded(CircuitElement*);
+    void setupStartScreenView();
+    void setupGameView();
+    void setupOptionsView();
     /**
      * @brief onMqttConnected called on mqtt brocker connection
      */
@@ -50,5 +55,6 @@ private slots:
      * @brief onMessageRecieve called on message arrival
      */
     void onMessageRecieve(const QByteArray&, const QMqttTopicName&);
+    void applyOptions(const Options* options);
 };
 #endif // MAINWINDOW_H
