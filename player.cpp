@@ -1,4 +1,5 @@
 #include "player.h"
+#include "qdebug.h"
 #include <QGraphicsEllipseItem>
 
 Player::Player(int x, int y ) : CircuitElement(x, y)

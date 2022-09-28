@@ -44,7 +44,6 @@ void MapTranslator::update(QJsonDocument message)
 void MapTranslator::update_players(QJsonDocument message)
 {
 
-    qDebug()<<"Update players ";
     QJsonObject base = message.object();
     QJsonArray players = base.value("players").toArray();
     qDebug()<<"PLAYERS RECEIVED"<<players;
@@ -52,8 +51,6 @@ void MapTranslator::update_players(QJsonDocument message)
     // UPDATE PLAYER
     for(int i = 0; i<players.size(); i++)
     {
-        qDebug()<<"Player upated"<<"\n";
-        qDebug()<<players[i];
         QJsonObject playerObj = players[i].toObject();
         QString uuid = playerObj.value("uuid").toString();
         Player* player = new Player(playerObj.value("x").toInt(), playerObj.value("y").toInt());

@@ -12,21 +12,30 @@ QT += mqtt
 SOURCES += \
     checkpoint.cpp \
     circle.cpp \
+    gameproperties.cpp \
     main.cpp \
     mainwindow.cpp \
     maptranslator.cpp \
+    options.cpp \
     player.cpp \
-    rectangle.cpp
+    rectangle.cpp \
+    startscreenlayer.cpp
 
 HEADERS += \
+    VehicleProperties.h \
     checkpoint.h \
     circle.h \
     circuitelement.h \
+    gameproperties.h \
+    gamescreen.h \
     mainwindow.h \
     mapinfo.h \
     maptranslator.h \
+    options.h \
+    optionslayer.h \
     player.h \
-    rectangle.h
+    rectangle.h \
+    startscreenlayer.h
 
 FORMS += \
     mainwindow.ui
