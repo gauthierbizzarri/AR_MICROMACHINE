@@ -102,6 +102,12 @@ void MapTranslator::update_game(QJsonDocument message)
             minfo->addItem(QVariant(i).toString(), rocket);
         }
 
+        if (type =="bomb")
+        {
+            Bomb* bomb = new Bomb(ItemObj.value("x").toInt(), ItemObj.value("y").toInt());
+            minfo->addItem(QVariant(i).toString(), bomb);
+        }
+
     }
 
 

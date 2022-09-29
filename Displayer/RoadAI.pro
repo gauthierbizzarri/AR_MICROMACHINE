@@ -11,9 +11,9 @@ QT += mqtt
 
 SOURCES += \
     banana.cpp \
+    bomb.cpp \
     checkpoint.cpp \
     circle.cpp \
-    controlleradapter.cpp \
     gameproperties.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -25,10 +25,10 @@ SOURCES += \
 
 HEADERS += \
     banana.h \
+    bomb.h \
     checkpoint.h \
     circle.h \
     circuitelement.h \
-    controlleradapter.h \
     gameproperties.h \
     gamescreen.h \
     mainwindow.h \
@@ -50,6 +50,7 @@ RESOURCES += \
     banana.qrc \
     banana2.qrc \
     bike.qrc \
+    bomb.qrc \
     car.qrc \
     rocket.qrc \
     truck.qrc
