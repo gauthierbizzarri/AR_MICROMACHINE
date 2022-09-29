@@ -71,8 +71,8 @@ void MainWindow::setupOptionsView()
 void MainWindow::onMqttConnected()
 {
     setupStartScreenView();
-    mclient->subscribe(QMqttTopicFilter("/map"));
-    mclient->subscribe(QMqttTopicFilter("/game"));
+    mclient->subscribe(QMqttTopicFilter("map"));
+    mclient->subscribe(QMqttTopicFilter("game"));
 }
 
 void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicName &topic)
@@ -82,14 +82,14 @@ void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicNam
     qDebug()<<message;
     if(error.error == QJsonParseError::NoError)
     {
-        if(topic.name() == "/map")
+        if(topic.name() == "map")
         {
 
             MapTranslator trans(minfo);
             trans.update(doc);
         }
 
-        if(topic.name() == "/game")
+        if(topic.name() == "game")
         {
             MapTranslator trans(minfo);
             trans.update_game(doc);

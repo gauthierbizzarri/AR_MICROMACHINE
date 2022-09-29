@@ -46,7 +46,8 @@ resources.files = \
     options.txt
 resources.prefix = /
 
-RESOURCES = resources
+RESOURCES += \
+    banana.qrc
 
 
 
