@@ -15,23 +15,20 @@ SOURCES += \
     controlleradapter.cpp \
     controllermanager.cpp \
     banana.cpp \
-    checkpoint.cpp \
-    circle.cpp \
     gameproperties.cpp \
     main.cpp \
     mainwindow.cpp \
     maptranslator.cpp \
     mqttdialog.cpp \
     options.cpp \
+    player.cpp\
+    rocket.cpp\
     rectangle.cpp
 
 HEADERS += \
-    options.cpp \
-    player.cpp \
-    rectangle.cpp \
-    rocket.cpp
-
-HEADERS += \
+    rocket.h\
+    player.h\
+    options.h\
     banana.h \
     checkpoint.h \
     circle.h \
@@ -43,28 +40,14 @@ HEADERS += \
     gamescreen.h \
     keyboardcontroller.h \
     mainwindow.h \
-    mapinfo.h \
     maptranslator.h \
     mqttdialog.h \
-    options.h \
     optionslayer.h \
-    rectangle.h \
     registerlayer.h \
     startscreenlayer.h \
-    vehicleproperties.h
-
-    gameproperties.h \
-    gamescreen.h \
-    mainwindow.h \
+    vehicleproperties.h\
     mapinfo.h \
-    maptranslator.h \
-    options.h \
-    optionslayer.h \
-    player.h \
-    rectangle.h \
-    rocket.h \
-    startscreenlayer.h \
-    vehicleproperties.h
+    rectangle.h
 
 resources.files = \
     options.txt

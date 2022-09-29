@@ -71,12 +71,11 @@ QString Player::get_color(QColor color)
     }
     else if (color ==Qt::blue)
     {
-             return "blue";
-            }
+        return "blue";
+    }
     else if (color ==Qt::green)
     {
-             return "green";
-            }
-
-
+        return "green";
+    }
+    return "black";
 }
