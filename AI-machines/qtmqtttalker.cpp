@@ -1,14 +1,14 @@
 #include "qtmqtttalker.h"
 
-QtMqttTalker::QtMqttTalker(QObject *parent)
+QtMqttTalker::QtMqttTalker(QUuid uuid, QUuid::StringFormat uuidStrFormat, QObject *parent)
     : QObject{parent}
 {
-    m_uuid = QUuid::createUuid();
-
-    qDebug() << m_uuid;
+    m_uuid = uuid;
+    m_uuidStrFormat = uuidStrFormat;
 
     m_topicProperties = QMqttTopicFilter("/game/properties");
     m_topicRegister =   QMqttTopicName("/player/register");
+    m_topicMap =        QMqttTopicFilter("/map");
     m_topicGame =       QMqttTopicFilter("/game");
     m_topicController = QMqttTopicName("/player/control");
 
@@ -16,6 +16,7 @@ QtMqttTalker::QtMqttTalker(QObject *parent)
 
     m_client = new QMqttClient(this);
     m_client->setHostname("10.3.0.218");
+    //m_client->setHostname("localhost");
     m_client->setPort(1883);
     m_client->setUsername("phoenix");
     m_client->setPassword("ardent");
@@ -25,32 +26,31 @@ QtMqttTalker::QtMqttTalker(QObject *parent)
     connect(m_client, &QMqttClient::connected,    this, &QtMqttTalker::TalkerConnected);
 
     m_client->connectToHost();
-
-    qDebug("Constructed");
 }
 
 void QtMqttTalker::QtMqttSub() {
     auto propertiesSubscription = m_client->subscribe(m_topicProperties, m_qos);
+    auto mapSubscription = m_client->subscribe(m_topicMap, m_qos);
     auto gameSubscription = m_client->subscribe(m_topicGame, m_qos);
 
     if (!propertiesSubscription) {
-        qDebug() << "Could not subscribe. Is there a valid connection?";
+        qDebug() << "Could not subscribe to propeties. Is there a valid connection?";
+        return;
+    }
+    if (!mapSubscription) {
+        qDebug() << "Could not subscribe to map. Is there a valid connection?";
         return;
     }
     if (!gameSubscription) {
-        qDebug() << "Could not subscribe. Is there a valid connection?";
+        qDebug() << "Could not subscribe to game. Is there a valid connection?";
         return;
     }
 
     connect(m_client, &QMqttClient::messageReceived, this, &QtMqttTalker::TalkerMessageReceived);
-
-    qDebug("MqttSub!");
 }
 
 void QtMqttTalker::QtMqttPub(QMqttTopicName topic, QByteArray message) {
     m_client->publish(topic, message, m_qos);
-
-    qDebug("MqttPub!");
 }
 
 void QtMqttTalker::QtMqttProperties(QJsonDocument properties) {
@@ -58,10 +58,15 @@ void QtMqttTalker::QtMqttProperties(QJsonDocument properties) {
     qDebug() << properties;
     TalkerRegister();
 }
+void QtMqttTalker::QtMqttMap(QJsonDocument map) {
+    qDebug() << "map";
+    qDebug() << map;
+    emit updateMap(map);
+}
 void QtMqttTalker::QtMqttGame(QJsonDocument game) {
     qDebug() << "game";
     qDebug() << game;
-    emit jsonAI(game);
+    emit updateGame(game);
 }
 
 void QtMqttTalker::TalkerMessageReceived(const QByteArray &message, const QMqttTopicName &topicName) {
@@ -76,21 +81,24 @@ void QtMqttTalker::TalkerMessageReceived(const QByteArray &message, const QMqttT
     if (topicName.name() == m_topicProperties.filter()) {
         QtMqttProperties(jsonMessage);
     }
+    if (topicName.name() == m_topicMap.filter()) {
+        QtMqttMap(jsonMessage);
+    }
     if (topicName.name() == m_topicGame.filter()) {
         QtMqttGame(jsonMessage);
     }
 }
 
 void QtMqttTalker::TalkerRegister() {
-    QVariantMap loginMap;
+    QJsonObject jsonLogin;
 
-    loginMap["uuid"] = m_uuid;
-    loginMap["pseudo"] = "ia" + m_uuid.toString();
-    loginMap["controller"] = "ia";
-    loginMap["vehicle"] = "car";
-    loginMap["team"] = "0";
+    jsonLogin.insert("uuid", m_uuid.toString(m_uuidStrFormat));
+    jsonLogin.insert("pseudo", "ia_" + m_uuid.toString(m_uuidStrFormat));
+    jsonLogin.insert("controller", "ia");
+    jsonLogin.insert("vehicle", "car");
+    jsonLogin.insert("team", 0);
 
-    QJsonDocument login = QJsonDocument(QJsonObject::fromVariantMap(loginMap));
+    QJsonDocument login = QJsonDocument(jsonLogin);
 
     qDebug() << login;
 

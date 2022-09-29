@@ -10,6 +10,9 @@ class AI_Manager : public QObject
 {
     Q_OBJECT
 private:
+    QUuid m_uuid;
+    QUuid::StringFormat m_uuidStrFormat;
+
     QtMqttTalker* m_talker;
     AI* m_ai;
 public:

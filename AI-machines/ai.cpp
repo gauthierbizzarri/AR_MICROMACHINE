@@ -1,31 +1,64 @@
 #include "ai.h"
 
-AI::AI(QObject *parent)
+AI::AI(QUuid uuid, QUuid::StringFormat uuidStrFormat, QObject *parent)
     : QObject{parent}
 {
-
+    m_uuid = uuid;
+    m_uuidStrFormat = uuidStrFormat;
 }
 
-void AI::playerDatas(QJsonDocument datas) {
-    process(datas);
+void AI::mapDatas(QJsonDocument map) {
+    m_map = map;
 }
 
-void AI::process(QJsonDocument inputs) {
-    QVariantMap outputMap;
+void AI::playerDatas(QJsonDocument game) {
+    m_game = game;
+    process();
+}
 
-    outputMap["uuid"] = "uuid";
-    outputMap["angle"] = "90";
-    outputMap["power"] = "100";
+void AI::process() {
+    qDebug("process IA");
+    qDebug() << m_map;
+    qDebug() << m_game;
 
-    QVariantMap buttons;
+    if (m_map.isEmpty()) return;
+    if (m_game.isEmpty()) return;
 
-    buttons["banana"] = false;
-    buttons["bomb"] = false;
-    buttons["rocket"] = false;
+    for (const auto player : m_game.object()["players"].toArray()) {
+        if (QUuid(player.toObject()["uuid"].toString()) == /*m_uuid*/ "ia_uuid") {
+            m_player = player.toObject();
+            break;
+        }
+    }
 
-    outputMap["buttons"] = buttons;
+    qDebug() << m_player;
+    if (m_player.isEmpty()) return;
 
-    QJsonDocument output = QJsonDocument(QJsonObject::fromVariantMap(outputMap));
+
+
+    qDebug("true uuid");
+    qDebug() << m_uuid.toString(m_uuidStrFormat);
+    qDebug("player !");
+    qDebug() << m_player;
+
+    QJsonObject jsonOutput;
+
+    jsonOutput.insert("uuid", m_uuid.toString(m_uuidStrFormat));
+    jsonOutput.insert("angle", "90");
+    jsonOutput.insert("power", "100");
+
+    qDebug("json uuid");
+    qDebug() << jsonOutput["uuid"];
+
+    QJsonObject buttons;
+
+    buttons.insert("banana", false);
+    buttons.insert("bomb", false);
+    buttons.insert("rocket", false);
+
+    jsonOutput.insert("buttons", buttons);
+
+    QJsonDocument output = QJsonDocument(jsonOutput);
 
     emit controllerInputs(output);
 }
