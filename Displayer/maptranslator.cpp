@@ -58,7 +58,7 @@ void MapTranslator::update_game(QJsonDocument message)
     for(int i = 0; i<players.size(); i++)
     {
         QJsonObject PlayerObj = players[i].toObject();
-        QString uuid = QString::number(PlayerObj["uuid"].toDouble());
+        QString uuid = PlayerObj["uuid"].toString();
         float angle = PlayerObj.value("angle").toDouble();
         Player* player = new Player(PlayerObj.value("x").toInt(), PlayerObj.value("y").toInt(),angle);
 
@@ -87,7 +87,6 @@ void MapTranslator::update_game(QJsonDocument message)
     // UPDATE PLAYER
     for(int i = 0; i<items.size(); i++)
     {
-        qDebug()<<"Items in list";
         QJsonObject ItemObj = items[i].toObject();
         QString type = ItemObj["type"].toString();
         // BANANA

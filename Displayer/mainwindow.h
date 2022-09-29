@@ -58,6 +58,8 @@ private:
 
     void showView(int);
 
+
+
 public slots:
     /**
      * @brief onMqttConnected called on mqtt brocker connection

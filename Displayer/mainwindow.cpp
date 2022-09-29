@@ -38,7 +38,6 @@ MainWindow::~MainWindow()
 {
     root->deleteLater();
     minfo->deleteLater();
-    mclient->deleteLater();
 }
 
 void MainWindow::setupMqtt()
@@ -96,7 +95,6 @@ void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicNam
 {
     QJsonParseError error;
     QJsonDocument doc = QJsonDocument::fromJson(message, &error);
-    qDebug()<<message;
     if(error.error == QJsonParseError::NoError)
     {
         if(topic.name() == MqttDialog::MAP)

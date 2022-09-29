@@ -15,12 +15,11 @@ MqttDialog::MqttDialog()
 
     connect(mclient, &QMqttClient::connected, this, &MqttDialog::onConnect);
     connect(mclient, &QMqttClient::messageReceived, this, &MqttDialog::onMessageRecieved);
-    connect(mclient, &QMqttClient::disconnected, mclient, &QMqttClient::deleteLater);
 }
 
 MqttDialog::~MqttDialog()
 {
-    mclient->disconnectFromHost();
+    delete mclient;
 }
 
 MqttDialog *MqttDialog::pub(QString name, QByteArray data)
@@ -43,7 +42,6 @@ MqttDialog *MqttDialog::sub(QString name)
 
 void MqttDialog::establishConnection()
 {
-    qDebug()<<"connect";
     mclient->connectToHost();
 }
 
@@ -55,6 +53,5 @@ void MqttDialog::onConnect()
 
 void MqttDialog::onMessageRecieved(const QByteArray &data, QMqttTopicName name)
 {
-    qDebug()<<data;
     emit messageRecieved(data, name);
 }

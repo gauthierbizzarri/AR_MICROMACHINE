@@ -39,7 +39,6 @@ public slots:
      */
     void onObjectRemoved(CircuitElement* e)
     {
-        qDebug()<<"remove";
         mscene->removeItem(e);
     }
     /**
@@ -48,7 +47,6 @@ public slots:
     void onObjectAdded(CircuitElement* e)
     {
         mscene->addItem(e);
-        qDebug()<<"elements in scene"<<mscene->items().size();
     }
 
     void onSizeChange(QSize size)
@@ -66,6 +64,7 @@ protected:
         {
             emit pauseMenu(0);
         }
+        event->ignore();
     }
 };
 

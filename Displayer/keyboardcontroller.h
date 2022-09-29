@@ -16,7 +16,6 @@ public:
 public:
     bool eventFilter(QObject *watched, QEvent *event)
     {
-        qDebug() <<"Event"<< event << watched;
         if(event->type() == QEvent::Type::KeyRelease)
         {
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
@@ -39,7 +38,6 @@ public:
         }
         if(event->type() == QEvent::Type::KeyPress)
         {
-            qDebug()<<"press";
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
             if(keyEvent->key() == Qt::Key_Z)
             {
@@ -58,7 +56,7 @@ public:
                 emit computeStreering(-90);
             }
         }
-        event->accept();
+        event->ignore();
         return QObject::eventFilter(watched, event);
     }
 };

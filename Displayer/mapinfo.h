@@ -48,17 +48,9 @@ public:
      * @param object object to be added
      */
     void addObject(QString id, CircuitElement* object){
+        if(mobjects.count(id)>0) return;
         mobjects.insert_or_assign(id, object);
         emit objectAdded(object);
-    }
-
-    void updateAll()
-    {
-        for(const auto &pair : mobjects)
-        {
-            if(pair.second != nullptr)
-                emit objectAdded(pair.second);
-        }
     }
     
     void addItem(QString id, CircuitElement* object){
@@ -121,14 +113,11 @@ public:
 
     void clear_players()
         {
-        qDebug()<<"amount"<<mobjects.size();
-        for(const auto &pair : std::map<QString, CircuitElement*>(mobjects))
-        {
-            if (  (pair.second->property("TYPE")=="Player") )
-            this->removeObject(pair.first);
-        }
-
-        qDebug()<<"after delete"<<mobjects.size();
+            for(const auto &pair : std::map<QString, CircuitElement*>(mobjects))
+            {
+                if (  (pair.second->property("TYPE")=="Player") )
+                    this->removeObject(pair.first);
+            }
 
         }
 
