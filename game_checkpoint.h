@@ -5,6 +5,8 @@
 
 class GameCheckpoint : public GameMapObject
 {
+    Q_OBJECT
+
 public:
     GameCheckpoint(QWidget *parent, int x, int y);
 };

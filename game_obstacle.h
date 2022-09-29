@@ -5,6 +5,8 @@
 
 class GameObstacle : public GameMapObject
 {
+    Q_OBJECT
+
 public:
     GameObstacle(QWidget *parent, int x, int y);
 };

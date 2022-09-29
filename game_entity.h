@@ -5,8 +5,11 @@
 
 class GameEntity : public GameObstacle
 {
+
+    Q_OBJECT
+
 public:
-    GameEntity();
+    GameEntity(QWidget* parent, int x, int y);
 };
 
 #endif // GAMEENTITY_H

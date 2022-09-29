@@ -5,6 +5,9 @@
 
 class GameRectangle : public GameObstacle
 {
+
+    Q_OBJECT
+
 public:
     GameRectangle(QWidget *parent, int x, int y, double angle);
 };

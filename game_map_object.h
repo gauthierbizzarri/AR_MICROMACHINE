@@ -12,8 +12,10 @@
 // Class
 // ////////////////////////////////////////////////////////////////////////////
 
-class GameMapObject
+class GameMapObject : public QObject
 {
+    Q_OBJECT
+
     QGraphicsItem* m_item;
 
     int m_x;

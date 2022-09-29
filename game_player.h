@@ -5,6 +5,7 @@
 
 class GamePlayer : public GameEntity
 {
+    Q_OBJECT
 
     QString m_uuid;
     QString m_pseudo;
