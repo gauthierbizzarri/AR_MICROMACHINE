@@ -5,9 +5,19 @@ Map::Map(QJsonObject map)
     m_width = map["mapWidth"].toInt();
     m_height = map["mapHeight"].toInt();
 
+    QList<Checkpoint> checkpoints;
+
     foreach (const auto checkpoint, map["checkpoints"].toArray()) {
-        m_checkpoints.append(Checkpoint(checkpoint.toObject()));
+        checkpoints.append(Checkpoint(checkpoint.toObject()));
     }
+
+    /*
+    while(!checkpoints.isEmpty()) {
+        for (int i = 1; i < checkpoints.size(); i++) {
+
+        }
+    }
+    */
 
     foreach (const auto obstacle, map["obstacles"].toArray()) {
         m_obstacles.append(Obstacle(obstacle.toObject()));

@@ -13,6 +13,8 @@ private:
 public:
     explicit Checkpoint(QJsonObject);
 
+    int get_id();
+
     static Checkpoint fromJson(QJsonDocument);
 
     void debug();

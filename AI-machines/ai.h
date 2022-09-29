@@ -8,6 +8,7 @@
 #include <QJsonArray>
 
 #include <QtMath>
+#include <QtAlgorithms>
 
 #include "map.h"
 #include "game.h"
@@ -24,12 +25,16 @@ private:
     Game* m_game;
 
     Player* m_player;
-    //Checkpoint m_checkpoint;
+    Checkpoint* m_nextCheckpoint;
+    int m_lastCheckpointId;
+
+    QList<Checkpoint> m_checkpoints;
 
 public:
     explicit AI(QUuid, QUuid::StringFormat, QObject *parent = nullptr);
     void set_checkpoints();
     void process();
+    static bool compareCheckpoints(const Checkpoint &, const Checkpoint &);
 
 signals:
     void controllerInputs(QJsonDocument);

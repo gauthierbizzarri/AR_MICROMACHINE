@@ -15,8 +15,8 @@ QtMqttTalker::QtMqttTalker(QUuid uuid, QUuid::StringFormat uuidStrFormat, QObjec
     m_qos = 0;
 
     m_client = new QMqttClient(this);
-    m_client->setHostname("10.3.0.218");
-    //m_client->setHostname("localhost");
+    //m_client->setHostname("10.3.0.218");
+    m_client->setHostname("localhost");
     m_client->setPort(1883);
     m_client->setUsername("phoenix");
     m_client->setPassword("ardent");

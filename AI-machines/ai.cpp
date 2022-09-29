@@ -5,6 +5,11 @@ AI::AI(QUuid uuid, QUuid::StringFormat uuidStrFormat, QObject *parent)
 {
     m_uuid = uuid;
     m_uuidStrFormat = uuidStrFormat;
+
+    m_map = nullptr;
+    m_game = nullptr;
+    m_player = nullptr;
+    m_nextCheckpoint = nullptr;
 }
 
 void AI::mapDatas(QJsonDocument map) {
@@ -19,30 +24,45 @@ void AI::playerDatas(QJsonDocument game) {
 
 void AI::set_checkpoints() {
     if (!m_map) return;
-    QList<Checkpoint> checkpoints = m_map->get_checkpoints();
-
-    qDebug("Checkpoints !");
-    if (checkpoints.isEmpty()) return;
-
-    foreach(Checkpoint checkpoint, checkpoints) {
-        checkpoint.debug();
-    }
+    m_checkpoints = m_map->get_checkpoints();
 }
 
 void AI::process() {
     qDebug("process IA");
 
     if (!m_map) return;
+    if (m_checkpoints.isEmpty()) return;
     if (!m_game) return;
 
     foreach (Player player, m_game->get_players()) {
-        if (player.get_uuid() == m_uuid /*"ia_uuid"*/) {
+        //if (player.get_uuid() == m_uuid) {
+        if (player.get_uuid() == "ia_uuid") {
             m_player = &player;
             break;
         }
     }
 
     if (!m_player) return;
+
+    m_lastCheckpointId = m_player->get_lastCheckpoint();
+
+    qDebug("Last id");
+    qDebug() << m_lastCheckpointId;
+
+    /*
+    foreach (Checkpoint checkpoint, m_checkpoints) {
+        bool isNext = false;
+
+        if (!m_nextCheckpoint) isNext = true;
+
+        if (isNext) {
+            m_nextCheckpoint = new Checkpoint(checkpoint);
+        }
+    }
+    */
+
+    qDebug("Next Checkpoint!");
+    m_nextCheckpoint->debug();
 
     QJsonObject jsonOutput;
 
