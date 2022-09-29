@@ -70,7 +70,7 @@ void MapTranslator::update_game(QJsonDocument message)
 
         int speed = PlayerObj.value("speed").toDouble();
 
-        QString vehicule = PlayerObj.value("vehicule").toString();
+        QString vehicule = PlayerObj.value("vehicle").toString();
 
         player->set_data(color,team,angle,speed,vehicule);
         minfo->addObject(uuid, player);

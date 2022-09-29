@@ -30,11 +30,11 @@ QRectF Player::boundingRect() const
 void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setBrush(this->color);
-    painter->drawRect(0, 0, GameProperties::getInstance()->rectangleWidth, GameProperties::getInstance()->rectangleHeight);
-
-    QPixmap pixmap3(":/ressources/banana.png");
-    pixmap3 = this->get_vehicle();
-
+    //painter->drawRect(0, 0, GameProperties::getInstance()->rectangleWidth, GameProperties::getInstance()->rectangleHeight);
+    qDebug()<<this->vehicule;
+    QPixmap pixmap3 = this->get_vehicle();
+    pixmap3.scaledToHeight(GameProperties::getInstance()->rectangleHeight);
+    pixmap3.scaledToWidth(GameProperties::getInstance()->rectangleWidth);
     painter->drawPixmap(10,10,100,100, pixmap3);
 
 }
