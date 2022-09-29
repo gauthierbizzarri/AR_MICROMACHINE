@@ -31,4 +31,36 @@ void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 {
     painter->setBrush(this->color);
     painter->drawRect(0, 0, GameProperties::getInstance()->rectangleWidth, GameProperties::getInstance()->rectangleHeight);
+
+    QPixmap pixmap3(":/ressources/banana.png");
+    pixmap3 = this->get_vehicle();
+
+    painter->drawPixmap(10,10,100,100, pixmap3);
+
 }
+
+QPixmap Player::get_vehicle(){
+
+     QPixmap pixmap3(":/ressources/car.png");
+
+     if (this->vehicule.contains("truck"))
+     {
+         pixmap3 =QPixmap(":/ressources/truck.png");
+
+     }
+
+     else if (this->vehicule.contains("bike"))
+     {
+              pixmap3 =QPixmap(":/ressources/moto.png");
+
+     }
+
+     else if (this->vehicule.contains("car"))
+     {
+              pixmap3 =QPixmap(":/ressources/car.png");
+
+     }
+
+    return pixmap3;
+}
+

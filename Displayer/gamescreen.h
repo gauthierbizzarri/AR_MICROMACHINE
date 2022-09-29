@@ -35,6 +35,8 @@ public slots:
      */
     void onObjectRemoved(CircuitElement* e)
     {
+
+        mview->update();
         mscene->removeItem(e);
     }
     /**
@@ -42,6 +44,8 @@ public slots:
      */
     void onObjectAdded(CircuitElement* e)
     {
+
+        mview->update();
         mscene->addItem(e);
     }
 };

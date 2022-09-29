@@ -1,7 +1,7 @@
 #include "banana.h"
 #include <QGraphicsEllipseItem>
+#include <QMovie>
 #include <gameproperties.h>
-#include <QDebug>
 
 Banana::Banana(int x, int y, QGraphicsItem* parent) : CircuitElement(x, y, parent)
 {
@@ -23,11 +23,5 @@ void Banana::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
     QPixmap pixmap3(":/ressources/banana.png");
 
-    qDebug()<<this->x;
-    qDebug()<<this->y;
     painter->drawPixmap(10,10,100,100, pixmap3);
-    //QImage logo;
-    //logo.load("ressources/banana.png");
-    //QPixmap pix("C:/Users/BIZZARRI/Documents/graphics/Displayer/ressources/banana.png");
-    //painter->drawImage(QRect(0,0,50,50),pix);
 }

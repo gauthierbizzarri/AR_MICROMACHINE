@@ -47,7 +47,12 @@ resources.files = \
 resources.prefix = /
 
 RESOURCES += \
-    banana.qrc
+    banana.qrc \
+    banana2.qrc \
+    bike.qrc \
+    car.qrc \
+    rocket.qrc \
+    truck.qrc
 
 
 
@@ -61,4 +66,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    banana.png
+    banana.png \
+    ressources/banana.gif
