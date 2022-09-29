@@ -4,15 +4,19 @@
 #include <QGraphicsView>
 #include <QHBoxLayout>
 #include <circuitelement.h>
+#include <QDebug>
+#include <mapinfo.h>
+#include <displayview.h>
 
-class GameScreen : public QWidget{
+class GameScreen : public DisplayView{
+    Q_OBJECT
 private:
     QHBoxLayout* mroot;
     QGraphicsView* mview;
     QGraphicsScene* mscene;
 
 public:
-    GameScreen(QWidget* parent = nullptr) : QWidget(parent)
+    GameScreen(QWidget* parent = nullptr) : DisplayView(parent)
     {
         mroot = new QHBoxLayout(this);
         mscene = new QGraphicsScene();
@@ -25,9 +29,16 @@ public:
 
     ~GameScreen()
     {
-        delete mscene;
-        delete mview;
-        delete mroot;
+        mscene->deleteLater();
+        mview->deleteLater();
+        mroot->deleteLater();
+    }
+
+    void display(MapInfo* info)
+    {
+        if(mscene == nullptr || !mscene->isActive()) return;
+        for(const auto element : info->getObjects())
+            mscene->addItem(element.second);
     }
 public slots:
     /**
@@ -42,7 +53,19 @@ public slots:
      */
     void onObjectAdded(CircuitElement* e)
     {
+        qDebug()<<mscene;
         mscene->addItem(e);
+    }
+signals:
+    void pauseMenu(int);
+    // QWidget interface
+protected:
+    void keyReleaseEvent(QKeyEvent *event)
+    {
+        if(event->key() == Qt::Key::Key_Escape)
+        {
+            emit pauseMenu(0);
+        }
     }
 };
 

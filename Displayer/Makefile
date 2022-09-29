@@ -281,9 +281,7 @@ Makefile: RoadAI.pro D:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf D:/Qt/
 		D:/Qt/5.15.2/mingw81_64/lib/Qt5Network.prl \
 		D:/Qt/5.15.2/mingw81_64/lib/Qt5Core.prl \
 		D:/Qt/5.15.2/mingw81_64/lib/qtmain.prl \
-		D:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf \
-		debug/qmake_resources.qrc \
-		release/qmake_resources.qrc
+		D:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf
 	$(QMAKE) -o Makefile RoadAI.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 D:/Qt/5.15.2/mingw81_64/mkspecs/features/spec_pre.prf:
 D:/Qt/5.15.2/mingw81_64/mkspecs/qdevice.pri:
@@ -497,8 +495,6 @@ D:/Qt/5.15.2/mingw81_64/lib/Qt5Network.prl:
 D:/Qt/5.15.2/mingw81_64/lib/Qt5Core.prl:
 D:/Qt/5.15.2/mingw81_64/lib/qtmain.prl:
 D:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
-debug/qmake_resources.qrc:
-release/qmake_resources.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile RoadAI.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

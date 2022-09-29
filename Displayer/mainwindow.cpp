@@ -9,74 +9,89 @@
 #include <QGraphicsView>
 #include <QPushButton>
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(MqttDialog* dialog, QWidget *parent)
     : QMainWindow(parent)
 {
-    setMinimumSize(1920, 1080);
+    setMinimumSize(1000, 1000);
     applyOptions(Options::getInstance());
     connect(Options::getInstance(), &Options::update, this, &MainWindow::applyOptions);
     minfo = new MapInfo();
+    mclient = dialog;
+    root = new QWidget();
+    rootLayout = new QStackedLayout();
+    rootLayout->addWidget(setupStartScreenView());
+    rootLayout->addWidget(setupGameView());
+    rootLayout->addWidget(setupOptionsView());
+    rootLayout->addWidget(setupRegister());
+    root->setLayout(rootLayout);
 
-    mclient = new QMqttClient(this);
-    connect(mclient, &QMqttClient::connected, this, &MainWindow::onMqttConnected);
-    connect(mclient, &QMqttClient::connected, this, &MainWindow::setupStartScreenView);
-    connect(mclient, &QMqttClient::messageReceived, this, &MainWindow::onMessageRecieve);
+    setCentralWidget(root);
+
+    showView(0);
+
     setupMqtt();
 }
 
 MainWindow::~MainWindow()
 {
-    currentLayer->deleteLater();
+    root->deleteLater();
     minfo->deleteLater();
     mclient->deleteLater();
 }
 
 void MainWindow::setupMqtt()
 {
-    mclient->setHostname("10.3.0.218");
-    mclient->setPort(1883);
-    mclient->setUsername("phoenix");
-    mclient->setPassword("ardent");
-
-    mclient->connectToHost();
+    connect(mclient, &MqttDialog::connected, this, &MainWindow::onMqttConnected);
+    connect(mclient, &MqttDialog::messageRecieved, this, &MainWindow::onMessageRecieve);
 }
 
-void MainWindow::setupStartScreenView()
+StartScreenLayer* MainWindow::setupStartScreenView()
 {
-    mstartLayer = new StartScreenLayer(this);
-    currentLayer = mstartLayer;
-    connect(mstartLayer, &StartScreenLayer::gameStart, this, &MainWindow::setupGameView);
-    connect(mstartLayer, &StartScreenLayer::exit, this, &MainWindow::close);
-    connect(mstartLayer, &StartScreenLayer::options, this, &MainWindow::setupOptionsView);
-    setCentralWidget(mstartLayer);
+    StartScreenLayer* start = new StartScreenLayer(this);
+    connect(start, &StartScreenLayer::exit, this, &MainWindow::close);
+    connect(start, &StartScreenLayer::gameStart, this, &MainWindow::playGame);
+    connect(start, &StartScreenLayer::options, this, &MainWindow::showView);
+    return start;
 }
 
-void MainWindow::setupGameView()
+GameScreen* MainWindow::setupGameView()
 {
-    mgameLayer = new GameScreen(this);
-    currentLayer = mgameLayer;
-    connect(minfo, &MapInfo::objectAdded, mgameLayer, &GameScreen::onObjectAdded);
-    connect(minfo, &MapInfo::objectRemoved, mgameLayer, &GameScreen::onObjectRemoved);
-    setCentralWidget(mgameLayer);
+    GameScreen* screen = new GameScreen(this);
+    connect(screen, &GameScreen::pauseMenu, this, &MainWindow::pauseGame);
+    connect(minfo, &MapInfo::objectAdded, screen, &GameScreen::onObjectAdded);
+    connect(minfo, &MapInfo::objectRemoved, screen, &GameScreen::onObjectRemoved);
+    return screen;
 }
 
-void MainWindow::setupOptionsView()
+OptionsLayer* MainWindow::setupOptionsView()
 {
-    moptions = new OptionsLayer(this);
-    currentLayer = moptions;
-    connect(moptions, &OptionsLayer::optionsDone, this, &MainWindow::setupStartScreenView);
-    setCentralWidget(moptions);
+    OptionsLayer* options = new OptionsLayer(this);
+    connect(options, &OptionsLayer::optionsDone, this, &MainWindow::showView);
+    return options;
+}
+
+RegisterLayer *MainWindow::setupRegister()
+{
+    RegisterLayer* layer = new RegisterLayer(this);
+    connect(layer, &RegisterLayer::registered, this, &MainWindow::onRegistered);
+    return layer;
+}
+
+void MainWindow::showView(int i)
+{
+    ((DisplayView*)rootLayout->widget(i))->setPrevious(rootLayout->currentIndex());
+    rootLayout->setCurrentIndex(i);
 }
 
 void MainWindow::onMqttConnected()
 {
-    setupStartScreenView();
-    mclient->subscribe(QMqttTopicFilter("/map"));
+    mclient->sub(MqttDialog::MAP);
 }
 
 void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicName &topic)
 {
     QJsonParseError error;
+    qDebug()<<message;
     QJsonDocument doc = QJsonDocument::fromJson(message, &error);
     if(error.error == QJsonParseError::NoError)
     {
@@ -102,5 +117,37 @@ void MainWindow::applyOptions(const Options *options)
     {
         showNormal();
     }
+}
+
+void MainWindow::onRegistered(QString id, QString pseudo, QString vehicle)
+{
+    QJsonObject data{
+        {"uuid", id},
+        {"pseudo", pseudo},
+        {"controller", "keyboard"},
+        {"vehicle", vehicle},
+        {"team", "null"}
+    };
+    mclient->pub(MqttDialog::PLAYER_REGISTER, QJsonDocument(data).toJson());
+    showView(1);
+    emit registered(id);
+}
+
+void MainWindow::pauseGame(int display)
+{
+    emit paused(true);
+    showView(display);
+}
+
+void MainWindow::playGame(int display)
+{
+    emit paused(false);
+    showView(display);
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    emit quitting();
+    event->accept();
 }
 

@@ -13,10 +13,12 @@ SOURCES += \
     checkpoint.cpp \
     circle.cpp \
     controlleradapter.cpp \
+    controllermanager.cpp \
     gameproperties.cpp \
     main.cpp \
     mainwindow.cpp \
     maptranslator.cpp \
+    mqttdialog.cpp \
     options.cpp \
     rectangle.cpp
 
@@ -25,22 +27,21 @@ HEADERS += \
     circle.h \
     circuitelement.h \
     controlleradapter.h \
+    controllermanager.h \
+    displayview.h \
     gameproperties.h \
     gamescreen.h \
+    keyboardcontroller.h \
     mainwindow.h \
     mapinfo.h \
     maptranslator.h \
+    mqttdialog.h \
     options.h \
     optionslayer.h \
     rectangle.h \
+    registerlayer.h \
     startscreenlayer.h \
     vehicleproperties.h
-
-resources.files = \
-    options.txt
-resources.prefix = /
-
-RESOURCES = resources
 
 FORMS += \
     mainwindow.ui

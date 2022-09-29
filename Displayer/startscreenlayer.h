@@ -4,19 +4,22 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QDebug>
+#include <QKeyEvent>
+#include <displayview.h>
 
-class StartScreenLayer : public QWidget{
+class StartScreenLayer : public DisplayView{
     Q_OBJECT
 private:
     QVBoxLayout* mroot;
     QPushButton* mstart;
     QPushButton* moptions;
     QPushButton* mquit;
+    bool ingame;
 public:
-    StartScreenLayer(QWidget* parent = nullptr):QWidget(parent)
+    StartScreenLayer(QWidget* parent):DisplayView(parent)
     {
+        ingame = false;
         mroot = new QVBoxLayout(this);
-
         mstart = new QPushButton("Start game");
         connect(mstart, &QPushButton::clicked, this, &StartScreenLayer::onStartClicked);
         mroot->addWidget(mstart);
@@ -38,16 +41,32 @@ public:
         delete mquit;
         delete mroot;
     }
+
+    // QWidget interface
+protected:
+    void keyReleaseEvent(QKeyEvent *event)
+    {
+        if(event->key() == Qt::Key_Escape && ingame)
+        {
+            emit(onStartClicked(previous));
+        }
+    }
+
 private slots:
     void onStartClicked(bool checked = false)
     {
         Q_UNUSED(checked);
-        emit gameStart();
+        mstart->setText("Back to game");
+        if(ingame)
+            emit gameStart(1);
+        else
+            emit gameStart(3);
+        ingame = true;
     }
     void onOptionClicked(bool checked = false)
     {
         Q_UNUSED(checked);
-        emit options();
+        emit options(2);
     }
     void onQuitClicked(bool checked = true)
     {
@@ -55,8 +74,8 @@ private slots:
         emit exit();
     }
 signals:
-    void gameStart();
-    void options();
+    void gameStart(int);
+    void options(int);
     void exit();
 };
 

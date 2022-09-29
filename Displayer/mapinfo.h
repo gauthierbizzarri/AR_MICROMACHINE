@@ -32,6 +32,15 @@ public:
         emit objectAdded(object);
     }
 
+    void updateAll()
+    {
+        for(const auto &pair : mobjects)
+        {
+            if(pair.second != nullptr)
+                emit objectAdded(pair.second);
+        }
+    }
+
     /**
      * @brief removeObject removed an object from the map
      * @param id id of the object to be removed
