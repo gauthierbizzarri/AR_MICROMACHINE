@@ -33,34 +33,50 @@ void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     //painter->drawRect(0, 0, GameProperties::getInstance()->rectangleWidth, GameProperties::getInstance()->rectangleHeight);
     qDebug()<<this->vehicule;
     QPixmap pixmap3 = this->get_vehicle();
-    pixmap3.scaledToHeight(GameProperties::getInstance()->rectangleHeight);
-    pixmap3.scaledToWidth(GameProperties::getInstance()->rectangleWidth);
-    painter->drawPixmap(10,10,100,100, pixmap3);
+    painter->drawPixmap(10,10, GameProperties::getInstance()->rectangleWidth,GameProperties::getInstance()->rectangleHeight, pixmap3);
 
 }
 
 QPixmap Player::get_vehicle(){
 
      QPixmap pixmap3(":/ressources/car.png");
+     QString color_str = this->get_color(this->color);
 
      if (this->vehicule.contains("truck"))
      {
-         pixmap3 =QPixmap(":/ressources/truck.png");
+         pixmap3 =QPixmap(":/ressources/"+color_str+"_truck.png");
 
      }
 
      else if (this->vehicule.contains("bike"))
      {
-              pixmap3 =QPixmap(":/ressources/moto.png");
+              pixmap3 =QPixmap(":/ressources/"+color_str+"_bike.png");
 
      }
 
      else if (this->vehicule.contains("car"))
      {
-              pixmap3 =QPixmap(":/ressources/car.png");
+              pixmap3 =QPixmap(":/ressources/"+color_str+"_car.png");
 
      }
 
     return pixmap3;
 }
 
+QString Player::get_color(QColor color)
+{
+    if (color ==Qt::red)
+    {
+        return "red";
+    }
+    else if (color ==Qt::blue)
+    {
+             return "blue";
+            }
+    else if (color ==Qt::green)
+    {
+             return "green";
+            }
+
+
+}

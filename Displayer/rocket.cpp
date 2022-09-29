@@ -20,5 +20,5 @@ void Rocket::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->drawEllipse(0, 0, 10,10 ); //GameProperties::getInstance()->checkpointRadius, 10 );GameProperties::getInstance()->checkpointRadius);
     QPixmap pixmap3(":/ressources/rocket.png");
 
-    painter->drawPixmap(10,10,100,100, pixmap3);
+    painter->drawPixmap(10,10, GameProperties::getInstance()->rectangleWidth,GameProperties::getInstance()->rectangleHeight, pixmap3);
 }

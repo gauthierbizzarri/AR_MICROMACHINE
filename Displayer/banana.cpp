@@ -23,5 +23,5 @@ void Banana::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
     QPixmap pixmap3(":/ressources/banana.png");
 
-    painter->drawPixmap(10,10,100,100, pixmap3);
+    painter->drawPixmap(10,10, GameProperties::getInstance()->rectangleWidth,GameProperties::getInstance()->rectangleHeight, pixmap3);
 }
