@@ -7,6 +7,12 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+#include <QtMath>
+
+#include "map.h"
+#include "game.h"
+#include "player.h"
+
 class AI : public QObject
 {
     Q_OBJECT
@@ -14,14 +20,15 @@ private:
     QUuid m_uuid;
     QUuid::StringFormat m_uuidStrFormat;
 
-    QJsonDocument m_map;
-    QJsonDocument m_game;
+    Map* m_map;
+    Game* m_game;
 
-    QJsonObject m_player;
-    QJsonObject m_checkpoint;
+    Player* m_player;
+    //Checkpoint m_checkpoint;
 
 public:
     explicit AI(QUuid, QUuid::StringFormat, QObject *parent = nullptr);
+    void set_checkpoints();
     void process();
 
 signals:

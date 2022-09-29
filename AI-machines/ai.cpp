@@ -8,44 +8,47 @@ AI::AI(QUuid uuid, QUuid::StringFormat uuidStrFormat, QObject *parent)
 }
 
 void AI::mapDatas(QJsonDocument map) {
-    m_map = map;
+    m_map = new Map(Map::fromJson(map));
+    set_checkpoints();
 }
 
 void AI::playerDatas(QJsonDocument game) {
-    m_game = game;
+    m_game = new Game(Game::fromJson(game));
     process();
+}
+
+void AI::set_checkpoints() {
+    if (!m_map) return;
+    QList<Checkpoint> checkpoints = m_map->get_checkpoints();
+
+    qDebug("Checkpoints !");
+    if (checkpoints.isEmpty()) return;
+
+    foreach(Checkpoint checkpoint, checkpoints) {
+        checkpoint.debug();
+    }
 }
 
 void AI::process() {
     qDebug("process IA");
-    qDebug() << m_map;
-    qDebug() << m_game;
 
-    if (m_map.isEmpty()) return;
-    if (m_game.isEmpty()) return;
+    if (!m_map) return;
+    if (!m_game) return;
 
-    for (const auto player : m_game.object()["players"].toArray()) {
-        if (QUuid(player.toObject()["uuid"].toString()) == /*m_uuid*/ "ia_uuid") {
-            m_player = player.toObject();
+    foreach (Player player, m_game->get_players()) {
+        if (player.get_uuid() == m_uuid /*"ia_uuid"*/) {
+            m_player = &player;
             break;
         }
     }
 
-    qDebug() << m_player;
-    if (m_player.isEmpty()) return;
-
-
-
-    qDebug("true uuid");
-    qDebug() << m_uuid.toString(m_uuidStrFormat);
-    qDebug("player !");
-    qDebug() << m_player;
+    if (!m_player) return;
 
     QJsonObject jsonOutput;
 
     jsonOutput.insert("uuid", m_uuid.toString(m_uuidStrFormat));
-    jsonOutput.insert("angle", "90");
-    jsonOutput.insert("power", "100");
+    jsonOutput.insert("angle", M_PI/2);
+    jsonOutput.insert("power", 100);
 
     qDebug("json uuid");
     qDebug() << jsonOutput["uuid"];

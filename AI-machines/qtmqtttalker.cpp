@@ -6,11 +6,11 @@ QtMqttTalker::QtMqttTalker(QUuid uuid, QUuid::StringFormat uuidStrFormat, QObjec
     m_uuid = uuid;
     m_uuidStrFormat = uuidStrFormat;
 
-    m_topicProperties = QMqttTopicFilter("/game/properties");
-    m_topicRegister =   QMqttTopicName("/player/register");
-    m_topicMap =        QMqttTopicFilter("/map");
-    m_topicGame =       QMqttTopicFilter("/game");
-    m_topicController = QMqttTopicName("/player/control");
+    m_topicProperties = QMqttTopicFilter("game/properties");
+    m_topicRegister =   QMqttTopicName("player/register");
+    m_topicMap =        QMqttTopicFilter("map");
+    m_topicGame =       QMqttTopicFilter("game");
+    m_topicController = QMqttTopicName("player/control");
 
     m_qos = 0;
 

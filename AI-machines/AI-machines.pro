@@ -11,8 +11,15 @@ CONFIG -= app_bundle
 SOURCES += \
         ai.cpp \
         ai_manager.cpp \
+        checkpoint.cpp \
+        entity.cpp \
         fakebroker.cpp \
+        game.cpp \
+        item.cpp \
         main.cpp \
+        map.cpp \
+        obstacle.cpp \
+        player.cpp \
         qtmqtttalker.cpp
 
 TRANSLATIONS += \
@@ -28,5 +35,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     ai.h \
     ai_manager.h \
+    checkpoint.h \
+    entity.h \
     fakebroker.h \
+    game.h \
+    item.h \
+    map.h \
+    obstacle.h \
+    player.h \
     qtmqtttalker.h
