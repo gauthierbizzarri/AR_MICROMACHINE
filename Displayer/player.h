@@ -21,7 +21,7 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void set_data(QColor color0, int team, float angle, int speed, QString vehicule);
-    QPixmap get_vehicle();
+    QImage get_vehicle();
     QString get_color(QColor color);
 private :
     QColor color;

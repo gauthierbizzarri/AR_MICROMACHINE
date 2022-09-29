@@ -25,11 +25,11 @@ public:
 
 private slots:
     void onConnect();
-    void onMessageRecieved(QByteArray data, QMqttTopicName name);
+    void onMessageRecieved(const QByteArray &data, QMqttTopicName name);
 
 signals:
     void connected();
-    void messageRecieved(QByteArray, QMqttTopicName);
+    void messageRecieved(const QByteArray&, QMqttTopicName);
 };
 
 #endif // MQTTDIALOG_H

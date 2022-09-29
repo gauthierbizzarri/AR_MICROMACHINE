@@ -12,6 +12,8 @@
 MainWindow::MainWindow(MqttDialog* dialog, QWidget *parent)
     : QMainWindow(parent)
 {
+
+    setFocusPolicy(Qt::StrongFocus);
     setMinimumSize(1000, 1000);
     applyOptions(Options::getInstance());
     connect(Options::getInstance(), &Options::update, this, &MainWindow::applyOptions);
@@ -60,6 +62,7 @@ GameScreen* MainWindow::setupGameView()
     connect(screen, &GameScreen::pauseMenu, this, &MainWindow::pauseGame);
     connect(minfo, &MapInfo::objectAdded, screen, &GameScreen::onObjectAdded);
     connect(minfo, &MapInfo::objectRemoved, screen, &GameScreen::onObjectRemoved);
+    connect(minfo, &MapInfo::sizeChanged, screen, &GameScreen::onSizeChange);
     return screen;
 }
 

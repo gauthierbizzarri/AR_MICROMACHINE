@@ -22,6 +22,8 @@ private:
      */
     std::map<QString, CircuitElement*> mobjects;
     std::map<QString, CircuitElement*> mitems;
+
+    QSize size;
 public:
     MapInfo():QObject(){
         mobjects = std::map<QString, CircuitElement*>();
@@ -32,6 +34,12 @@ public:
         clear();
         clear_players();
         clear_items();
+    }
+
+    void setSize(int width, int height)
+    {
+        size = QSize(width, height);
+        emit sizeChanged(size);
     }
 
     /**
@@ -113,14 +121,14 @@ public:
 
     void clear_players()
         {
-
+        qDebug()<<"amount"<<mobjects.size();
         for(const auto &pair : std::map<QString, CircuitElement*>(mobjects))
         {
-            qDebug()<<"CLEAR ELEMENT"<<pair.second->property("TYPE");
             if (  (pair.second->property("TYPE")=="Player") )
             this->removeObject(pair.first);
         }
 
+        qDebug()<<"after delete"<<mobjects.size();
 
         }
 
@@ -129,15 +137,14 @@ public:
         {
 
         for(const auto &pair : std::map<QString, CircuitElement*>(mitems))
-            delete(mitems[pair.first]);
-
-
+            removeObject(pair.first);
         }
 
 
 signals:
     void objectAdded(CircuitElement* object);
     void objectRemoved(CircuitElement* object);
+    void sizeChanged(QSize);
 };
 
 #endif // MAPINFO_H

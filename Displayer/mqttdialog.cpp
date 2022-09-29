@@ -43,6 +43,7 @@ MqttDialog *MqttDialog::sub(QString name)
 
 void MqttDialog::establishConnection()
 {
+    qDebug()<<"connect";
     mclient->connectToHost();
 }
 
@@ -52,7 +53,8 @@ void MqttDialog::onConnect()
     emit connected();
 }
 
-void MqttDialog::onMessageRecieved(QByteArray data, QMqttTopicName name)
+void MqttDialog::onMessageRecieved(const QByteArray &data, QMqttTopicName name)
 {
+    qDebug()<<data;
     emit messageRecieved(data, name);
 }

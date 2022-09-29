@@ -16,7 +16,7 @@ public:
 public:
     bool eventFilter(QObject *watched, QEvent *event)
     {
-        event->accept();
+        qDebug() <<"Event"<< event << watched;
         if(event->type() == QEvent::Type::KeyRelease)
         {
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
@@ -36,7 +36,6 @@ public:
             {
                 emit computeThrotle(0);
             }
-            return true;
         }
         if(event->type() == QEvent::Type::KeyPress)
         {
@@ -58,8 +57,8 @@ public:
             {
                 emit computeStreering(-90);
             }
-            return true;
         }
+        event->accept();
         return QObject::eventFilter(watched, event);
     }
 };

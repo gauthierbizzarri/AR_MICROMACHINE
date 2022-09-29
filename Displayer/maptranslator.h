@@ -26,7 +26,7 @@ public:
      */
     void update(QJsonDocument message);
     void update_game(QJsonDocument message);
-    QColor get_color(QString colorstr);
+    static QColor get_color(QString colorstr);
 };
 
 #endif // MAPTRANSLATOR_H

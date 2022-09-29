@@ -14,6 +14,8 @@ void MapTranslator::update(QJsonDocument message)
     QJsonArray obstacles = base.value("obstacles").toArray();
     minfo->clear();
 
+    minfo->setSize(base.value("mapWidth").toInt(1000), base.value("mapHeight").toInt(1000));
+
     // POINTS
     for(int i = 0; i<points.size(); i++)
     {
@@ -64,7 +66,7 @@ void MapTranslator::update_game(QJsonDocument message)
         QString colorstr =PlayerObj.value("color").toString();
 
         // Get color
-        QColor color = this->get_color(colorstr);
+        QColor color = MapTranslator::get_color(colorstr);
 
         int team = PlayerObj.value("team").toDouble();
 
@@ -115,7 +117,7 @@ void MapTranslator::update_game(QJsonDocument message)
 
 QColor MapTranslator::get_color(QString colorstr){
 
-     QColor color = Qt::black;
+    QColor color = Qt::black;
 
     if (colorstr.contains("yellow"))
     {

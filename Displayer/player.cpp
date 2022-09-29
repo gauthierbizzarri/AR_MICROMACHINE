@@ -29,37 +29,37 @@ QRectF Player::boundingRect() const
 
 void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(this->color);
-    //painter->drawRect(0, 0, GameProperties::getInstance()->rectangleWidth, GameProperties::getInstance()->rectangleHeight);
-    QPixmap pixmap3 = this->get_vehicle();
-    painter->drawPixmap(10,10, GameProperties::getInstance()->rectangleWidth,GameProperties::getInstance()->rectangleHeight, pixmap3);
+    painter->drawRect(0, 0, GameProperties::getInstance()->rectangleWidth, GameProperties::getInstance()->rectangleHeight);
+    QImage image = this->get_vehicle();
+    painter->drawImage(0, 0, image.scaled(GameProperties::getInstance()->rectangleWidth ,GameProperties::getInstance()->rectangleHeight));
+    //painter->drawPixmap(0,0, GameProperties::getInstance()->rectangleWidth,GameProperties::getInstance()->rectangleHeight, pixmap3);
 
 }
 
-QPixmap Player::get_vehicle(){
+QImage Player::get_vehicle(){
 
-     QPixmap pixmap3(":/ressources/car.png");
+     QImage image = QImage(":/ressources/car.png");
      QString color_str = this->get_color(this->color);
 
      if (this->vehicule.contains("truck"))
      {
-         pixmap3 =QPixmap(":/ressources/"+color_str+"_truck.png");
+         image =QImage(":/ressources/"+color_str+"_truck.png");
 
      }
 
      else if (this->vehicule.contains("bike"))
      {
-              pixmap3 =QPixmap(":/ressources/"+color_str+"_bike.png");
+              image =QImage(":/ressources/"+color_str+"_bike.png");
 
      }
 
      else if (this->vehicule.contains("car"))
      {
-              pixmap3 =QPixmap(":/ressources/"+color_str+"_car.png");
+              image =QImage(":/ressources/"+color_str+"_car.png");
 
      }
 
-    return pixmap3;
+    return image;
 }
 
 QString Player::get_color(QColor color)

@@ -33,19 +33,13 @@ public:
         mview->deleteLater();
         mroot->deleteLater();
     }
-
-    void display(MapInfo* info)
-    {
-        if(mscene == nullptr || !mscene->isActive()) return;
-        for(const auto element : info->getObjects())
-            mscene->addItem(element.second);
-    }
 public slots:
     /**
      * @brief onObjectRemoved called whenever an object gets removed from the map
      */
     void onObjectRemoved(CircuitElement* e)
     {
+        qDebug()<<"remove";
         mscene->removeItem(e);
     }
     /**
@@ -54,7 +48,14 @@ public slots:
     void onObjectAdded(CircuitElement* e)
     {
         mscene->addItem(e);
+        qDebug()<<"elements in scene"<<mscene->items().size();
     }
+
+    void onSizeChange(QSize size)
+    {
+        mscene->setSceneRect(0, 0, size.width(), size.height());
+    }
+
 signals:
     void pauseMenu(int);
     // QWidget interface

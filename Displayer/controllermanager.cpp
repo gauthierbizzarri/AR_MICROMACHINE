@@ -10,6 +10,7 @@ ControllerManager::ControllerManager(MqttDialog* client)
 
     mclient = client;
     connect(mclient, &MqttDialog::connected, this, &ControllerManager::onMqttConnected);
+
 }
 
 void ControllerManager::setup(MainWindow *frame, ControllerAdapter *adapter)
