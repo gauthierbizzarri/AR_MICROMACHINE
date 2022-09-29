@@ -14,6 +14,9 @@ SOURCES += \
     circle.cpp \
     controlleradapter.cpp \
     controllermanager.cpp \
+    banana.cpp \
+    checkpoint.cpp \
+    circle.cpp \
     gameproperties.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -23,6 +26,13 @@ SOURCES += \
     rectangle.cpp
 
 HEADERS += \
+    options.cpp \
+    player.cpp \
+    rectangle.cpp \
+    rocket.cpp
+
+HEADERS += \
+    banana.h \
     checkpoint.h \
     circle.h \
     circuitelement.h \
@@ -43,6 +53,34 @@ HEADERS += \
     startscreenlayer.h \
     vehicleproperties.h
 
+    gameproperties.h \
+    gamescreen.h \
+    mainwindow.h \
+    mapinfo.h \
+    maptranslator.h \
+    options.h \
+    optionslayer.h \
+    player.h \
+    rectangle.h \
+    rocket.h \
+    startscreenlayer.h \
+    vehicleproperties.h
+
+resources.files = \
+    options.txt
+resources.prefix = /
+
+RESOURCES += \
+    banana.qrc \
+    banana2.qrc \
+    bike.qrc \
+    car.qrc \
+    rocket.qrc \
+    truck.qrc
+
+
+
+
 FORMS += \
     mainwindow.ui
 
@@ -50,3 +88,7 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    banana.png \
+    ressources/banana.gif

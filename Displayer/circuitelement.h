@@ -10,6 +10,7 @@
 class CircuitElement : public QGraphicsObject
 {
 protected:
+    int x,y;
     /**
      * @brief CircuitElement Base class for graphical representation of circuit elements
      * @param x circuit element's center x

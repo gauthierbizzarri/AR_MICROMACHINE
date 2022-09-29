@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <startscreenlayer.h>
 #include <gamescreen.h>
 #include <QMainWindow>
 #include <QPainter>
@@ -11,7 +12,6 @@
 #include <QMqttClient>
 #include <options.h>
 #include <optionslayer.h>
-#include <startscreenlayer.h>
 #include <QStackedLayout>
 #include <registerlayer.h>
 #include <mqttdialog.h>

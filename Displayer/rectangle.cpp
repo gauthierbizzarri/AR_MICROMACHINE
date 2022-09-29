@@ -6,6 +6,7 @@ Rectangle::Rectangle(int x, int y, float angle, QGraphicsItem* parent): CircuitE
 {
     this->setTransformOriginPoint(GameProperties::getInstance()->rectangleWidth/2, GameProperties::getInstance()->rectangleHeight/2);
     this->setRotation(angle);
+    this->setProperty("TYPE","Rectangle");
 }
 
 QRectF Rectangle::boundingRect() const

@@ -91,14 +91,21 @@ void MainWindow::onMqttConnected()
 void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicName &topic)
 {
     QJsonParseError error;
-    qDebug()<<message;
     QJsonDocument doc = QJsonDocument::fromJson(message, &error);
+    qDebug()<<message;
     if(error.error == QJsonParseError::NoError)
     {
-        if(topic.name() == "/map")
+        if(topic.name() == "map")
         {
+
             MapTranslator trans(minfo);
             trans.update(doc);
+        }
+
+        if(topic.name() == "game")
+        {
+            MapTranslator trans(minfo);
+            trans.update_game(doc);
         }
     }
     else

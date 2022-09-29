@@ -18,4 +18,11 @@ release/moc_mqttdialog.o
 release/moc_options.o
 release/moc_optionslayer.o
 release/moc_registerlayer.o
+release/options.o
+release/rectangle.o
+release/qrc_qmake_resources.o
+release/moc_mainwindow.o
+release/moc_mapinfo.o
+release/moc_options.o
+release/moc_optionslayer.o
 release/moc_startscreenlayer.o

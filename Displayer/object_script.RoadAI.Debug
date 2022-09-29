@@ -18,4 +18,11 @@ debug/moc_mqttdialog.o
 debug/moc_options.o
 debug/moc_optionslayer.o
 debug/moc_registerlayer.o
+debug/options.o
+debug/rectangle.o
+debug/qrc_qmake_resources.o
+debug/moc_mainwindow.o
+debug/moc_mapinfo.o
+debug/moc_options.o
+debug/moc_optionslayer.o
 debug/moc_startscreenlayer.o

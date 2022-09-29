@@ -3,6 +3,13 @@
 
 #include <checkpoint.h>
 #include <rectangle.h>
+#include <player.h>
+
+#include <circle.h>
+
+#include <banana.h>
+#include <rocket.h>
+
 #include <QVBoxLayout>
 #include <QDebug>
 
@@ -13,13 +20,17 @@ private:
      * @brief objects mapping of object on the map, with their id
      */
     std::map<QString, CircuitElement*> mobjects;
+    std::map<QString, CircuitElement*> mitems;
 public:
     MapInfo():QObject(){
         mobjects = std::map<QString, CircuitElement*>();
+        mitems = std::map<QString, CircuitElement*>();
     }
 
     ~MapInfo(){
         clear();
+        clear_players();
+        clear_items();
     }
 
     /**
@@ -39,6 +50,11 @@ public:
             if(pair.second != nullptr)
                 emit objectAdded(pair.second);
         }
+    }
+    
+    void addItem(QString id, CircuitElement* object){
+        mitems.insert_or_assign(id, object);
+        emit objectAdded(object);
     }
 
     /**
@@ -89,9 +105,35 @@ public:
     {
         for(const auto &pair : std::map<QString, CircuitElement*>(mobjects))
         {
+            qDebug()<<"CLEAR ELEMENT"<<pair.second->property("TYPE");
+            if ( (pair.second->property("TYPE")!="Player") || (pair.second->property("TYPE")=="Rectangle") )
             this->removeObject(pair.first);
         }
     }
+
+    void clear_players()
+        {
+
+        for(const auto &pair : std::map<QString, CircuitElement*>(mobjects))
+        {
+            qDebug()<<"CLEAR ELEMENT"<<pair.second->property("TYPE");
+            if (  (pair.second->property("TYPE")=="Player") )
+            this->removeObject(pair.first);
+        }
+
+
+        }
+
+
+    void clear_items()
+        {
+
+        for(const auto &pair : std::map<QString, CircuitElement*>(mitems))
+            delete(mitems[pair.first]);
+
+
+        }
+
 
 signals:
     void objectAdded(CircuitElement* object);

@@ -1,0 +1,7 @@
+{
+    "fullscreen": false,
+    "music": 1,
+    "sound": 1,
+    "soundeffects": 1
+}
+
