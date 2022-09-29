@@ -18,4 +18,9 @@ void Banana::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     Q_UNUSED(widget);
     painter->setBrush(Qt::yellow);
     painter->drawEllipse(0, 0, 10,10 ); //GameProperties::getInstance()->checkpointRadius, 10 );GameProperties::getInstance()->checkpointRadius);
+
+    //QImage logo;
+    //logo.load("ressources/banana.png");
+    //QPixmap pix("C:/Users/BIZZARRI/Documents/graphics/Displayer/ressources/banana.png");
+    //painter->drawImage(QRect(0,0,50,50),pix);
 }

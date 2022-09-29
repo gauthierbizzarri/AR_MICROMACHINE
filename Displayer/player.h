@@ -14,13 +14,18 @@ public:
      * @param y y central position of the circle
      * @param parent graphical item's parent
      */
-    Player(int x, int y, QGraphicsItem* parent = nullptr);
+    Player(int x, int y, float angle, QGraphicsItem* parent = nullptr);
 
     // QGraphicsItem interface
 public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void set_data(char color0, int team, float angle, int speed, char vehicule);
+    void set_data(QColor color0, int team, float angle, int speed, QString vehicule);
+private :
+    QColor color;
+    int team;
+    int speed;
+    QString vehicule;
 };
 
 #endif // PLAYER_H

@@ -56,8 +56,23 @@ void MapTranslator::update_game(QJsonDocument message)
     {
         qDebug()<<"Player in list";
         QJsonObject PlayerObj = players[i].toObject();
-        QString uuid = QString::number(PlayerObj["id"].toDouble());
-        Player* player = new Player(PlayerObj.value("x").toInt(), PlayerObj.value("y").toInt());
+        QString uuid = QString::number(PlayerObj["uuid"].toDouble());
+        float angle = PlayerObj.value("angle").toDouble();
+        Player* player = new Player(PlayerObj.value("x").toInt(), PlayerObj.value("y").toInt(),angle);
+
+        // SET DATA OF PLAYER
+        QString colorstr =PlayerObj.value("color").toString();
+
+        // Get color
+        QColor color = this->get_color(colorstr);
+
+        int team = PlayerObj.value("team").toDouble();
+
+        int speed = PlayerObj.value("speed").toDouble();
+
+        QString vehicule = PlayerObj.value("vehicule").toString();
+
+        player->set_data(color,team,angle,speed,vehicule);
         minfo->addObject(uuid, player);
     }
 
@@ -91,3 +106,31 @@ void MapTranslator::update_game(QJsonDocument message)
 
 
 }
+
+QColor MapTranslator::get_color(QString colorstr){
+
+     QColor color = Qt::black;
+
+    if (colorstr.contains("yellow"))
+    {
+        color = Qt::yellow;
+    }
+
+    else if (colorstr.contains("red"))
+    {
+        color = Qt::red;
+    }
+
+    else if (colorstr.contains("green"))
+    {
+        color = Qt::green;
+    }
+
+    else if (colorstr.contains("blue"))
+    {
+        color = Qt::blue;
+    }
+    return color;
+}
+
+

@@ -79,10 +79,12 @@ void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicNam
 {
     QJsonParseError error;
     QJsonDocument doc = QJsonDocument::fromJson(message, &error);
+    qDebug()<<message;
     if(error.error == QJsonParseError::NoError)
     {
         if(topic.name() == "/map")
         {
+
             MapTranslator trans(minfo);
             trans.update(doc);
         }

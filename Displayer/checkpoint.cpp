@@ -17,4 +17,6 @@ void Checkpoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     Q_UNUSED(widget);
     painter->setBrush(Qt::green);
     painter->drawEllipse(0, 0, GameProperties::getInstance()->checkpointRadius, GameProperties::getInstance()->checkpointRadius);
+
+
 }
