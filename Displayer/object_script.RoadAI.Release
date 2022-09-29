@@ -1,0 +1,15 @@
+release/checkpoint.o
+release/circle.o
+release/controlleradapter.o
+release/gameproperties.o
+release/main.o
+release/mainwindow.o
+release/maptranslator.o
+release/options.o
+release/rectangle.o
+release/qrc_qmake_resources.o
+release/moc_mainwindow.o
+release/moc_mapinfo.o
+release/moc_options.o
+release/moc_optionslayer.o
+release/moc_startscreenlayer.o
