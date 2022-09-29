@@ -80,9 +80,6 @@ void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicNam
     QJsonDocument doc = QJsonDocument::fromJson(message, &error);
     if(error.error == QJsonParseError::NoError)
     {
-        qDebug()<<"Message received"<<"\n";
-        qDebug()<<"ON TOPIC"<<topic.name();
-        qDebug()<<doc<<"\n";
         if(topic.name() == "/map")
         {
             MapTranslator trans(minfo);
@@ -98,7 +95,6 @@ void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicNam
     }
     else
     {
-        qDebug()<<"Error in string";
         qDebug()<<error.errorString();
     }
 }

@@ -3,6 +3,7 @@ debug/circle.o
 debug/controlleradapter.o
 debug/controllermanager.o
 debug/banana.o
+debug/bomb.o
 debug/gameproperties.o
 debug/main.o
 debug/mainwindow.o
@@ -15,6 +16,7 @@ debug/rectangle.o
 debug/qrc_banana.o
 debug/qrc_banana2.o
 debug/qrc_bike.o
+debug/qrc_bomb.o
 debug/qrc_car.o
 debug/qrc_rocket.o
 debug/qrc_truck.o

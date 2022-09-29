@@ -55,7 +55,6 @@ void MapTranslator::update_game(QJsonDocument message)
     minfo->clear_players();
     for(int i = 0; i<players.size(); i++)
     {
-        qDebug()<<"Player in list";
         QJsonObject PlayerObj = players[i].toObject();
         QString uuid = QString::number(PlayerObj["uuid"].toDouble());
         float angle = PlayerObj.value("angle").toDouble();
@@ -101,6 +100,12 @@ void MapTranslator::update_game(QJsonDocument message)
         {
             Rocket* rocket = new Rocket(ItemObj.value("x").toInt(), ItemObj.value("y").toInt());
             minfo->addItem(QVariant(i).toString(), rocket);
+        }
+
+        if (type =="bomb")
+        {
+            Bomb* bomb = new Bomb(ItemObj.value("x").toInt(), ItemObj.value("y").toInt());
+            minfo->addItem(QVariant(i).toString(), bomb);
         }
 
     }

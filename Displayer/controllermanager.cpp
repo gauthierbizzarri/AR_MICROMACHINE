@@ -104,7 +104,6 @@ void ControllerManager::sendControll(QByteArray data)
 
 void ControllerManager::onPaused(bool pause)
 {
-    qDebug()<<pause;
     paused = pause;
     if(pause)
     {

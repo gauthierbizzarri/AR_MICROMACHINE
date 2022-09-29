@@ -9,6 +9,7 @@
 
 #include <banana.h>
 #include <rocket.h>
+#include <bomb.h>
 
 #include <QVBoxLayout>
 #include <QDebug>
@@ -105,8 +106,7 @@ public:
     {
         for(const auto &pair : std::map<QString, CircuitElement*>(mobjects))
         {
-            qDebug()<<"CLEAR ELEMENT"<<pair.second->property("TYPE");
-            if ( (pair.second->property("TYPE")!="Player") || (pair.second->property("TYPE")=="Rectangle") )
+            if ( (pair.second->property("TYPE")!="Player") )
             this->removeObject(pair.first);
         }
     }

@@ -17,10 +17,8 @@ public:
     bool eventFilter(QObject *watched, QEvent *event)
     {
         event->accept();
-        qDebug()<<event->type();
         if(event->type() == QEvent::Type::KeyRelease)
         {
-            qDebug()<<"release";
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
             if(keyEvent->key() == Qt::Key_E)
             {

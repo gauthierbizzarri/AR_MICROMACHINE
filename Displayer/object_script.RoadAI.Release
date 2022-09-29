@@ -3,6 +3,7 @@ release/circle.o
 release/controlleradapter.o
 release/controllermanager.o
 release/banana.o
+release/bomb.o
 release/gameproperties.o
 release/main.o
 release/mainwindow.o
@@ -15,6 +16,7 @@ release/rectangle.o
 release/qrc_banana.o
 release/qrc_banana2.o
 release/qrc_bike.o
+release/qrc_bomb.o
 release/qrc_car.o
 release/qrc_rocket.o
 release/qrc_truck.o

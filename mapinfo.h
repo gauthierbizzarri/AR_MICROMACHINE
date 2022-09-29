@@ -17,7 +17,6 @@ public:
     }
 
     void addObject(QString id, CircuitElement* object){
-        qDebug()<<"INSERT"<<object->property("TYPE");
         this->objects.insert_or_assign(id, object);
         emit objectAdded(object);
     }
@@ -47,7 +46,6 @@ public:
     {
         for(std::map<QString, CircuitElement*>::iterator it = this->objects.begin(); it != this->objects.end(); ++it)
         {
-            qDebug()<<"CLEAR ELEMENT"<<it->second;
             if (it->second->property("TYPE")=="Circle" || it->second->property("TYPE")=="Checkpoint" )
             this->removeObject(it->first);
         }
@@ -56,7 +54,6 @@ public:
     {
         for(std::map<QString, CircuitElement*>::iterator it = this->objects.begin(); it != this->objects.end(); ++it)
         {
-            qDebug()<<"CLEAR ELEMENT"<<it->second->property("TYPE");
             if (it->second->property("TYPE")=="Player")
             this->removeObject(it->first);
         }

@@ -285,6 +285,7 @@ Makefile: RoadAI.pro D:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf D:/Qt/
 		banana.qrc \
 		banana2.qrc \
 		bike.qrc \
+		bomb.qrc \
 		car.qrc \
 		rocket.qrc \
 		truck.qrc
@@ -504,6 +505,7 @@ D:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
 banana.qrc:
 banana2.qrc:
 bike.qrc:
+bomb.qrc:
 car.qrc:
 rocket.qrc:
 truck.qrc:

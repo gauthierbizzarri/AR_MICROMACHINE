@@ -31,7 +31,6 @@ void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 {
     painter->setBrush(this->color);
     //painter->drawRect(0, 0, GameProperties::getInstance()->rectangleWidth, GameProperties::getInstance()->rectangleHeight);
-    qDebug()<<this->vehicule;
     QPixmap pixmap3 = this->get_vehicle();
     painter->drawPixmap(10,10, GameProperties::getInstance()->rectangleWidth,GameProperties::getInstance()->rectangleHeight, pixmap3);
 

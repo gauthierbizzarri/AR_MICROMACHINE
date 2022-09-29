@@ -8,7 +8,6 @@ Rectangle::Rectangle(int x, int y, float angle, QGraphicsItem* parent): CircuitE
     this->setRotation(angle);
 
     this->setProperty("TYPE","Rectangle");
-    qDebug()<<"Created"<<this->property("TYPE");
 }
 
 QRectF Rectangle::boundingRect() const

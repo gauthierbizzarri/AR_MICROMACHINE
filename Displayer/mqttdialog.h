@@ -15,6 +15,7 @@ public:
     static const QString MAP;
     static const QString PLAYER_CONTROL;
     static const QString PLAYER_REGISTER;
+    static const QString GAME;
 
     MqttDialog();
     ~MqttDialog();

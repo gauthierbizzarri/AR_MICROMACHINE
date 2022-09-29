@@ -86,6 +86,7 @@ void MainWindow::showView(int i)
 void MainWindow::onMqttConnected()
 {
     mclient->sub(MqttDialog::MAP);
+    mclient->sub(MqttDialog::GAME);
 }
 
 void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicName &topic)
@@ -95,14 +96,14 @@ void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicNam
     qDebug()<<message;
     if(error.error == QJsonParseError::NoError)
     {
-        if(topic.name() == "map")
+        if(topic.name() == MqttDialog::MAP)
         {
 
             MapTranslator trans(minfo);
             trans.update(doc);
         }
 
-        if(topic.name() == "game")
+        if(topic.name() == MqttDialog::GAME)
         {
             MapTranslator trans(minfo);
             trans.update_game(doc);

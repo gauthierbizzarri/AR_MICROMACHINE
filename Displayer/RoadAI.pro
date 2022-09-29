@@ -15,6 +15,7 @@ SOURCES += \
     controlleradapter.cpp \
     controllermanager.cpp \
     banana.cpp \
+    bomb.cpp \
     gameproperties.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     player.h\
     options.h\
     banana.h \
+    bomb.h \
     checkpoint.h \
     circle.h \
     circuitelement.h \
@@ -57,6 +59,7 @@ RESOURCES += \
     banana.qrc \
     banana2.qrc \
     bike.qrc \
+    bomb.qrc \
     car.qrc \
     rocket.qrc \
     truck.qrc

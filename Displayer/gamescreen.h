@@ -53,7 +53,6 @@ public slots:
      */
     void onObjectAdded(CircuitElement* e)
     {
-        qDebug()<<mscene;
         mscene->addItem(e);
     }
 signals:
