@@ -50,7 +50,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupMqtt()
 {
-    connect(mclient, &MqttDialog::connected, this, &MainWindow::onMqttConnected);
     connect(mclient, &MqttDialog::disconnected, this, &MainWindow::onMqttDisconnected);
     connect(mclient, &MqttDialog::messageRecieved, this, &MainWindow::onMessageRecieve);
 }
@@ -83,14 +82,14 @@ RegisterLayer *MainWindow::setupRegister()
 {
     RegisterLayer* layer = new RegisterLayer(this);
     connect(layer, &RegisterLayer::registered, this, &MainWindow::onRegistered);
+    connect(layer, &ConnectionLayer::stateChange, this, &MainWindow::onStateChange);
     return layer;
 }
 
 ConnectionLayer *MainWindow::setupConnectionLayer()
 {
-    ConnectionLayer* layer = new ConnectionLayer(this);
+    ConnectionLayer* layer = new ConnectionLayer(mclient, this);
     connect(layer, &ConnectionLayer::stateChange, this, &MainWindow::onStateChange);
-    layer->init(mclient);
     return layer;
 }
 
@@ -98,21 +97,6 @@ void MainWindow::showView(int i)
 {
     ((DisplayView*)rootLayout->widget(i))->setPrevious(currentstate);
     rootLayout->setCurrentIndex(i);
-}
-
-void MainWindow::onMqttConnected()
-{
-    mclient->sub(MqttDialog::MAP);
-    mclient->sub(MqttDialog::GAME);
-    QJsonObject data{
-        {"uuid", id},
-        {"pseudo", pseudo},
-        {"controller", "keyboard"},
-        {"vehicle", vehicle},
-        {"team", "null"}
-    };
-    mclient->pub(MqttDialog::PLAYER_REGISTER, QJsonDocument(data).toJson());
-    onStateChange(AppState::CONNECTED);
 }
 
 void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicName &topic)
@@ -155,10 +139,7 @@ void MainWindow::applyOptions(const Options *options)
 void MainWindow::onRegistered(QString id, QString pseudo, QString vehicle, QString host, int port, QString username, QString password)
 {
     onStateChange(AppState::REGISTERED);
-    this->id = id;
-    this->pseudo = pseudo;
-    this->vehicle = vehicle;
-    mclient->establishConnection(host, port, username, password);
+    ((ConnectionLayer*)rootLayout->widget(CONNECTING_VIEW))->init(id, pseudo, vehicle, host, port, username, password);
     emit registered(id);
 }
 

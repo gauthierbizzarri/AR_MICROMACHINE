@@ -74,10 +74,6 @@ private:
 
 public slots:
     /**
-     * @brief onMqttConnected called on mqtt brocker connection
-     */
-    void onMqttConnected();
-    /**
      * @brief onMessageRecieve called on message arrival
      */
     void onMessageRecieve(const QByteArray&, const QMqttTopicName&);

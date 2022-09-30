@@ -4,6 +4,8 @@
 #include <QString>
 #include <vehicleproperties.h>
 #include <map>
+#include <player.h>
+#include <QJsonObject>
 
 class GameProperties
 {
@@ -22,19 +24,19 @@ public:
     /**
      * @brief circleRadius the radius of circle obstacles in meters
      */
-    float circleRadius = 30;
+    int circleRadius = 30;
     /**
      * @brief rectangleWidth width of rectangle obstacles in meters
      */
-    float rectangleWidth = 30;
+    int rectangleWidth = 30;
     /**
      * @brief rectangleHeight height of rectangle obstacles in meters
      */
-    float rectangleHeight = 30;
+    int rectangleHeight = 30;
     /**
      * @brief checkpointRadius radius of checkpoints in meters
      */
-    float checkpointRadius = 10;
+    int checkpointRadius = 10;
 
     /**
      * @brief bananaNb number of banana powerups for each player at start, -1 for infinity
@@ -44,6 +46,7 @@ public:
      * @brief bananaCd cooldown of the banana powerup, -1 for instant recharge, in ms
      */
     int bananaCd = -1;
+    int bananaRadius = 10;
     /**
      * @brief bananaTtl lifetime of a thrown banana
      */
@@ -56,6 +59,8 @@ public:
      * @brief bombCd cooldown of the bomb powerup, -1 for instant recharge, in ms
      */
     int bombCd = -1;
+    int bombRadius = 10;
+    int bombExplosionRadius = 20;
     /**
      * @brief bombTtl time before a bomb explode, -1 for instant explosion (kamikaze mode)
      */
@@ -68,25 +73,21 @@ public:
      * @brief rocketCd cooldown of the rocket powerup, -1 for instant recharge, in ms
      */
     int rocketCd = -1;
+    int rocketRadius = 10;
     /**
      * @brief rocketSpeed rocket powerup speed in m/s
      */
     int rocketSpeed = 150;
 
     std::map<QString, VechicleProperties> vehicleProperties = {
-        {"car", VechicleProperties()},
-        {"motorbike", VechicleProperties()},
-        {"truck", VechicleProperties()}
+        {Player::CAR, VechicleProperties()},
+        {Player::BIKE, VechicleProperties()},
+        {Player::TRUCK, VechicleProperties()}
     };
 
-    static GameProperties* getInstance()
-    {
-        if(GameProperties::instance == nullptr)
-        {
-            GameProperties::instance = new GameProperties();
-        }
-        return GameProperties::instance;
-    }
+    static GameProperties* getInstance();
+
+    void fill(QJsonObject data);
 
 private:
     static GameProperties* instance;

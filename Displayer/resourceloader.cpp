@@ -1,10 +1,11 @@
 #include "resourceloader.h"
+#include <QDebug>
 
 ResourceLoader* ResourceLoader::instance = nullptr;
 
 ResourceLoader::ResourceLoader()
 {
-    resources.insert("missing_texture", QImage(":ressources/missing_texture.png"));
+    resources.insert("missing_texture", QImage(":/ressources/missing_texture.jpg"));
     resources.insert("vehicle:default", QImage(":/ressources/car.png"));
     resources.insert("vehicle:car:red", QImage(":/ressources/red_car.png"));
     resources.insert("vehicle:car:blue", QImage(":/ressources/blue_car.png"));
@@ -31,6 +32,9 @@ ResourceLoader *ResourceLoader::getInstance()
 
 QImage ResourceLoader::get(QString id)
 {
-    if(!resources.contains(id)) return resources["missing_texture"];
+    if(!resources.contains(id))
+    {
+        return resources["missing_texture"];
+    }
     return resources[id];
 }

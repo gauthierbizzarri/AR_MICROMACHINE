@@ -39,6 +39,7 @@ void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     Q_UNUSED(widget);
     // painter->drawRect(0, 0, GameProperties::getInstance()->rectangleWidth, GameProperties::getInstance()->rectangleHeight);
     QImage image = this->get_vehicle();
+    qDebug()<<image;
     painter->drawImage(0, 0, image.scaled(GameProperties::getInstance()->rectangleWidth ,GameProperties::getInstance()->rectangleHeight*1.6));
     //painter->drawPixmap(0,0, GameProperties::getInstance()->rectangleWidth,GameProperties::getInstance()->rectangleHeight, pixmap3);
 
@@ -46,6 +47,7 @@ void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
 QImage Player::get_vehicle(){
      QString color_str = this->get_color(this->color);
+     qDebug()<<this->vehicule;
      return ResourceLoader::getInstance()->get("vehicle:"+this->vehicule+":"+color_str);
 }
 

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[24];
-    char stringdata0[235];
+    QByteArrayData data[23];
+    char stringdata0[219];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,33 +38,31 @@ QT_MOC_LITERAL(2, 20, 0), // ""
 QT_MOC_LITERAL(3, 21, 10), // "registered"
 QT_MOC_LITERAL(4, 32, 4), // "uuid"
 QT_MOC_LITERAL(5, 37, 6), // "paused"
-QT_MOC_LITERAL(6, 44, 15), // "onMqttConnected"
-QT_MOC_LITERAL(7, 60, 16), // "onMessageRecieve"
-QT_MOC_LITERAL(8, 77, 14), // "QMqttTopicName"
-QT_MOC_LITERAL(9, 92, 12), // "applyOptions"
-QT_MOC_LITERAL(10, 105, 14), // "const Options*"
-QT_MOC_LITERAL(11, 120, 7), // "options"
-QT_MOC_LITERAL(12, 128, 12), // "onRegistered"
-QT_MOC_LITERAL(13, 141, 2), // "id"
-QT_MOC_LITERAL(14, 144, 6), // "pseudo"
-QT_MOC_LITERAL(15, 151, 7), // "vehicle"
-QT_MOC_LITERAL(16, 159, 4), // "host"
-QT_MOC_LITERAL(17, 164, 4), // "port"
-QT_MOC_LITERAL(18, 169, 8), // "username"
-QT_MOC_LITERAL(19, 178, 8), // "password"
-QT_MOC_LITERAL(20, 187, 18), // "onMqttDisconnected"
-QT_MOC_LITERAL(21, 206, 13), // "onStateChange"
-QT_MOC_LITERAL(22, 220, 8), // "AppState"
-QT_MOC_LITERAL(23, 229, 5) // "state"
+QT_MOC_LITERAL(6, 44, 16), // "onMessageRecieve"
+QT_MOC_LITERAL(7, 61, 14), // "QMqttTopicName"
+QT_MOC_LITERAL(8, 76, 12), // "applyOptions"
+QT_MOC_LITERAL(9, 89, 14), // "const Options*"
+QT_MOC_LITERAL(10, 104, 7), // "options"
+QT_MOC_LITERAL(11, 112, 12), // "onRegistered"
+QT_MOC_LITERAL(12, 125, 2), // "id"
+QT_MOC_LITERAL(13, 128, 6), // "pseudo"
+QT_MOC_LITERAL(14, 135, 7), // "vehicle"
+QT_MOC_LITERAL(15, 143, 4), // "host"
+QT_MOC_LITERAL(16, 148, 4), // "port"
+QT_MOC_LITERAL(17, 153, 8), // "username"
+QT_MOC_LITERAL(18, 162, 8), // "password"
+QT_MOC_LITERAL(19, 171, 18), // "onMqttDisconnected"
+QT_MOC_LITERAL(20, 190, 13), // "onStateChange"
+QT_MOC_LITERAL(21, 204, 8), // "AppState"
+QT_MOC_LITERAL(22, 213, 5) // "state"
 
     },
     "MainWindow\0quitting\0\0registered\0uuid\0"
-    "paused\0onMqttConnected\0onMessageRecieve\0"
-    "QMqttTopicName\0applyOptions\0const Options*\0"
-    "options\0onRegistered\0id\0pseudo\0vehicle\0"
-    "host\0port\0username\0password\0"
-    "onMqttDisconnected\0onStateChange\0"
-    "AppState\0state"
+    "paused\0onMessageRecieve\0QMqttTopicName\0"
+    "applyOptions\0const Options*\0options\0"
+    "onRegistered\0id\0pseudo\0vehicle\0host\0"
+    "port\0username\0password\0onMqttDisconnected\0"
+    "onStateChange\0AppState\0state"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,7 +72,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -82,17 +80,16 @@ static const uint qt_meta_data_MainWindow[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   59,    2, 0x06 /* Public */,
-       3,    1,   60,    2, 0x06 /* Public */,
-       5,    1,   63,    2, 0x06 /* Public */,
+       1,    0,   54,    2, 0x06 /* Public */,
+       3,    1,   55,    2, 0x06 /* Public */,
+       5,    1,   58,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   66,    2, 0x0a /* Public */,
-       7,    2,   67,    2, 0x0a /* Public */,
-       9,    1,   72,    2, 0x0a /* Public */,
-      12,    7,   75,    2, 0x0a /* Public */,
-      20,    0,   90,    2, 0x0a /* Public */,
-      21,    1,   91,    2, 0x0a /* Public */,
+       6,    2,   61,    2, 0x0a /* Public */,
+       8,    1,   66,    2, 0x0a /* Public */,
+      11,    7,   69,    2, 0x0a /* Public */,
+      19,    0,   84,    2, 0x0a /* Public */,
+      20,    1,   85,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -100,12 +97,11 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Bool,    2,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::QByteArray, 0x80000000 | 7,    2,    2,
+    QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::QString, QMetaType::QString,   12,   13,   14,   15,   16,   17,   18,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QByteArray, 0x80000000 | 8,    2,    2,
-    QMetaType::Void, 0x80000000 | 10,   11,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::QString, QMetaType::QString,   13,   14,   15,   16,   17,   18,   19,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 22,   23,
+    QMetaType::Void, 0x80000000 | 21,   22,
 
        0        // eod
 };
@@ -119,18 +115,17 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->quitting(); break;
         case 1: _t->registered((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->paused((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 3: _t->onMqttConnected(); break;
-        case 4: _t->onMessageRecieve((*reinterpret_cast< const QByteArray(*)>(_a[1])),(*reinterpret_cast< const QMqttTopicName(*)>(_a[2]))); break;
-        case 5: _t->applyOptions((*reinterpret_cast< const Options*(*)>(_a[1]))); break;
-        case 6: _t->onRegistered((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
-        case 7: _t->onMqttDisconnected(); break;
-        case 8: _t->onStateChange((*reinterpret_cast< AppState(*)>(_a[1]))); break;
+        case 3: _t->onMessageRecieve((*reinterpret_cast< const QByteArray(*)>(_a[1])),(*reinterpret_cast< const QMqttTopicName(*)>(_a[2]))); break;
+        case 4: _t->applyOptions((*reinterpret_cast< const Options*(*)>(_a[1]))); break;
+        case 5: _t->onRegistered((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
+        case 6: _t->onMqttDisconnected(); break;
+        case 7: _t->onStateChange((*reinterpret_cast< AppState(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 4:
+        case 3:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 1:
@@ -193,13 +188,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 8;
     }
     return _id;
 }

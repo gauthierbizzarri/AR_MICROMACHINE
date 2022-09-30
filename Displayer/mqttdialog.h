@@ -16,6 +16,7 @@ public:
     static const QString PLAYER_CONTROL;
     static const QString PLAYER_REGISTER;
     static const QString GAME;
+    static const QString GAME_PROPERTIES;
 
     MqttDialog();
     ~MqttDialog();

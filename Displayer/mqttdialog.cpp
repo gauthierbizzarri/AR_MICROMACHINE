@@ -4,6 +4,7 @@ const QString MqttDialog::MAP = "map";
 const QString MqttDialog::PLAYER_CONTROL = "player/control";
 const QString MqttDialog::PLAYER_REGISTER = "player/register";
 const QString MqttDialog::GAME = "game";
+const QString MqttDialog::GAME_PROPERTIES = "game/properties";
 
 MqttDialog::MqttDialog()
 {

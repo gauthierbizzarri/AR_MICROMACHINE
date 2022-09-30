@@ -78,9 +78,14 @@ RegisterLayer::RegisterLayer(QWidget* parent): DisplayView(parent)
     hostGroup->setLayout(hostLayout);
     mroot->addWidget(hostGroup);
 
+    QHBoxLayout* buttonLayout = new QHBoxLayout();
     QPushButton* ok = new QPushButton("Launch");
     connect(ok, &QPushButton::clicked, this, &RegisterLayer::accept);
-    mroot->addWidget(ok);
+    QPushButton* back = new QPushButton("Back");
+    connect(back, &QPushButton::clicked, this, &RegisterLayer::goBack);
+    buttonLayout->addWidget(back);
+    buttonLayout->addWidget(ok);
+    mroot->addLayout(buttonLayout);
     setLayout(mroot);
 }
 
@@ -135,4 +140,9 @@ void RegisterLayer::accept(bool checked)
 void RegisterLayer::vehicleChanged(QString text)
 {
     vehicle = text;
+}
+
+void RegisterLayer::goBack()
+{
+    emit stateChange(AppState::STARTMENU);
 }

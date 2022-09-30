@@ -45,6 +45,8 @@ private slots:
     void accept(bool checked);
 
     void vehicleChanged(QString text);
+
+    void goBack();
 signals:
     void registered(QString uuid, QString psueod, QString vehicle, QString host, int port, QString username, QString password);
 

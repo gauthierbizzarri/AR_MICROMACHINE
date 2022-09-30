@@ -41,11 +41,11 @@ bool KeyboardController::eventFilter(QObject *watched, QEvent *event)
         {
             if(keyEvent->key() == Qt::Key_Z)
             {
-                emit computeThrotle(20);
+                emit computeThrotle(100);
             }
             if(keyEvent->key() == Qt::Key_S)
             {
-                emit computeThrotle(-20);
+                emit computeThrotle(-100);
             }
             if(keyEvent->key() == Qt::Key_D)
             {
