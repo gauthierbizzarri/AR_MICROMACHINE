@@ -3,10 +3,8 @@
 
 ControllerManager::ControllerManager(MqttDialog* client)
 {
-    running = true;
     connected = false;
     paused = false;
-    connect(this, &ControllerManager::finished, this, &QObject::deleteLater);
 
     mclient = client;
     connect(mclient, &MqttDialog::connected, this, &ControllerManager::onMqttConnected);
@@ -20,39 +18,22 @@ void ControllerManager::setup(MainWindow *frame, ControllerAdapter *adapter)
     connect(adapter, &ControllerAdapter::bananaAction, this, &ControllerManager::onBananaAction);
     connect(adapter, &ControllerAdapter::bombAction, this, &ControllerManager::onBombAction);
     connect(adapter, &ControllerAdapter::rocketAction, this, &ControllerManager::onRocketAction);
-    connect(frame, &MainWindow::quitting, this, &ControllerManager::onFrameClosed);
     connect(frame, &MainWindow::registered, this, &ControllerManager::onRegistered);
     connect(frame, &MainWindow::paused, this, &ControllerManager::onPaused);
-    connect(this, &ControllerManager::controllComputed, this, &ControllerManager::sendControll);
     frame->installEventFilter(adapter);
-}
-
-void ControllerManager::run()
-{
-    while(running)
-    {
-        delay(1000);
-        if(!base.empty() && connected && !paused)
-        {
-            emit controllComputed(QJsonDocument(sendee).toJson());
-            sendee = QJsonObject(base);
-        }
-    }
-}
-
-void ControllerManager::stop()
-{
-    running = false;
 }
 
 void ControllerManager::onComputeThrotle(float power)
 {
     base["power"] = power;
+    sendee["power"] = power;
+    sendControll(sendee);
 }
 
 void ControllerManager::onComputeStreering(float steering)
 {
     sendee["angle"] = steering;
+    sendControll(sendee);
 }
 
 void ControllerManager::onBombAction()
@@ -60,6 +41,7 @@ void ControllerManager::onBombAction()
     QJsonObject buttons = sendee["buttons"].toObject();
     buttons["bomb"]=true;
     sendee["buttons"]=buttons;
+    sendControll(sendee);
 }
 
 void ControllerManager::onBananaAction()
@@ -67,6 +49,7 @@ void ControllerManager::onBananaAction()
     QJsonObject buttons = sendee["buttons"].toObject();
     buttons["banana"]=true;
     sendee["buttons"]=buttons;
+    sendControll(sendee);
 }
 
 void ControllerManager::onRocketAction()
@@ -74,6 +57,7 @@ void ControllerManager::onRocketAction()
     QJsonObject buttons = sendee["buttons"].toObject();
     buttons["rocket"]=true;
     sendee["buttons"]=buttons;
+    sendControll(sendee);
 }
 
 void ControllerManager::onRegistered(QString playerUuid)
@@ -94,19 +78,16 @@ void ControllerManager::onRegistered(QString playerUuid)
     sendee = QJsonObject(base);
 }
 
-void ControllerManager::onFrameClosed()
-{
-    running=false;
-}
-
 void ControllerManager::onMqttConnected()
 {
     connected = true;
 }
 
-void ControllerManager::sendControll(QByteArray data)
+void ControllerManager::sendControll(QJsonObject data)
 {
-    mclient->pub(MqttDialog::PLAYER_CONTROL, data);
+    mclient->pub(MqttDialog::PLAYER_CONTROL, QJsonDocument(data).toJson());
+    qDebug()<<data;
+    sendee = QJsonObject(base);
 }
 
 void ControllerManager::onPaused(bool pause)

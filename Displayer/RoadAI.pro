@@ -18,14 +18,20 @@ SOURCES += \
     bomb.cpp \
     gamepadcontroller.cpp \
     gameproperties.cpp \
+    gamescreen.cpp \
+    keyboardcontroller.cpp \
     main.cpp \
     mainwindow.cpp \
+    mapinfo.cpp \
     maptranslator.cpp \
     mqttdialog.cpp \
     options.cpp \
+    optionslayer.cpp \
     player.cpp\
+    registerlayer.cpp \
     rocket.cpp\
-    rectangle.cpp
+    rectangle.cpp \
+    startscreenlayer.cpp
 
 HEADERS += \
     appstate.h \

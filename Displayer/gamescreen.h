@@ -4,65 +4,35 @@
 #include <QGraphicsView>
 #include <QHBoxLayout>
 #include <circuitelement.h>
-#include <QDebug>
-#include <mapinfo.h>
 #include <displayview.h>
 
 class GameScreen : public DisplayView{
-    Q_OBJECT
 private:
     QHBoxLayout* mroot;
     QGraphicsView* mview;
     QGraphicsScene* mscene;
 
 public:
-    GameScreen(QWidget* parent = nullptr) : DisplayView(parent)
-    {
-        mroot = new QHBoxLayout(this);
-        mscene = new QGraphicsScene();
-        mscene->setSceneRect(0, 0, 1000, 1000);
-        mview = new QGraphicsView();
-        mview->setScene(mscene);
-        mroot->addWidget(mview);
-        setLayout(mroot);
-    }
+    GameScreen(QWidget* parent = nullptr);
 
-    ~GameScreen()
-    {
-        mscene->deleteLater();
-        mview->deleteLater();
-        mroot->deleteLater();
-    }
+    ~GameScreen();
 public slots:
     /**
      * @brief onObjectRemoved called whenever an object gets removed from the map
      */
-    void onObjectRemoved(CircuitElement* e)
-    {
-        mscene->removeItem(e);
-    }
+    void onObjectRemoved(CircuitElement* e);
     /**
      * @brief onObjectAdded called whenever an object gets added to the map
      */
-    void onObjectAdded(CircuitElement* e)
-    {
-        mscene->addItem(e);
-    }
+    void onObjectAdded(CircuitElement* e);
 
-    void onSizeChange(QSize size)
-    {
-        mscene->setSceneRect(0, 0, size.width(), size.height());
-    }
+    void onSizeChanged(QSize size);
+
+
+
     // QWidget interface
 protected:
-    void keyReleaseEvent(QKeyEvent *event)
-    {
-        if(event->key() == Qt::Key::Key_Escape)
-        {
-            emit stateChange(AppState::PAUSED);
-        }
-        event->ignore();
-    }
+    void keyReleaseEvent(QKeyEvent *event);
 };
 
 #endif // GAMESCREEN_H

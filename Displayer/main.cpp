@@ -15,11 +15,10 @@ int main(int argc, char *argv[])
     ControllerAdapter* controller = new KeyboardController();
     ControllerManager* manager = new ControllerManager(dialog);
     manager->setup(&w, controller);
-    manager->start();
     w.show();
     a.exec();
-    manager->stop();
     delete controller;
     delete dialog;
+    delete manager;
     return EXIT_SUCCESS;
 }

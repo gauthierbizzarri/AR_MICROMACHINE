@@ -1,5 +1,5 @@
 {
-    "fullscreen": true,
+    "fullscreen": false,
     "music": 0.6399999856948853,
     "sound": 0.3499999940395355,
     "soundeffects": 0.7300000190734863
