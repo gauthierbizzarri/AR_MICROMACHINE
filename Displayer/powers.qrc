@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>ressources/rocket_power.png</file>
-        <file>ressources/banana_power.png</file>
-        <file>ressources/bomb_power.png</file>
-    </qresource>
-</RCC>

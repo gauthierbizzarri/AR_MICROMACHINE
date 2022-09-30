@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>ressources/missing_texture.jpg</file>
-    </qresource>
-</RCC>

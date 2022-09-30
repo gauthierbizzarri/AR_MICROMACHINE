@@ -75,10 +75,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\checkpoint.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\mapobjects\\checkpoint\\checkpoint.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/checkpoint.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/mapobjects/checkpoint/checkpoint.cpp"
 },
 {
     "arguments": [
@@ -156,10 +156,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\circle.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\mapobjects\\circle\\circle.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/circle.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/mapobjects/circle/circle.cpp"
 },
 {
     "arguments": [
@@ -237,10 +237,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\connectionlayer.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\connectionlayer\\connectionlayer.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/connectionlayer.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/connectionlayer/connectionlayer.cpp"
 },
 {
     "arguments": [
@@ -318,10 +318,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\controlleradapter.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\controller\\controlleradapter.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/controlleradapter.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/controller/controlleradapter.cpp"
 },
 {
     "arguments": [
@@ -399,10 +399,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\controllermanager.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\controller\\controllermanager.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/controllermanager.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/controller/controllermanager.cpp"
 },
 {
     "arguments": [
@@ -480,10 +480,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\banana.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\powerups\\banana\\banana.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/banana.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/powerups/banana/banana.cpp"
 },
 {
     "arguments": [
@@ -561,10 +561,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\bomb.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\powerups\\bomb\\bomb.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/bomb.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/powerups/bomb/bomb.cpp"
 },
 {
     "arguments": [
@@ -642,10 +642,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\gamepadcontroller.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\controller\\gamepad\\gamepadcontroller.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/gamepadcontroller.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/controller/gamepad/gamepadcontroller.cpp"
 },
 {
     "arguments": [
@@ -723,10 +723,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\gameproperties.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\properties\\gameproperties.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/gameproperties.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/properties/gameproperties.cpp"
 },
 {
     "arguments": [
@@ -804,10 +804,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\gamescreen.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\gamescreen\\gamescreen.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/gamescreen.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/gamescreen/gamescreen.cpp"
 },
 {
     "arguments": [
@@ -885,10 +885,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\keyboardcontroller.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\controller\\keyboard\\keyboardcontroller.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/keyboardcontroller.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/controller/keyboard/keyboardcontroller.cpp"
 },
 {
     "arguments": [
@@ -1047,10 +1047,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\mainwindow.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\mainwindow.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/mainwindow.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/mainwindow.cpp"
 },
 {
     "arguments": [
@@ -1128,10 +1128,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\mapinfo.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\map\\mapinfo.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/mapinfo.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/map/mapinfo.cpp"
 },
 {
     "arguments": [
@@ -1209,10 +1209,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\maptranslator.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\map\\maptranslator.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/maptranslator.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/map/maptranslator.cpp"
 },
 {
     "arguments": [
@@ -1290,10 +1290,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\mqttdialog.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\mqtt\\mqttdialog.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/mqttdialog.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/mqtt/mqttdialog.cpp"
 },
 {
     "arguments": [
@@ -1371,10 +1371,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\options.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\options.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/options.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/options.cpp"
 },
 {
     "arguments": [
@@ -1452,10 +1452,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\optionslayer.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\optionslayer\\optionslayer.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/optionslayer.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/optionslayer/optionslayer.cpp"
 },
 {
     "arguments": [
@@ -1533,10 +1533,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\player.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\mapobjects\\player\\player.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/player.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/mapobjects/player/player.cpp"
 },
 {
     "arguments": [
@@ -1614,10 +1614,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\registerlayer.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\registerlayer\\registerlayer.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/registerlayer.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/registerlayer/registerlayer.cpp"
 },
 {
     "arguments": [
@@ -1695,10 +1695,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\power.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\powerups\\power.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/power.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/powerups/power.cpp"
 },
 {
     "arguments": [
@@ -1776,10 +1776,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\resourceloader.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\resourceloader.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/resourceloader.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/resourceloader.cpp"
 },
 {
     "arguments": [
@@ -1857,10 +1857,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\rocket.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\powerups\\rocket\\rocket.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/rocket.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/powerups/rocket/rocket.cpp"
 },
 {
     "arguments": [
@@ -1938,10 +1938,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\rectangle.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\mapobjects\\rectangle\\rectangle.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/rectangle.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/mapobjects/rectangle/rectangle.cpp"
 },
 {
     "arguments": [
@@ -2019,10 +2019,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\startscreenlayer.cpp"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\startscreenlayer\\startscreenlayer.cpp"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/startscreenlayer.cpp"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/startscreenlayer/startscreenlayer.cpp"
 },
 {
     "arguments": [
@@ -2100,10 +2100,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\appstate.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\appstate.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/appstate.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/appstate.h"
 },
 {
     "arguments": [
@@ -2181,10 +2181,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\connectionlayer.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\connectionlayer\\connectionlayer.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/connectionlayer.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/connectionlayer/connectionlayer.h"
 },
 {
     "arguments": [
@@ -2262,10 +2262,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\gamepadcontroller.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\controller\\gamepad\\gamepadcontroller.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/gamepadcontroller.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/controller/gamepad/gamepadcontroller.h"
 },
 {
     "arguments": [
@@ -2343,10 +2343,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\power.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\powerups\\power.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/power.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/powerups/power.h"
 },
 {
     "arguments": [
@@ -2424,10 +2424,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\resourceloader.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\resourceloader.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/resourceloader.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/resourceloader.h"
 },
 {
     "arguments": [
@@ -2505,10 +2505,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\rocket.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\powerups\\rocket\\rocket.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/rocket.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/powerups/rocket/rocket.h"
 },
 {
     "arguments": [
@@ -2586,10 +2586,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\player.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\mapobjects\\player\\player.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/player.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/mapobjects/player/player.h"
 },
 {
     "arguments": [
@@ -2667,10 +2667,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\options.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\options.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/options.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/options.h"
 },
 {
     "arguments": [
@@ -2748,10 +2748,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\banana.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\powerups\\banana\\banana.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/banana.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/powerups/banana/banana.h"
 },
 {
     "arguments": [
@@ -2829,10 +2829,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\bomb.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\powerups\\bomb\\bomb.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/bomb.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/powerups/bomb/bomb.h"
 },
 {
     "arguments": [
@@ -2910,10 +2910,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\checkpoint.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\mapobjects\\checkpoint\\checkpoint.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/checkpoint.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/mapobjects/checkpoint/checkpoint.h"
 },
 {
     "arguments": [
@@ -2991,10 +2991,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\circle.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\mapobjects\\circle\\circle.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/circle.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/mapobjects/circle/circle.h"
 },
 {
     "arguments": [
@@ -3072,10 +3072,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\circuitelement.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\mapobjects\\circuitelement.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/circuitelement.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/mapobjects/circuitelement.h"
 },
 {
     "arguments": [
@@ -3153,10 +3153,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\controlleradapter.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\controller\\controlleradapter.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/controlleradapter.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/controller/controlleradapter.h"
 },
 {
     "arguments": [
@@ -3234,10 +3234,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\controllermanager.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\controller\\controllermanager.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/controllermanager.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/controller/controllermanager.h"
 },
 {
     "arguments": [
@@ -3315,10 +3315,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\displayview.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\displayview.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/displayview.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/displayview.h"
 },
 {
     "arguments": [
@@ -3396,10 +3396,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\gameproperties.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\properties\\gameproperties.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/gameproperties.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/properties/gameproperties.h"
 },
 {
     "arguments": [
@@ -3477,10 +3477,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\gamescreen.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\gamescreen\\gamescreen.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/gamescreen.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/gamescreen/gamescreen.h"
 },
 {
     "arguments": [
@@ -3558,10 +3558,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\keyboardcontroller.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\controller\\keyboard\\keyboardcontroller.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/keyboardcontroller.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/controller/keyboard/keyboardcontroller.h"
 },
 {
     "arguments": [
@@ -3639,10 +3639,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\mainwindow.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\mainwindow.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/mainwindow.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/mainwindow.h"
 },
 {
     "arguments": [
@@ -3720,10 +3720,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\maptranslator.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\map\\maptranslator.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/maptranslator.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/map/maptranslator.h"
 },
 {
     "arguments": [
@@ -3801,10 +3801,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\mqttdialog.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\mqtt\\mqttdialog.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/mqttdialog.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/mqtt/mqttdialog.h"
 },
 {
     "arguments": [
@@ -3882,10 +3882,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\optionslayer.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\optionslayer\\optionslayer.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/optionslayer.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/optionslayer/optionslayer.h"
 },
 {
     "arguments": [
@@ -3963,10 +3963,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\registerlayer.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\registerlayer\\registerlayer.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/registerlayer.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/registerlayer/registerlayer.h"
 },
 {
     "arguments": [
@@ -4044,10 +4044,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\startscreenlayer.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\ui\\startscreenlayer\\startscreenlayer.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/startscreenlayer.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/ui/startscreenlayer/startscreenlayer.h"
 },
 {
     "arguments": [
@@ -4125,10 +4125,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\vehicleproperties.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\properties\\vehicleproperties.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/vehicleproperties.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/properties/vehicleproperties.h"
 },
 {
     "arguments": [
@@ -4206,10 +4206,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\mapinfo.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\utils\\map\\mapinfo.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/mapinfo.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/utils/map/mapinfo.h"
 },
 {
     "arguments": [
@@ -4287,90 +4287,9 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\rectangle.h"
+        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\game\\mapobjects\\rectangle\\rectangle.h"
     ],
     "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/rectangle.h"
-},
-{
-    "arguments": [
-        "clang",
-        "-Wno-documentation-unknown-command",
-        "-Wno-unknown-warning-option",
-        "-Wno-unknown-pragmas",
-        "-nostdinc",
-        "-nostdinc++",
-        "-g",
-        "-std=gnu++1z",
-        "-Wall",
-        "-Wextra",
-        "-Wextra",
-        "-fexceptions",
-        "-mthreads",
-        "-fsyntax-only",
-        "-m64",
-        "--target=x86_64-w64-mingw32",
-        "-DUNICODE",
-        "-D_UNICODE",
-        "-DWIN32",
-        "-DMINGW_HAS_SECURE_API",
-        "-DQT_QML_DEBUG",
-        "-DQT_GAMEPAD_LIB",
-        "-DQT_WIDGETS_LIB",
-        "-DQT_GUI_LIB",
-        "-DQT_MQTT_LIB",
-        "-DQT_NETWORK_LIB",
-        "-DQT_CORE_LIB",
-        "-DQT_NEEDS_QMAIN",
-        "-DQ_CREATOR_RUN",
-        "-I",
-        "D:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedMingwHeaders",
-        "-I",
-        "D:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders",
-        "-I",
-        "D:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
-        "-I",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer",
-        "-I",
-        "D:\\Qt\\5.15.2\\mingw81_64\\include",
-        "-I",
-        "D:\\Qt\\5.15.2\\mingw81_64\\include\\QtGamepad",
-        "-I",
-        "D:\\Qt\\5.15.2\\mingw81_64\\include\\QtWidgets",
-        "-I",
-        "D:\\Qt\\5.15.2\\mingw81_64\\include\\QtGui",
-        "-I",
-        "D:\\Qt\\5.15.2\\mingw81_64\\include\\QtANGLE",
-        "-I",
-        "D:\\Qt\\5.15.2\\mingw81_64\\include\\QtMqtt",
-        "-I",
-        "D:\\Qt\\5.15.2\\mingw81_64\\include\\QtNetwork",
-        "-I",
-        "D:\\Qt\\5.15.2\\mingw81_64\\include\\QtCore",
-        "-I",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\debug",
-        "-I",
-        "D:\\Qt\\5.15.2\\mingw81_64\\mkspecs\\win32-g++",
-        "-isystem",
-        "D:\\Qt\\Tools\\mingw810_64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++",
-        "-isystem",
-        "D:\\Qt\\Tools\\mingw810_64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++\\x86_64-w64-mingw32",
-        "-isystem",
-        "D:\\Qt\\Tools\\mingw810_64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++\\backward",
-        "-isystem",
-        "D:\\Qt\\Tools\\QtCreator\\bin\\clang\\lib\\clang\\14.0.3\\include",
-        "-isystem",
-        "D:\\Qt\\Tools\\mingw810_64\\x86_64-w64-mingw32\\include",
-        "-fmessage-length=0",
-        "-fdiagnostics-show-note-include-stack",
-        "-fretain-comments-from-system-headers",
-        "-fmacro-backtrace-limit=0",
-        "-ferror-limit=1000",
-        "-x",
-        "c++-header",
-        "C:\\Users\\boyer\\Documents\\ar_micro-machines\\Displayer\\ui_mainwindow.h"
-    ],
-    "directory": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/.qtc_clangd",
-    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/ui_mainwindow.h"
+    "file": "C:/Users/boyer/Documents/ar_micro-machines/Displayer/game/mapobjects/rectangle/rectangle.h"
 }
 ]

@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>ressources/bomb.png</file>
-    </qresource>
-</RCC>

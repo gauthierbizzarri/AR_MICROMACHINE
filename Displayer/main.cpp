@@ -1,11 +1,11 @@
-#include "mainwindow.h"
+#include "game/ui/mainwindow.h"
 
 #include <QApplication>
-#include <controlleradapter.h>
-#include <keyboardcontroller.h>
-#include <controllermanager.h>
-#include <gamepadcontroller.h>
-#include <mqttdialog.h>
+#include <game/controller/controlleradapter.h>
+#include <game/controller/keyboard/keyboardcontroller.h>
+#include <game/controller/controllermanager.h>
+#include <game/controller/gamepad/gamepadcontroller.h>
+#include <game/utils/mqtt/mqttdialog.h>
 
 int main(int argc, char *argv[])
 {
