@@ -68,6 +68,12 @@ void MapTranslator::update_game(QJsonDocument message)
         Power* banana_power = new Power(1200,50,"banana",bananas);
         minfo->addObject("banana_power_1",banana_power);
 
+        Power* bomb_power = new Power(1200,150,"bomb",bombs);
+        minfo->addObject("bomb_power_1",bomb_power);
+
+        Power* rocket_power = new Power(1200,250,"rocket",rockets);
+        minfo->addObject("rocket_power_1",rocket_power);
+
 
         qDebug()<<banana_power;
 

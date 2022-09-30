@@ -5,6 +5,7 @@
 
 Power::Power(int x, int y,QString name,int amount, QGraphicsItem* parent) : CircuitElement(x, y, parent)
 {
+    this->setProperty("TYPE",name);
 }
 
 QRectF Power::boundingRect() const
@@ -22,13 +23,30 @@ void Power::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
     QPixmap pixmap3(":/ressources/banana.png");
 
-    painter->drawPixmap(10,10, GameProperties::getInstance()->rectangleWidth*3,GameProperties::getInstance()->rectangleHeight*3, this->get_image());
+    painter->drawPixmap(10,10, GameProperties::getInstance()->rectangleWidth*1.5,GameProperties::getInstance()->rectangleHeight*1.5, this->get_image());
 }
 
 QPixmap Power::get_image()
 {
-    QPixmap pixmap3(":/ressources/banana.png");
+    if (this->property("TYPE").toString().contains("banana") )
+    {
+        QPixmap pixmap3(":/ressources/banana_power.png");
 
-    return pixmap3;
+        return pixmap3;
+    }
+
+    else if (this->property("TYPE").toString().contains("bomb") )
+    {
+        QPixmap pixmap3(":/ressources/bomb_power.png");
+
+        return pixmap3;
+    }
+
+    else if (this->property("TYPE").toString().contains("rocket") )
+    {
+        QPixmap pixmap3(":/ressources/rocket_power.png");
+
+        return pixmap3;
+    }
 
 }

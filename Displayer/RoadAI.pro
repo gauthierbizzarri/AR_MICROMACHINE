@@ -67,6 +67,7 @@ RESOURCES += \
     bike.qrc \
     bomb.qrc \
     car.qrc \
+    powers.qrc \
     rocket.qrc \
     truck.qrc
 
