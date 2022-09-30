@@ -24,6 +24,7 @@ SOURCES += \
     mqttdialog.cpp \
     options.cpp \
     player.cpp\
+    power.cpp \
     rocket.cpp\
     rectangle.cpp
 
@@ -31,6 +32,7 @@ HEADERS += \
     appstate.h \
     connectionlayer.h \
     gamepadcontroller.h \
+    power.h \
     rocket.h\
     player.h\
     options.h\
