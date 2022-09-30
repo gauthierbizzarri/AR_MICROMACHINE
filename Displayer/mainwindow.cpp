@@ -68,7 +68,7 @@ GameScreen* MainWindow::setupGameView()
     connect(screen, &DisplayView::stateChange, this, &MainWindow::onStateChange);
     connect(minfo, &MapInfo::objectAdded, screen, &GameScreen::onObjectAdded);
     connect(minfo, &MapInfo::objectRemoved, screen, &GameScreen::onObjectRemoved);
-    connect(minfo, &MapInfo::sizeChanged, screen, &GameScreen::onSizeChange);
+    connect(minfo, &MapInfo::sizeChanged, screen, &GameScreen::onSizeChanged);
     return screen;
 }
 

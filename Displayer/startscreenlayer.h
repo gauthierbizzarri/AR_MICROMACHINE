@@ -16,68 +16,21 @@ private:
     QPushButton* mquit;
     bool ingame;
 public:
-    StartScreenLayer(QWidget* parent):DisplayView(parent)
-    {
-        ingame = false;
-        mroot = new QVBoxLayout(this);
-        mstart = new QPushButton("Start game");
-        connect(mstart, &QPushButton::clicked, this, &StartScreenLayer::onStartClicked);
-        mroot->addWidget(mstart);
+    StartScreenLayer(QWidget* parent = nullptr);
 
-        moptions = new QPushButton("Options");
-        connect(moptions, &QPushButton::clicked, this, &StartScreenLayer::onOptionClicked);
-        mroot->addWidget(moptions);
+    ~StartScreenLayer();
 
-        mquit = new QPushButton("Quit game");
-        connect(mquit, &QPushButton::clicked, this, &StartScreenLayer::onQuitClicked);
-        mroot->addWidget(mquit);
-        setLayout(mroot);
-    }
-
-    ~StartScreenLayer()
-    {
-        delete mstart;
-        delete moptions;
-        delete mquit;
-        delete mroot;
-    }
-
-    void outGame()
-    {
-        mstart->setText("Start game");
-        ingame = false;
-    }
+    void outGame();
     // QWidget interface
 protected:
-    void keyReleaseEvent(QKeyEvent *event)
-    {
-        if(event->key() == Qt::Key_Escape && ingame)
-        {
-            emit(onStartClicked(previous));
-        }
-    }
+    void keyReleaseEvent(QKeyEvent *event);
 
 private slots:
-    void onStartClicked(bool checked = false)
-    {
-        Q_UNUSED(checked);
-        mstart->setText("Back to game");
-        if(ingame)
-            emit stateChange(AppState::PLAYED);
-        else
-            emit stateChange(AppState::STARTED);
-        ingame = true;
-    }
-    void onOptionClicked(bool checked = false)
-    {
-        Q_UNUSED(checked);
-        emit stateChange(AppState::OPTIONS);
-    }
-    void onQuitClicked(bool checked = true)
-    {
-        Q_UNUSED(checked);
-        emit stateChange(AppState::QUITED);
-    }
+    void onStartClicked(bool checked = false);
+
+    void onOptionClicked(bool checked = false);
+
+    void onQuitClicked(bool checked = true);
 };
 
 #endif

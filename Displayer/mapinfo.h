@@ -25,109 +25,55 @@ private:
 
     QSize size;
 public:
-    MapInfo():QObject(){
-        mobjects = std::map<QString, CircuitElement*>();
-        mitems = std::map<QString, CircuitElement*>();
-    }
+    MapInfo();
 
-    ~MapInfo(){
-        clear();
-        clear_players();
-        clear_items();
-    }
+    ~MapInfo();
 
-    void setSize(int width, int height)
-    {
-        size = QSize(width, height);
-        emit sizeChanged(size);
-    }
+    void setSize(int width, int height);
 
     /**
      * @brief addObject adds an object to the map
      * @param id id of the object
      * @param object object to be added
      */
-    void addObject(QString id, CircuitElement* object){
-        if(mobjects.count(id)>0) return;
-        mobjects.insert_or_assign(id, object);
-        emit objectAdded(object);
-    }
+    void addObject(QString id, CircuitElement* object);
     
-    void addItem(QString id, CircuitElement* object){
-        mitems.insert_or_assign(id, object);
-        emit objectAdded(object);
-    }
+    void addItem(QString id, CircuitElement* object);
 
     /**
      * @brief removeObject removed an object from the map
      * @param id id of the object to be removed
      */
-    void removeObject(QString id){
-        if(mobjects.count(id)==0) return;
-        CircuitElement* object = mobjects[id];
-        mobjects.erase(id);
-        emit objectRemoved(object);
-        delete(object);
-    }
+    void removeObject(QString id);
 
     /**
      * @brief contains check if the map holds an object with the given id
      * @param id id of the object
      * @return true if objec on the map, false overwise
      */
-    bool contains(QString id)
-    {
-        return mobjects.count(id);
-    }
+    bool contains(QString id);
 
     /**
      * @brief getObjects gets all the objects on the map
      * @return the map object representing the mapping between ids and objects
      */
-    std::map<QString, CircuitElement*> getObjects() const
-    {
-        return mobjects;
-    }
+    std::map<QString, CircuitElement*> getObjects() const;
 
     /**
      * @brief getObject gets the object corresponding to the id
      * @param id id of the object
      * @return the object, or nullptr
      */
-    CircuitElement* getObject(QString id)
-    {
-        return mobjects[id];
-    }
+    CircuitElement* getObject(QString id);
 
     /**
      * @brief clear removes all objects from the map
      */
-    void clear()
-    {
-        for(const auto &pair : std::map<QString, CircuitElement*>(mobjects))
-        {
-            if ( (pair.second->property("TYPE")!="Player") )
-            this->removeObject(pair.first);
-        }
-    }
+    void clear();
 
-    void clear_players()
-        {
-            for(const auto &pair : std::map<QString, CircuitElement*>(mobjects))
-            {
-                if (  (pair.second->property("TYPE")=="Player") )
-                    this->removeObject(pair.first);
-            }
+    void clear_players();
 
-        }
-
-
-    void clear_items()
-        {
-
-        for(const auto &pair : std::map<QString, CircuitElement*>(mitems))
-            removeObject(pair.first);
-        }
+    void clear_items();
 
 
 signals:

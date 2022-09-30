@@ -9,14 +9,13 @@
 #include <mainwindow.h>
 #include <QCoreApplication>
 
-class ControllerManager : public QThread
+class ControllerManager : public QObject
 {
     Q_OBJECT
 private:
     QJsonObject base;
     QJsonObject sendee;
     QString uuid;
-    bool running;
     bool connected;
     bool paused;
     MqttDialog* mclient;
@@ -31,8 +30,8 @@ public:
     ControllerManager(MqttDialog* client);
 
     void setup(MainWindow* frame, ControllerAdapter* adapter);
-    void run() override;
-    void stop();
+    void sendValues(QJsonObject data);
+    void sendControll(QJsonObject data);
 
 signals:
     void controllComputed(QByteArray);
@@ -44,9 +43,7 @@ private slots:
     void onBananaAction();
     void onRocketAction();
     void onRegistered(QString);
-    void onFrameClosed();
     void onMqttConnected();
-    void sendControll(QByteArray data);
     void onPaused(bool);
 };
 
