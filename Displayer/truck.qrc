@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ressources/truck.png</file>
+        <file>ressources/blue_truck.png</file>
+        <file>ressources/green_truck.png</file>
+        <file>ressources/red_truck.png</file>
+    </qresource>
+</RCC>
