@@ -26,38 +26,37 @@ void ControllerManager::setup(MainWindow *frame, ControllerAdapter *adapter)
 void ControllerManager::onComputeThrotle(float power)
 {
     base["power"] = power;
-    sendee["power"] = power;
-    sendControll(sendee);
+    sendControll();
 }
 
 void ControllerManager::onComputeStreering(float steering)
 {
-    sendee["angle"] = steering;
-    sendControll(sendee);
+    base["angle"] = steering;
+    sendControll();
 }
 
 void ControllerManager::onBombAction()
 {
-    QJsonObject buttons = sendee["buttons"].toObject();
+    QJsonObject buttons = base["buttons"].toObject();
     buttons["bomb"]=true;
-    sendee["buttons"]=buttons;
-    sendControll(sendee);
+    base["buttons"]=buttons;
+    sendControll();
 }
 
 void ControllerManager::onBananaAction()
 {
-    QJsonObject buttons = sendee["buttons"].toObject();
+    QJsonObject buttons = base["buttons"].toObject();
     buttons["banana"]=true;
-    sendee["buttons"]=buttons;
-    sendControll(sendee);
+    base["buttons"]=buttons;
+    sendControll();
 }
 
 void ControllerManager::onRocketAction()
 {
-    QJsonObject buttons = sendee["buttons"].toObject();
+    QJsonObject buttons = base["buttons"].toObject();
     buttons["rocket"]=true;
-    sendee["buttons"]=buttons;
-    sendControll(sendee);
+    base["buttons"]=buttons;
+    sendControll();
 }
 
 void ControllerManager::onRegistered(QString playerUuid)
@@ -75,7 +74,6 @@ void ControllerManager::onRegistered(QString playerUuid)
          }
         }
     };
-    sendee = QJsonObject(base);
 }
 
 void ControllerManager::onMqttConnected()
@@ -83,11 +81,9 @@ void ControllerManager::onMqttConnected()
     connected = true;
 }
 
-void ControllerManager::sendControll(QJsonObject data)
+void ControllerManager::sendControll()
 {
-    mclient->pub(MqttDialog::PLAYER_CONTROL, QJsonDocument(data).toJson());
-    qDebug()<<data;
-    sendee = QJsonObject(base);
+    mclient->pub(MqttDialog::PLAYER_CONTROL, QJsonDocument(base).toJson());
 }
 
 void ControllerManager::onPaused(bool pause)

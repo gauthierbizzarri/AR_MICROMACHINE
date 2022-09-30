@@ -19,6 +19,7 @@ debug/optionslayer.o
 debug/player.o
 debug/registerlayer.o
 debug/power.o
+debug/resourceloader.o
 debug/rocket.o
 debug/rectangle.o
 debug/startscreenlayer.o
@@ -27,6 +28,7 @@ debug/qrc_banana2.o
 debug/qrc_bike.o
 debug/qrc_bomb.o
 debug/qrc_car.o
+debug/qrc_missing_texture.o
 debug/qrc_rocket.o
 debug/qrc_truck.o
 debug/moc_connectionlayer.o
