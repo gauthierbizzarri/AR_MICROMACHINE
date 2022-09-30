@@ -4,7 +4,6 @@
 // ////////////////////////////////////////////////////////////////////////////
 
 #include <QDebug>
-#include <QGraphicsRectItem>
 #include "game_map_object.h"
 
 // ////////////////////////////////////////////////////////////////////////////
@@ -18,16 +17,8 @@ QList<GameMapObject*> gameObjects;
 // ////////////////////////////////////////////////////////////////////////////
 
 GameMapObject::GameMapObject(QWidget *parent, int x, int y)
+    : m_x(x), m_y(y), m_item(nullptr)
 {
-    this->m_x = x;
-    this->m_y = y;
-
-    QGraphicsRectItem* rect = new QGraphicsRectItem(-25, -25, 50, 50);
-    //rect->setBrush(Qt::red);
-    rect->moveBy(x*0.6, y*0.6);
-
-    this->m_item = rect;
-
     gameObjects.append(this);
 }
 

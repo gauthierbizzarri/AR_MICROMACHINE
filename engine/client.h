@@ -9,8 +9,6 @@
 #include <QJsonObject>
 #include <QtMqtt/QMqttClient>
 
-#include "game_properties.h"
-
 // ////////////////////////////////////////////////////////////////////////////
 // Class Client
 // ////////////////////////////////////////////////////////////////////////////
@@ -31,8 +29,8 @@ public slots:
     void debugError(QMqttClient::ClientError error);
     void connected();
     void messageReceived(const QByteArray& message, const QMqttTopicName& topic);
-    void publishProperties(GameProperties properties);
-    void publishGame();
+    void publishProperties(QJsonObject properties);
+    void publishGame(QJsonObject engine);
 
 signals:
     void receivedMap(QJsonObject object);

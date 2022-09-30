@@ -38,7 +38,9 @@ GameEngine::GameEngine(QObject *parent)
 
     this->m_running = true;
     this->m_ihm->show();
+
     this->sendProperties();
+    this->update();
 }
 
 GameEngine::~GameEngine() {
@@ -124,13 +126,52 @@ void GameEngine::sendProperties() {
 
     if(this->m_running) {
         QTimer::singleShot(1000, this, &GameEngine::sendProperties);
-        this->m_client->publishProperties(this->m_properties);
+        this->m_client->publishProperties(this->m_properties.toJson());
     }
 
 }
 
 void GameEngine::update() {
 
+    if(this->m_running) {
+        QTimer::singleShot(1000, this, &GameEngine::update);
 
 
+        for(GameEntity* entity : this->m_entitites) {
+            entity->update();
+        }
+
+
+        qDebug() << "entity nb : " << this->m_entitites.length() << "object nb : " << gameObjects.length();
+        this->m_client->publishGame(this->toJson());
+
+    }
+}
+
+QJsonObject GameEngine::toJson() {
+
+    QJsonObject json;
+
+    json.insert(QString("elapsedTime"), QJsonValue(0));
+    json.insert(QString("infoMessage"), QJsonValue("Serveur pas prêêêêêêêêêêêêt, et oui"));
+    json.insert(QString("status"), QJsonValue("not ready yet"));
+
+    QJsonArray players;
+    QJsonArray items;
+
+    for(GameEntity* entity : this->m_entitites) {
+
+        if(qobject_cast<GamePlayer*>(entity) != nullptr) {
+            players.append(entity->toJson());
+        }
+        else {
+            // Handle game item
+        }
+
+    }
+
+    json.insert(QString("players"), players);
+    json.insert(QString("items"), items);
+
+    return json;
 }

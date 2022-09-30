@@ -6,7 +6,36 @@
 #include "game_properties.h"
 
 // ////////////////////////////////////////////////////////////////////////////
-// Constructor
+// VehicleProperties
+// ////////////////////////////////////////////////////////////////////////////
+
+VehicleProperties::VehicleProperties()
+{
+
+}
+
+VehicleProperties::VehicleProperties(int v, float a, int we, float sa, int w, int h)
+    : maxSpeed(v), acceleration(a), weight(we), steeringAngle(sa), width(w), height(h)
+{
+
+}
+
+QJsonObject VehicleProperties::toJson()
+{
+    QJsonObject json;
+
+    json.insert(QString("maxSpeed"), QJsonValue(this->maxSpeed));
+    json.insert(QString("acceleration"), QJsonValue(this->acceleration));
+    json.insert(QString("weight"), QJsonValue(this->weight));
+    json.insert(QString("steeringAngle"), QJsonValue(this->steeringAngle));
+    json.insert(QString("width"), QJsonValue(this->width));
+    json.insert(QString("height"), QJsonValue(this->height));
+
+    return json;
+}
+
+// ////////////////////////////////////////////////////////////////////////////
+// GameProperties
 // ////////////////////////////////////////////////////////////////////////////
 
 GameProperties::GameProperties()
@@ -29,18 +58,10 @@ GameProperties::GameProperties()
     this->rocketCd = 1; // s
     this->rocketSpeed = 160; // m/s
 
-    this->bikeSpeed = 55; // m/s
-    this->bikeAcceleration = 6.9; // m/s²
-    this->bikeWeight = 180; // kg
-    this->bikeSteering = 1.6; // rad
-    this->carSpeed = 69; // m/s
-    this->carAcceleration = 5.0; // m/s²
-    this->carWeight = 1460; // kg
-    this->carSteering = 1.2; // rad
-    this->truckSpeed = 44; // m/s
-    this->truckAcceleration = 3.3; // m/s²
-    this->truckWeight = 35000; // kg
-    this->truckSteering = 1; // rad
+    this->bike = VehicleProperties(55, 6.9, 180, 1.6, 1, 2);
+    this->car = VehicleProperties(69, 5.0, 1460, 1.2, 2, 4);
+    this->truck = VehicleProperties(44, 3.3, 35000, 1, 3, 9);
+
 }
 
 QJsonObject GameProperties::toJson() {
@@ -66,25 +87,9 @@ QJsonObject GameProperties::toJson() {
 
     QJsonObject vehicles;
 
-    QJsonObject bike;
-    bike.insert(QString("maxSpeed"), QJsonValue(this->bikeSpeed));
-    bike.insert(QString("acceleration"), QJsonValue(this->bikeAcceleration));
-    bike.insert(QString("weight"), QJsonValue(this->bikeWeight));
-    bike.insert(QString("steeringAngle"), QJsonValue(this->bikeSteering));
-    QJsonObject car;
-    car.insert(QString("maxSpeed"), QJsonValue(this->carSpeed));
-    car.insert(QString("acceleration"), QJsonValue(this->carAcceleration));
-    car.insert(QString("weight"), QJsonValue(this->carWeight));
-    car.insert(QString("steeringAngle"), QJsonValue(this->carSteering));
-    QJsonObject truck;
-    truck.insert(QString("maxSpeed"), QJsonValue(this->truckSpeed));
-    truck.insert(QString("acceleration"), QJsonValue(this->truckAcceleration));
-    truck.insert(QString("weight"), QJsonValue(this->truckWeight));
-    truck.insert(QString("steeringAngle"), QJsonValue(this->truckSteering));
-
-    vehicles.insert(QString("bike"), bike);
-    vehicles.insert(QString("car"), car);
-    vehicles.insert(QString("truck"), truck);
+    vehicles.insert(QString("bike"), this->bike.toJson());
+    vehicles.insert(QString("car"), this->car.toJson());
+    vehicles.insert(QString("truck"), this->truck.toJson());
 
     json.insert(QString("vehicleOptions"), vehicles);
 

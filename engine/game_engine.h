@@ -35,6 +35,8 @@ public:
     explicit GameEngine(QObject *parent = nullptr);
     ~GameEngine();
 
+    QJsonObject toJson();
+
 public slots:
     void map(QJsonObject object);
     void playerRegister(QJsonObject object);

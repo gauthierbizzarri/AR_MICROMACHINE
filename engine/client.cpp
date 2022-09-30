@@ -12,9 +12,11 @@
 #define MQTT_USERNAME "phoenix"
 #define MQTT_PASSWORD "ardent"
 
-#define MQTT_TOPIC_MAP "/map"
-#define MQTT_TOPIC_PLAYER_REGISTER "/player/register"
-#define MQTT_TOPIC_PLAYER_CONTROL "/player/control"
+#define MQTT_TOPIC_MAP "map"
+#define MQTT_TOPIC_PLAYER_REGISTER "player/register"
+#define MQTT_TOPIC_PLAYER_CONTROL "player/control"
+#define MQTT_TOPIC_GAME "game"
+#define MQTT_TOPIC_GAME_PROPERTIES "game/properties"
 
 #define EXAMPLE_MAP "{\"mapWidth\":1000,\"mapHeight\":1000,\"checkpoints\":[{\"id\": 121,\"x\": 50,\"y\": 100},{\"id\": 154,\"x\": 500,\"y\": 300}],\"obstacles\":[{\"id\": 231,\"angle\": 0.2,\"x\": 700,\"y\": 600}]}"
 #define EXAMPLE_REGISTER "{\"uuid\":\"qkfbf541qe684eq1eq86f4g8t3gt4\",\"pseudo\":\"quiscale\",\"controller\":\"keyboard\",\"vehicle\":\"car\",\"team\":0}"
@@ -74,11 +76,6 @@ void Client::connected() {
 
     qDebug() << "MQTT Client is ready";
 
-    // TODO : remove lines behind
-    this->m_mqtt->publish(QString("/map"), QString(EXAMPLE_MAP).toUtf8());
-    this->m_mqtt->publish(QString("/player/register"), QString(EXAMPLE_REGISTER).toUtf8());
-    this->m_mqtt->publish(QString("/player/control"), QString(EXAMPLE_CONTROL).toUtf8());
-    // TODO : remove lines above
 }
 
 void Client::messageReceived(const QByteArray& message, const QMqttTopicName& topic) {
@@ -96,13 +93,15 @@ void Client::messageReceived(const QByteArray& message, const QMqttTopicName& to
 
 }
 
-void Client::publishProperties(GameProperties properties) {
+void Client::publishProperties(QJsonObject propertyJson) {
 
-    this->m_mqtt->publish(QString("/game/properties"), QJsonDocument(properties.toJson()).toJson());
+    this->m_mqtt->publish(QString(MQTT_TOPIC_GAME_PROPERTIES), QJsonDocument(propertyJson).toJson());
 
 }
 
-void Client::publishGame() {
+void Client::publishGame(QJsonObject engineJson) {
+
+    this->m_mqtt->publish(QString(MQTT_TOPIC_GAME), QJsonDocument(engineJson).toJson());
 
 }
 

@@ -16,10 +16,12 @@ class GameMapObject : public QObject
 {
     Q_OBJECT
 
-    QGraphicsItem* m_item;
+protected:
 
     int m_x;
     int m_y;
+
+    QGraphicsItem* m_item;
 
 public:
 
