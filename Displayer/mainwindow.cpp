@@ -25,13 +25,16 @@ MainWindow::MainWindow(MqttDialog* dialog, QWidget *parent)
     rootLayout->addWidget(setupGameView());
     rootLayout->addWidget(setupOptionsView());
     rootLayout->addWidget(setupRegister());
+    ConnectionLayer* conLayer = setupConnectionLayer();
+    conLayer->setPrevious(3);
+    rootLayout->addWidget(conLayer);
     root->setLayout(rootLayout);
 
     setCentralWidget(root);
 
-    showView(0);
-
     setupMqtt();
+
+    showView(0);
 }
 
 MainWindow::~MainWindow()
@@ -43,6 +46,7 @@ MainWindow::~MainWindow()
 void MainWindow::setupMqtt()
 {
     connect(mclient, &MqttDialog::connected, this, &MainWindow::onMqttConnected);
+    connect(mclient, &MqttDialog::disconnected, this, &MainWindow::onMqttDisconnected);
     connect(mclient, &MqttDialog::messageRecieved, this, &MainWindow::onMessageRecieve);
 }
 
@@ -79,6 +83,15 @@ RegisterLayer *MainWindow::setupRegister()
     return layer;
 }
 
+ConnectionLayer *MainWindow::setupConnectionLayer()
+{
+    ConnectionLayer* layer = new ConnectionLayer(this);
+    connect(layer, &ConnectionLayer::connectionDone, this, &MainWindow::showView);
+    connect(layer, &ConnectionLayer::goBack, this, &MainWindow::backToStart);
+    layer->init(mclient);
+    return layer;
+}
+
 void MainWindow::showView(int i)
 {
     ((DisplayView*)rootLayout->widget(i))->setPrevious(rootLayout->currentIndex());
@@ -89,6 +102,15 @@ void MainWindow::onMqttConnected()
 {
     mclient->sub(MqttDialog::MAP);
     mclient->sub(MqttDialog::GAME);
+    QJsonObject data{
+        {"uuid", id},
+        {"pseudo", pseudo},
+        {"controller", "keyboard"},
+        {"vehicle", vehicle},
+        {"team", "null"}
+    };
+    mclient->pub(MqttDialog::PLAYER_REGISTER, QJsonDocument(data).toJson());
+    showView(1);
 }
 
 void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicName &topic)
@@ -128,17 +150,13 @@ void MainWindow::applyOptions(const Options *options)
     }
 }
 
-void MainWindow::onRegistered(QString id, QString pseudo, QString vehicle)
+void MainWindow::onRegistered(QString id, QString pseudo, QString vehicle, QString host, int port, QString username, QString password)
 {
-    QJsonObject data{
-        {"uuid", id},
-        {"pseudo", pseudo},
-        {"controller", "keyboard"},
-        {"vehicle", vehicle},
-        {"team", "null"}
-    };
-    mclient->pub(MqttDialog::PLAYER_REGISTER, QJsonDocument(data).toJson());
-    showView(1);
+    showView(4);
+    this->id = id;
+    this->pseudo = pseudo;
+    this->vehicle = vehicle;
+    mclient->establishConnection(host, port, username, password);
     emit registered(id);
 }
 
@@ -152,6 +170,17 @@ void MainWindow::playGame(int display)
 {
     emit paused(false);
     showView(display);
+}
+
+void MainWindow::onMqttDisconnected()
+{
+    showView(4);
+}
+
+void MainWindow::backToStart(int)
+{
+    ((StartScreenLayer*)rootLayout->widget(0))->outGame();
+    showView(0);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

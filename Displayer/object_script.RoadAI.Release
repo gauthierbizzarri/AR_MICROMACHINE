@@ -1,9 +1,11 @@
 release/checkpoint.o
 release/circle.o
+release/connectionlayer.o
 release/controlleradapter.o
 release/controllermanager.o
 release/banana.o
 release/bomb.o
+release/gamepadcontroller.o
 release/gameproperties.o
 release/main.o
 release/mainwindow.o
@@ -20,6 +22,7 @@ release/qrc_bomb.o
 release/qrc_car.o
 release/qrc_rocket.o
 release/qrc_truck.o
+release/moc_connectionlayer.o
 release/moc_options.o
 release/moc_controlleradapter.o
 release/moc_controllermanager.o

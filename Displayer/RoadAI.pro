@@ -1,9 +1,8 @@
-QT       += core gui
+QT       += core gui mqtt gamepad
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
-QT += mqtt
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -12,10 +11,12 @@ QT += mqtt
 SOURCES += \
     checkpoint.cpp \
     circle.cpp \
+    connectionlayer.cpp \
     controlleradapter.cpp \
     controllermanager.cpp \
     banana.cpp \
     bomb.cpp \
+    gamepadcontroller.cpp \
     gameproperties.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -27,6 +28,8 @@ SOURCES += \
     rectangle.cpp
 
 HEADERS += \
+    connectionlayer.h \
+    gamepadcontroller.h \
     rocket.h\
     player.h\
     options.h\

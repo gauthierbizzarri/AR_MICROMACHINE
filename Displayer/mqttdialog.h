@@ -21,14 +21,18 @@ public:
     ~MqttDialog();
     MqttDialog*  pub(QString name, QByteArray data);
     MqttDialog* sub(QString name);
-    void establishConnection();
+    void establishConnection(QString host, int port, QString username = "", QString password = "");
+    void cutConnection();
+    bool isConnected();
 
 private slots:
     void onConnect();
+    void onDisconnect();
     void onMessageRecieved(const QByteArray &data, QMqttTopicName name);
 
 signals:
     void connected();
+    void disconnected();
     void messageRecieved(const QByteArray&, QMqttTopicName);
 };
 

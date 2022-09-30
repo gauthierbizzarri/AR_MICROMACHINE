@@ -42,6 +42,11 @@ public:
         delete mroot;
     }
 
+    void outGame()
+    {
+        mstart->setText("Start game");
+        ingame = false;
+    }
     // QWidget interface
 protected:
     void keyReleaseEvent(QKeyEvent *event)

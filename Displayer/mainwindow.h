@@ -15,6 +15,7 @@
 #include <QStackedLayout>
 #include <registerlayer.h>
 #include <mqttdialog.h>
+#include <connectionlayer.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,6 +31,9 @@ public:
 
 
 private:
+    QString id;
+    QString pseudo;
+    QString vehicle;
     /**
      * @brief minfo map informations
      */
@@ -55,6 +59,7 @@ private:
     GameScreen* setupGameView();
     OptionsLayer* setupOptionsView();
     RegisterLayer* setupRegister();
+    ConnectionLayer* setupConnectionLayer();
 
     void showView(int);
 
@@ -70,9 +75,11 @@ public slots:
      */
     void onMessageRecieve(const QByteArray&, const QMqttTopicName&);
     void applyOptions(const Options* options);
-    void onRegistered(QString id, QString pseudo, QString vehicle);
+    void onRegistered(QString id, QString pseudo, QString vehicle, QString host, int port, QString username, QString password);
     void pauseGame(int display);
     void playGame(int display);
+    void onMqttDisconnected();
+    void backToStart(int);
 
 signals:
     void quitting();
