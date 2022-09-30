@@ -1,6 +1,7 @@
 
 #include <QDebug>
-#include <QPainter>
+#include <QPen>
+#include <qmath.h>
 
 #include "game_player.h"
 
@@ -10,9 +11,16 @@ GamePlayer::GamePlayer(QWidget* parent, QString uuid, QString pseudo, QString co
     this->m_color = "red"; // TODO : donner une couleur qui dépend du nom du joueur, ou de l'équipe s'il y en a plusieurs
     this->m_steering = 0;
     this->m_angle = 0;
+    this->m_power = 0;
 
-    QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-12.5, -12.5, 25, 25);
-    item->moveBy(m_x*0.6, m_y*0.6);
+    QGraphicsRectItem* item = new QGraphicsRectItem(-12.5, -6, 25, 12);
+    QPen pen;
+    pen.setWidth(1);
+    item->setPen(pen);
+    item->setBrush(QBrush(Qt::blue));
+    item->moveBy(this->m_x*0.6, this->m_y*0.6);
+    item->setRotation(0);
+
     this->m_item = item;
 
     qDebug() << "player log : " << pseudo;
@@ -47,7 +55,11 @@ int GamePlayer::getTeam() {
 }
 
 void GamePlayer::setSteering(double value) {
-    this->m_angle = value;
+    this->m_steering = value;
+}
+
+void GamePlayer::setPower(int value) {
+    this->m_power = value;
 }
 
 QJsonObject GamePlayer::toJson() {
@@ -60,18 +72,18 @@ QJsonObject GamePlayer::toJson() {
     json.insert(QString("team"), QJsonValue(this->m_team));
     json.insert(QString("x"), QJsonValue(this->X()));
     json.insert(QString("y"), QJsonValue(this->Y()));
-    json.insert(QString("angle"), QJsonValue(0));
-    json.insert(QString("speed"), QJsonValue(0));
+    json.insert(QString("angle"), QJsonValue(this->m_angle));
+    json.insert(QString("speed"), QJsonValue(this->m_power));
     json.insert(QString("vehicle"), QJsonValue(this->m_vehicle));
     json.insert(QString("lastCheckpoint"), QJsonValue(0));
     json.insert(QString("currentLap"), QJsonValue(0));
-    json.insert(QString("status"), QJsonValue(""));
+    json.insert(QString("status"), QJsonValue("driving"));
     json.insert(QString("controller"), QJsonValue(this->m_conrtoller));
 
     QJsonObject items;
-    items.insert(QString("banana"), QJsonValue(0));
-    items.insert(QString("bomb"), QJsonValue(0));
-    items.insert(QString("rocket"), QJsonValue(0));
+    items.insert(QString("banana"), QJsonValue(1));
+    items.insert(QString("bomb"), QJsonValue(1));
+    items.insert(QString("rocket"), QJsonValue(1));
 
     json.insert(QString("items"), items);
 
@@ -80,7 +92,32 @@ QJsonObject GamePlayer::toJson() {
 
 void GamePlayer::update() {
 
-    qDebug() << "hell update";
-    this->m_x += 10;
+    this->m_angle += this->m_steering;
+
+    int futurX = this->m_x +cos(this->m_angle) *this->m_power;
+    int futurY = this->m_y -sin(this->m_angle) *this->m_power;
+
+    if(futurX < 50)
+        this->m_x = 50;
+    else {
+        if(futurX > 950)
+            this->m_x = 950;
+        else
+            this->m_x = this->m_x +cos(this->m_angle) *this->m_power /2;
+    }
+
+    if(futurY < 50)
+        this->m_y = 50;
+    else {
+        if(futurY > 950)
+            this->m_y = 950;
+        else
+            this->m_y = this->m_y -sin(this->m_angle) *this->m_power /2;
+    }
+
+
+    this->m_item->setX(this->m_x*0.6);
+    this->m_item->setY(this->m_y*0.6);
+    this->m_item->setRotation(-this->m_angle *57.2974);
 
 }

@@ -46,7 +46,7 @@ void MapView::update() {
     // add everything that need to be added
 
     for(int i = 0; i < gameObjects.length(); i++) {
-        qDebug() << gameObjects[i];
+        //qDebug() << gameObjects[i];
         this->m_group_default->addToGroup(gameObjects[i]->getItem());
     }
 }
