@@ -68,9 +68,6 @@ void MapTranslator::update_game(QJsonDocument message)
         Power* banana_power = new Power(1200,50,"banana",bananas);
         minfo->addObject("banana_power_1",banana_power);
 
-
-        qDebug()<<banana_power;
-
         float angle = PlayerObj.value("angle").toDouble();
         Player* player = new Player(PlayerObj.value("x").toInt(), PlayerObj.value("y").toInt(),angle);
 

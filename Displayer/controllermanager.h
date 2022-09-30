@@ -14,7 +14,6 @@ class ControllerManager : public QObject
     Q_OBJECT
 private:
     QJsonObject base;
-    QJsonObject sendee;
     QString uuid;
     bool connected;
     bool paused;
@@ -30,8 +29,7 @@ public:
     ControllerManager(MqttDialog* client);
 
     void setup(MainWindow* frame, ControllerAdapter* adapter);
-    void sendValues(QJsonObject data);
-    void sendControll(QJsonObject data);
+    void sendControll();
 
 signals:
     void controllComputed(QByteArray);

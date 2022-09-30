@@ -30,6 +30,7 @@ SOURCES += \
     player.cpp\
     registerlayer.cpp \
     power.cpp \
+    resourceloader.cpp \
     rocket.cpp\
     rectangle.cpp \
     startscreenlayer.cpp
@@ -39,6 +40,7 @@ HEADERS += \
     connectionlayer.h \
     gamepadcontroller.h \
     power.h \
+    resourceloader.h \
     rocket.h\
     player.h\
     options.h\
@@ -73,6 +75,7 @@ RESOURCES += \
     bike.qrc \
     bomb.qrc \
     car.qrc \
+    missing_texture.qrc \
     rocket.qrc \
     truck.qrc
 

@@ -18,17 +18,6 @@ public:
     static const QString CAR;
     static const QString TRUCK;
 
-    static const QImage DEFAULT;
-    static const QImage GREEN_CAR;
-    static const QImage RED_CAR;
-    static const QImage BLUE_CAR;
-    static const QImage GREEN_TRUCK;
-    static const QImage RED_TRUCK;
-    static const QImage BLUE_TRUCK;
-    static const QImage GREEN_BIKE;
-    static const QImage RED_BIKE;
-    static const QImage BLUE_BIKE;
-
     Player(int x, int y, float angle, QGraphicsItem* parent = nullptr);
 
     // QGraphicsItem interface
