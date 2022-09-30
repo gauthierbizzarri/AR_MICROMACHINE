@@ -28,6 +28,7 @@ release/qrc_banana2.o
 release/qrc_bike.o
 release/qrc_bomb.o
 release/qrc_car.o
+release/qrc_powers.o
 release/qrc_missing_texture.o
 release/qrc_rocket.o
 release/qrc_truck.o

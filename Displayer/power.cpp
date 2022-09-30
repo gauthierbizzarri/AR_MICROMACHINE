@@ -2,6 +2,7 @@
 #include <QGraphicsEllipseItem>
 #include <QMovie>
 #include <gameproperties.h>
+#include <resourceloader.h>
 
 Power::Power(int x, int y,QString name,int amount, QGraphicsItem* parent) : CircuitElement(x, y, parent)
 {
@@ -10,7 +11,7 @@ Power::Power(int x, int y,QString name,int amount, QGraphicsItem* parent) : Circ
 
 QRectF Power::boundingRect() const
 {
-    return QRectF(0, 0,10,10); //GameProperties::getInstance()->checkpointRadius, GameProperties::getInstance()->checkpointRadius);
+    return QRectF(0, 0,GameProperties::getInstance()->rectangleWidth,GameProperties::getInstance()->rectangleHeight); //GameProperties::getInstance()->checkpointRadius, GameProperties::getInstance()->checkpointRadius);
 }
 
 void Power::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -19,34 +20,11 @@ void Power::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     Q_UNUSED(widget);
     painter->setBrush(Qt::black);
 
-    painter->drawEllipse(0, 0, 10,10 ); //GameProperties::getInstance()->checkpointRadius, 10 );GameProperties::getInstance()->checkpointRadius);
-
-    QPixmap pixmap3(":/ressources/banana.png");
-
-    painter->drawPixmap(10,10, GameProperties::getInstance()->rectangleWidth*1.5,GameProperties::getInstance()->rectangleHeight*1.5, this->get_image());
+    painter->drawImage(0,0, get_image().scaled(GameProperties::getInstance()->rectangleWidth,GameProperties::getInstance()->rectangleHeight));
 }
 
-QPixmap Power::get_image()
+QImage Power::get_image()
 {
-    if (this->property("TYPE").toString().contains("banana") )
-    {
-        QPixmap pixmap3(":/ressources/banana_power.png");
-
-        return pixmap3;
-    }
-
-    else if (this->property("TYPE").toString().contains("bomb") )
-    {
-        QPixmap pixmap3(":/ressources/bomb_power.png");
-
-        return pixmap3;
-    }
-
-    else if (this->property("TYPE").toString().contains("rocket") )
-    {
-        QPixmap pixmap3(":/ressources/rocket_power.png");
-
-        return pixmap3;
-    }
+    return ResourceLoader::getInstance()->get("power:"+this->property("TYPE").toString());
 
 }

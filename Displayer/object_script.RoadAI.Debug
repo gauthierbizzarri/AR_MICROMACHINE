@@ -28,6 +28,7 @@ debug/qrc_banana2.o
 debug/qrc_bike.o
 debug/qrc_bomb.o
 debug/qrc_car.o
+debug/qrc_powers.o
 debug/qrc_missing_texture.o
 debug/qrc_rocket.o
 debug/qrc_truck.o

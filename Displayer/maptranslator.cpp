@@ -74,9 +74,6 @@ void MapTranslator::update_game(QJsonDocument message)
         Power* rocket_power = new Power(1200,250,"rocket",rockets);
         minfo->addObject("rocket_power_1",rocket_power);
 
-
-        qDebug()<<banana_power;
-
         float angle = PlayerObj.value("angle").toDouble();
         Player* player = new Player(PlayerObj.value("x").toInt(), PlayerObj.value("y").toInt(),angle);
 

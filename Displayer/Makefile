@@ -288,6 +288,7 @@ Makefile: RoadAI.pro D:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf D:/Qt/
 		bike.qrc \
 		bomb.qrc \
 		car.qrc \
+		powers.qrc \
 		missing_texture.qrc \
 		rocket.qrc \
 		truck.qrc
@@ -510,6 +511,7 @@ banana2.qrc:
 bike.qrc:
 bomb.qrc:
 car.qrc:
+powers.qrc:
 missing_texture.qrc:
 rocket.qrc:
 truck.qrc:

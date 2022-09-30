@@ -18,7 +18,7 @@ public:
 //********interface***********//
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    QPixmap get_image();
+    QImage get_image();
 };
 
 #endif // POWER_H

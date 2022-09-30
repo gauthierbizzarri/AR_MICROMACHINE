@@ -15,6 +15,9 @@ ResourceLoader::ResourceLoader()
     resources.insert("vehicle:bike:red", QImage(":/ressources/red_bike.png"));
     resources.insert("vehicle:bike:blue", QImage(":/ressources/blue_bike.png"));
     resources.insert("vehicle:bike:green", QImage(":/ressources/green_bike.png"));
+    resources.insert("power:banana", QImage(":/ressources/banana_power.png"));
+    resources.insert("power:bomb", QImage(":/ressources/bomb_power.png"));
+    resources.insert("power:rocket", QImage(":/ressources/rocket_power.png"));
 }
 
 ResourceLoader *ResourceLoader::getInstance()
