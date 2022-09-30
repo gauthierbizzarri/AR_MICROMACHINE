@@ -38,7 +38,6 @@ void GameMap::deleteCheckpointsNObstacles() {
     for(const auto key : this->m_objects.keys())
     {
         if(key.size() <= 3 ) {
-            qDebug() << "remove" << key;
             delete this->m_objects.take(key);
         }
     }
