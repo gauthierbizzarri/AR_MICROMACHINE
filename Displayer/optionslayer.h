@@ -98,10 +98,8 @@ private slots:
     {
         Q_UNUSED(checked);
         Options::getInstance()->apply();
-        emit optionsDone(previous);
+        emit stateChange(previous);
     }
-signals:
-    void optionsDone(int);
 
     // QWidget interface
 protected:
@@ -109,7 +107,7 @@ protected:
     {
         if(event->key() == Qt::Key_Escape)
         {
-            emit(optionsDone(previous));
+            emit stateChange(previous);
         }
     }
 };

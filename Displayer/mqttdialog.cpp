@@ -61,7 +61,6 @@ bool MqttDialog::isConnected()
 
 void MqttDialog::onConnect()
 {
-    qDebug()<<"connected";
     connectionAcquired = true;
     emit connected();
 }
@@ -74,6 +73,5 @@ void MqttDialog::onDisconnect()
 
 void MqttDialog::onMessageRecieved(const QByteArray &data, QMqttTopicName name)
 {
-    qDebug()<<data;
     emit messageRecieved(data, name);
 }

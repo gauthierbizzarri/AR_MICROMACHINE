@@ -26,6 +26,7 @@ debug/moc_connectionlayer.o
 debug/moc_options.o
 debug/moc_controlleradapter.o
 debug/moc_controllermanager.o
+debug/moc_displayview.o
 debug/moc_gamescreen.o
 debug/moc_mainwindow.o
 debug/moc_mqttdialog.o

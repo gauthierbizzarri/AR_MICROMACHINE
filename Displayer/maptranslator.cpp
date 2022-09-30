@@ -74,7 +74,7 @@ void MapTranslator::update_game(QJsonDocument message)
 
         QString vehicule = PlayerObj.value("vehicle").toString();
 
-        player->set_data(color,team,angle,speed,vehicule);
+        player->set_data(color,team,speed,vehicule);
         minfo->addObject(uuid, player);
     }
 

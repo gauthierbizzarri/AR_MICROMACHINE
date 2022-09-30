@@ -31,6 +31,13 @@ public:
 
 
 private:
+    int START_MENU_VIEW;
+    int GAME_VIEW;
+    int OPTIONS_VIEW;
+    int REGISTER_VIEW;
+    int CONNECTING_VIEW;
+
+    AppState currentstate;
     QString id;
     QString pseudo;
     QString vehicle;
@@ -76,10 +83,8 @@ public slots:
     void onMessageRecieve(const QByteArray&, const QMqttTopicName&);
     void applyOptions(const Options* options);
     void onRegistered(QString id, QString pseudo, QString vehicle, QString host, int port, QString username, QString password);
-    void pauseGame(int display);
-    void playGame(int display);
     void onMqttDisconnected();
-    void backToStart(int);
+    void onStateChange(AppState state);
 
 signals:
     void quitting();

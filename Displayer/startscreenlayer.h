@@ -63,25 +63,21 @@ private slots:
         Q_UNUSED(checked);
         mstart->setText("Back to game");
         if(ingame)
-            emit gameStart(1);
+            emit stateChange(AppState::PLAYED);
         else
-            emit gameStart(3);
+            emit stateChange(AppState::STARTED);
         ingame = true;
     }
     void onOptionClicked(bool checked = false)
     {
         Q_UNUSED(checked);
-        emit options(2);
+        emit stateChange(AppState::OPTIONS);
     }
     void onQuitClicked(bool checked = true)
     {
         Q_UNUSED(checked);
-        emit exit();
+        emit stateChange(AppState::QUITED);
     }
-signals:
-    void gameStart(int);
-    void options(int);
-    void exit();
 };
 
 #endif

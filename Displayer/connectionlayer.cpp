@@ -29,12 +29,12 @@ void ConnectionLayer::init(MqttDialog *diag)
 
 void ConnectionLayer::nextLayer()
 {
-    emit connectionDone(1);
+    emit stateChange(AppState::CONNECTED);
 }
 
 void ConnectionLayer::backBtnClicked(bool checked)
 {
     Q_UNUSED(checked);
     this->diag->cutConnection();
-    emit goBack(0);
+    emit stateChange(AppState::STARTED);
 }

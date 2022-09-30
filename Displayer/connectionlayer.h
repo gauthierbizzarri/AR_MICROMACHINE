@@ -18,10 +18,6 @@ public:
 private slots:
     void nextLayer();
     void backBtnClicked(bool);
-
-signals:
-    void connectionDone(int);
-    void goBack(int);
 };
 
 #endif // CONNECTIONLAYER_H

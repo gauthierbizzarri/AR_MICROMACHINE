@@ -18,9 +18,6 @@ GamepadController::GamepadController()
         connect(pad, SIGNAL(buttonL2Changed(double)), this, SLOT(l2precise(double)));
         connect(pad, SIGNAL(axisLeftXChanged(double)),this ,SLOT(dirprecise(double)));
     }
-
-
-    qDebug()<<"hey";
 }
 
 bool GamepadController::eventFilter(QObject *watched, QEvent *event)

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[25];
-    char stringdata0[245];
+    QByteArrayData data[24];
+    char stringdata0[235];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -52,20 +52,19 @@ QT_MOC_LITERAL(16, 159, 4), // "host"
 QT_MOC_LITERAL(17, 164, 4), // "port"
 QT_MOC_LITERAL(18, 169, 8), // "username"
 QT_MOC_LITERAL(19, 178, 8), // "password"
-QT_MOC_LITERAL(20, 187, 9), // "pauseGame"
-QT_MOC_LITERAL(21, 197, 7), // "display"
-QT_MOC_LITERAL(22, 205, 8), // "playGame"
-QT_MOC_LITERAL(23, 214, 18), // "onMqttDisconnected"
-QT_MOC_LITERAL(24, 233, 11) // "backToStart"
+QT_MOC_LITERAL(20, 187, 18), // "onMqttDisconnected"
+QT_MOC_LITERAL(21, 206, 13), // "onStateChange"
+QT_MOC_LITERAL(22, 220, 8), // "AppState"
+QT_MOC_LITERAL(23, 229, 5) // "state"
 
     },
     "MainWindow\0quitting\0\0registered\0uuid\0"
     "paused\0onMqttConnected\0onMessageRecieve\0"
     "QMqttTopicName\0applyOptions\0const Options*\0"
     "options\0onRegistered\0id\0pseudo\0vehicle\0"
-    "host\0port\0username\0password\0pauseGame\0"
-    "display\0playGame\0onMqttDisconnected\0"
-    "backToStart"
+    "host\0port\0username\0password\0"
+    "onMqttDisconnected\0onStateChange\0"
+    "AppState\0state"
 };
 #undef QT_MOC_LITERAL
 
@@ -75,7 +74,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -83,19 +82,17 @@ static const uint qt_meta_data_MainWindow[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x06 /* Public */,
-       3,    1,   70,    2, 0x06 /* Public */,
-       5,    1,   73,    2, 0x06 /* Public */,
+       1,    0,   59,    2, 0x06 /* Public */,
+       3,    1,   60,    2, 0x06 /* Public */,
+       5,    1,   63,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   76,    2, 0x0a /* Public */,
-       7,    2,   77,    2, 0x0a /* Public */,
-       9,    1,   82,    2, 0x0a /* Public */,
-      12,    7,   85,    2, 0x0a /* Public */,
-      20,    1,  100,    2, 0x0a /* Public */,
-      22,    1,  103,    2, 0x0a /* Public */,
-      23,    0,  106,    2, 0x0a /* Public */,
-      24,    1,  107,    2, 0x0a /* Public */,
+       6,    0,   66,    2, 0x0a /* Public */,
+       7,    2,   67,    2, 0x0a /* Public */,
+       9,    1,   72,    2, 0x0a /* Public */,
+      12,    7,   75,    2, 0x0a /* Public */,
+      20,    0,   90,    2, 0x0a /* Public */,
+      21,    1,   91,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -107,10 +104,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::QByteArray, 0x80000000 | 8,    2,    2,
     QMetaType::Void, 0x80000000 | 10,   11,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::QString, QMetaType::QString,   13,   14,   15,   16,   17,   18,   19,
-    QMetaType::Void, QMetaType::Int,   21,
-    QMetaType::Void, QMetaType::Int,   21,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    2,
+    QMetaType::Void, 0x80000000 | 22,   23,
 
        0        // eod
 };
@@ -128,10 +123,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 4: _t->onMessageRecieve((*reinterpret_cast< const QByteArray(*)>(_a[1])),(*reinterpret_cast< const QMqttTopicName(*)>(_a[2]))); break;
         case 5: _t->applyOptions((*reinterpret_cast< const Options*(*)>(_a[1]))); break;
         case 6: _t->onRegistered((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
-        case 7: _t->pauseGame((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 8: _t->playGame((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: _t->onMqttDisconnected(); break;
-        case 10: _t->backToStart((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 7: _t->onMqttDisconnected(); break;
+        case 8: _t->onStateChange((*reinterpret_cast< AppState(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -200,13 +193,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 9;
     }
     return _id;
 }

@@ -26,6 +26,7 @@ release/moc_connectionlayer.o
 release/moc_options.o
 release/moc_controlleradapter.o
 release/moc_controllermanager.o
+release/moc_displayview.o
 release/moc_gamescreen.o
 release/moc_mainwindow.o
 release/moc_mqttdialog.o

@@ -2,21 +2,25 @@
 #define DISPLAYVIEW_H
 
 #include <QWidget>
+#include <appstate.h>
 
 class DisplayView : public QWidget
 {
+    Q_OBJECT
 protected:
-    int previous;
+    AppState previous;
 public:
     DisplayView(QWidget* parent = nullptr) : QWidget(parent)
     {
-        previous = 0;
+        previous = AppState::UNKNOWN;
     }
 
-    void setPrevious(int prev)
+    void setPrevious(AppState prev)
     {
         previous = prev;
     }
+signals:
+    void stateChange(AppState state);
 };
 
 #endif // DISPLAYVIEW_H

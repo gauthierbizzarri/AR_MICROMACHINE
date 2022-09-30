@@ -28,6 +28,7 @@ SOURCES += \
     rectangle.cpp
 
 HEADERS += \
+    appstate.h \
     connectionlayer.h \
     gamepadcontroller.h \
     rocket.h\
