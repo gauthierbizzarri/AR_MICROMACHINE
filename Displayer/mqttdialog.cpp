@@ -8,12 +8,9 @@ const QString MqttDialog::GAME = "game";
 MqttDialog::MqttDialog()
 {
     mclient = new QMqttClient(this);
-    mclient->setHostname("10.3.0.218");
-    mclient->setPort(1883);
-    mclient->setUsername("phoenix");
-    mclient->setPassword("ardent");
 
     connect(mclient, &QMqttClient::connected, this, &MqttDialog::onConnect);
+    connect(mclient, &QMqttClient::disconnected, this, &MqttDialog::onDisconnect);
     connect(mclient, &QMqttClient::messageReceived, this, &MqttDialog::onMessageRecieved);
 }
 
@@ -40,15 +37,38 @@ MqttDialog *MqttDialog::sub(QString name)
     return this;
 }
 
-void MqttDialog::establishConnection()
+void MqttDialog::establishConnection(QString host, int port, QString username, QString password)
 {
+    if(connectionAcquired)
+        mclient->disconnectFromHost();
+
+    mclient->setHostname(host);
+    mclient->setPort(port);
+    mclient->setUsername(username);
+    mclient->setPassword(password);
     mclient->connectToHost();
+}
+
+void MqttDialog::cutConnection()
+{
+    mclient->disconnectFromHost();
+}
+
+bool MqttDialog::isConnected()
+{
+    return connectionAcquired;
 }
 
 void MqttDialog::onConnect()
 {
     connectionAcquired = true;
     emit connected();
+}
+
+void MqttDialog::onDisconnect()
+{
+    connectionAcquired = false;
+    emit disconnected();
 }
 
 void MqttDialog::onMessageRecieved(const QByteArray &data, QMqttTopicName name)

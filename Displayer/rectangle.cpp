@@ -1,11 +1,12 @@
 #include "rectangle.h"
 #include <QGraphicsEllipseItem>
 #include <gameproperties.h>
+#include <QtMath>
 
 Rectangle::Rectangle(int x, int y, float angle, QGraphicsItem* parent): CircuitElement(x, y, parent)
 {
     this->setTransformOriginPoint(GameProperties::getInstance()->rectangleWidth/2, GameProperties::getInstance()->rectangleHeight/2);
-    this->setRotation(angle);
+    this->setRotation(angle*180/M_PI);
     this->setProperty("TYPE","Rectangle");
 }
 

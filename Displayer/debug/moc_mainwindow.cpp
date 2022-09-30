@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[19];
-    char stringdata0[186];
+    QByteArrayData data[24];
+    char stringdata0[235];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -48,16 +48,23 @@ QT_MOC_LITERAL(12, 128, 12), // "onRegistered"
 QT_MOC_LITERAL(13, 141, 2), // "id"
 QT_MOC_LITERAL(14, 144, 6), // "pseudo"
 QT_MOC_LITERAL(15, 151, 7), // "vehicle"
-QT_MOC_LITERAL(16, 159, 9), // "pauseGame"
-QT_MOC_LITERAL(17, 169, 7), // "display"
-QT_MOC_LITERAL(18, 177, 8) // "playGame"
+QT_MOC_LITERAL(16, 159, 4), // "host"
+QT_MOC_LITERAL(17, 164, 4), // "port"
+QT_MOC_LITERAL(18, 169, 8), // "username"
+QT_MOC_LITERAL(19, 178, 8), // "password"
+QT_MOC_LITERAL(20, 187, 18), // "onMqttDisconnected"
+QT_MOC_LITERAL(21, 206, 13), // "onStateChange"
+QT_MOC_LITERAL(22, 220, 8), // "AppState"
+QT_MOC_LITERAL(23, 229, 5) // "state"
 
     },
     "MainWindow\0quitting\0\0registered\0uuid\0"
     "paused\0onMqttConnected\0onMessageRecieve\0"
     "QMqttTopicName\0applyOptions\0const Options*\0"
     "options\0onRegistered\0id\0pseudo\0vehicle\0"
-    "pauseGame\0display\0playGame"
+    "host\0port\0username\0password\0"
+    "onMqttDisconnected\0onStateChange\0"
+    "AppState\0state"
 };
 #undef QT_MOC_LITERAL
 
@@ -83,9 +90,9 @@ static const uint qt_meta_data_MainWindow[] = {
        6,    0,   66,    2, 0x0a /* Public */,
        7,    2,   67,    2, 0x0a /* Public */,
        9,    1,   72,    2, 0x0a /* Public */,
-      12,    3,   75,    2, 0x0a /* Public */,
-      16,    1,   82,    2, 0x0a /* Public */,
-      18,    1,   85,    2, 0x0a /* Public */,
+      12,    7,   75,    2, 0x0a /* Public */,
+      20,    0,   90,    2, 0x0a /* Public */,
+      21,    1,   91,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -96,9 +103,9 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QByteArray, 0x80000000 | 8,    2,    2,
     QMetaType::Void, 0x80000000 | 10,   11,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,   13,   14,   15,
-    QMetaType::Void, QMetaType::Int,   17,
-    QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::QString, QMetaType::QString,   13,   14,   15,   16,   17,   18,   19,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 22,   23,
 
        0        // eod
 };
@@ -115,9 +122,9 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->onMqttConnected(); break;
         case 4: _t->onMessageRecieve((*reinterpret_cast< const QByteArray(*)>(_a[1])),(*reinterpret_cast< const QMqttTopicName(*)>(_a[2]))); break;
         case 5: _t->applyOptions((*reinterpret_cast< const Options*(*)>(_a[1]))); break;
-        case 6: _t->onRegistered((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
-        case 7: _t->pauseGame((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 8: _t->playGame((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->onRegistered((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
+        case 7: _t->onMqttDisconnected(); break;
+        case 8: _t->onStateChange((*reinterpret_cast< AppState(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

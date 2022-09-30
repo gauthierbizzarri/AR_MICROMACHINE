@@ -4,6 +4,7 @@
 #include <controlleradapter.h>
 #include <keyboardcontroller.h>
 #include <controllermanager.h>
+#include <gamepadcontroller.h>
 #include <mqttdialog.h>
 
 int main(int argc, char *argv[])
@@ -16,7 +17,6 @@ int main(int argc, char *argv[])
     manager->setup(&w, controller);
     manager->start();
     w.show();
-    dialog->establishConnection();
     a.exec();
     manager->stop();
     delete controller;

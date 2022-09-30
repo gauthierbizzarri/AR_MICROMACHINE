@@ -53,16 +53,13 @@ public slots:
     {
         mscene->setSceneRect(0, 0, size.width(), size.height());
     }
-
-signals:
-    void pauseMenu(int);
     // QWidget interface
 protected:
     void keyReleaseEvent(QKeyEvent *event)
     {
         if(event->key() == Qt::Key::Key_Escape)
         {
-            emit pauseMenu(0);
+            emit stateChange(AppState::PAUSED);
         }
         event->ignore();
     }

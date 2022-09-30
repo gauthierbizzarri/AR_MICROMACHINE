@@ -57,17 +57,23 @@ void ControllerManager::onComputeStreering(float steering)
 
 void ControllerManager::onBombAction()
 {
-    sendee["buttons"].toObject()["bomb"] = true;
+    QJsonObject buttons = sendee["buttons"].toObject();
+    buttons["bomb"]=true;
+    sendee["buttons"]=buttons;
 }
 
 void ControllerManager::onBananaAction()
 {
-    sendee["buttons"].toObject()["banana"] = true;
+    QJsonObject buttons = sendee["buttons"].toObject();
+    buttons["banana"]=true;
+    sendee["buttons"]=buttons;
 }
 
 void ControllerManager::onRocketAction()
 {
-    sendee["buttons"].toObject()["rocket"] = true;
+    QJsonObject buttons = sendee["buttons"].toObject();
+    buttons["rocket"]=true;
+    sendee["buttons"]=buttons;
 }
 
 void ControllerManager::onRegistered(QString playerUuid)

@@ -1,9 +1,11 @@
 debug/checkpoint.o
 debug/circle.o
+debug/connectionlayer.o
 debug/controlleradapter.o
 debug/controllermanager.o
 debug/banana.o
 debug/bomb.o
+debug/gamepadcontroller.o
 debug/gameproperties.o
 debug/main.o
 debug/mainwindow.o
@@ -20,9 +22,11 @@ debug/qrc_bomb.o
 debug/qrc_car.o
 debug/qrc_rocket.o
 debug/qrc_truck.o
+debug/moc_connectionlayer.o
 debug/moc_options.o
 debug/moc_controlleradapter.o
 debug/moc_controllermanager.o
+debug/moc_displayview.o
 debug/moc_gamescreen.o
 debug/moc_mainwindow.o
 debug/moc_mqttdialog.o

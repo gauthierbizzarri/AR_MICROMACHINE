@@ -22,16 +22,24 @@ MainWindow::MainWindow(MqttDialog* dialog, QWidget *parent)
     root = new QWidget();
     rootLayout = new QStackedLayout();
     rootLayout->addWidget(setupStartScreenView());
+    START_MENU_VIEW = 0;
     rootLayout->addWidget(setupGameView());
+    GAME_VIEW = 1;
     rootLayout->addWidget(setupOptionsView());
+    OPTIONS_VIEW = 2;
     rootLayout->addWidget(setupRegister());
+    REGISTER_VIEW = 3;
+    rootLayout->addWidget(setupConnectionLayer());
+    CONNECTING_VIEW = 4;
     root->setLayout(rootLayout);
+
+    currentstate = AppState::STARTMENU;
 
     setCentralWidget(root);
 
-    showView(0);
-
     setupMqtt();
+
+    showView(0);
 }
 
 MainWindow::~MainWindow()
@@ -43,22 +51,21 @@ MainWindow::~MainWindow()
 void MainWindow::setupMqtt()
 {
     connect(mclient, &MqttDialog::connected, this, &MainWindow::onMqttConnected);
+    connect(mclient, &MqttDialog::disconnected, this, &MainWindow::onMqttDisconnected);
     connect(mclient, &MqttDialog::messageRecieved, this, &MainWindow::onMessageRecieve);
 }
 
 StartScreenLayer* MainWindow::setupStartScreenView()
 {
     StartScreenLayer* start = new StartScreenLayer(this);
-    connect(start, &StartScreenLayer::exit, this, &MainWindow::close);
-    connect(start, &StartScreenLayer::gameStart, this, &MainWindow::playGame);
-    connect(start, &StartScreenLayer::options, this, &MainWindow::showView);
+    connect(start, &DisplayView::stateChange, this, &MainWindow::onStateChange);
     return start;
 }
 
 GameScreen* MainWindow::setupGameView()
 {
     GameScreen* screen = new GameScreen(this);
-    connect(screen, &GameScreen::pauseMenu, this, &MainWindow::pauseGame);
+    connect(screen, &DisplayView::stateChange, this, &MainWindow::onStateChange);
     connect(minfo, &MapInfo::objectAdded, screen, &GameScreen::onObjectAdded);
     connect(minfo, &MapInfo::objectRemoved, screen, &GameScreen::onObjectRemoved);
     connect(minfo, &MapInfo::sizeChanged, screen, &GameScreen::onSizeChange);
@@ -68,7 +75,7 @@ GameScreen* MainWindow::setupGameView()
 OptionsLayer* MainWindow::setupOptionsView()
 {
     OptionsLayer* options = new OptionsLayer(this);
-    connect(options, &OptionsLayer::optionsDone, this, &MainWindow::showView);
+    connect(options, &DisplayView::stateChange, this, &MainWindow::onStateChange);
     return options;
 }
 
@@ -79,9 +86,17 @@ RegisterLayer *MainWindow::setupRegister()
     return layer;
 }
 
+ConnectionLayer *MainWindow::setupConnectionLayer()
+{
+    ConnectionLayer* layer = new ConnectionLayer(this);
+    connect(layer, &ConnectionLayer::stateChange, this, &MainWindow::onStateChange);
+    layer->init(mclient);
+    return layer;
+}
+
 void MainWindow::showView(int i)
 {
-    ((DisplayView*)rootLayout->widget(i))->setPrevious(rootLayout->currentIndex());
+    ((DisplayView*)rootLayout->widget(i))->setPrevious(currentstate);
     rootLayout->setCurrentIndex(i);
 }
 
@@ -89,6 +104,15 @@ void MainWindow::onMqttConnected()
 {
     mclient->sub(MqttDialog::MAP);
     mclient->sub(MqttDialog::GAME);
+    QJsonObject data{
+        {"uuid", id},
+        {"pseudo", pseudo},
+        {"controller", "keyboard"},
+        {"vehicle", vehicle},
+        {"team", "null"}
+    };
+    mclient->pub(MqttDialog::PLAYER_REGISTER, QJsonDocument(data).toJson());
+    onStateChange(AppState::CONNECTED);
 }
 
 void MainWindow::onMessageRecieve(const QByteArray &message, const QMqttTopicName &topic)
@@ -128,30 +152,59 @@ void MainWindow::applyOptions(const Options *options)
     }
 }
 
-void MainWindow::onRegistered(QString id, QString pseudo, QString vehicle)
+void MainWindow::onRegistered(QString id, QString pseudo, QString vehicle, QString host, int port, QString username, QString password)
 {
-    QJsonObject data{
-        {"uuid", id},
-        {"pseudo", pseudo},
-        {"controller", "keyboard"},
-        {"vehicle", vehicle},
-        {"team", "null"}
-    };
-    mclient->pub(MqttDialog::PLAYER_REGISTER, QJsonDocument(data).toJson());
-    showView(1);
+    onStateChange(AppState::REGISTERED);
+    this->id = id;
+    this->pseudo = pseudo;
+    this->vehicle = vehicle;
+    mclient->establishConnection(host, port, username, password);
     emit registered(id);
 }
 
-void MainWindow::pauseGame(int display)
+void MainWindow::onMqttDisconnected()
 {
-    emit paused(true);
-    showView(display);
+    onStateChange(AppState::DISCONNECTED);
 }
 
-void MainWindow::playGame(int display)
+void MainWindow::onStateChange(AppState state)
 {
-    emit paused(false);
-    showView(display);
+    switch(state)
+    {
+        case AppState::STARTMENU:
+            ((StartScreenLayer*)rootLayout->widget(START_MENU_VIEW))->outGame();
+            showView(START_MENU_VIEW);
+        break;
+        case AppState::OPTIONS:
+            showView(OPTIONS_VIEW);
+        break;
+        case AppState::STARTED:
+            showView(REGISTER_VIEW);
+        break;
+        case AppState::REGISTERED:
+            showView(CONNECTING_VIEW);
+        break;
+        case AppState::PLAYED:
+            emit paused(false);
+            showView(GAME_VIEW);
+        break;
+        case AppState::PAUSED:
+            emit paused(true);
+            showView(START_MENU_VIEW);
+        break;
+        case AppState::DISCONNECTED:
+            showView(CONNECTING_VIEW);
+        break;
+        case AppState::CONNECTED:
+            showView(GAME_VIEW);
+        break;
+        case AppState::QUITED:
+            close();
+        break;
+        default:
+        break;
+    }
+    currentstate = state;
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

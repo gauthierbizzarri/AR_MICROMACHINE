@@ -275,6 +275,7 @@ Makefile: RoadAI.pro D:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf D:/Qt/
 		D:/Qt/5.15.2/mingw81_64/mkspecs/features/yacc.prf \
 		D:/Qt/5.15.2/mingw81_64/mkspecs/features/lex.prf \
 		RoadAI.pro \
+		D:/Qt/5.15.2/mingw81_64/lib/Qt5Gamepad.prl \
 		D:/Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl \
 		D:/Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl \
 		D:/Qt/5.15.2/mingw81_64/lib/Qt5Mqtt.prl \
@@ -495,6 +496,7 @@ D:/Qt/5.15.2/mingw81_64/mkspecs/features/exceptions.prf:
 D:/Qt/5.15.2/mingw81_64/mkspecs/features/yacc.prf:
 D:/Qt/5.15.2/mingw81_64/mkspecs/features/lex.prf:
 RoadAI.pro:
+D:/Qt/5.15.2/mingw81_64/lib/Qt5Gamepad.prl:
 D:/Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl:
 D:/Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl:
 D:/Qt/5.15.2/mingw81_64/lib/Qt5Mqtt.prl:
