@@ -76,6 +76,8 @@ void Client::connected() {
 
     qDebug() << "MQTT Client is ready";
 
+    //this->m_mqtt->publish(QString("player/register"), QString(EXAMPLE_REGISTER).toUtf8());
+
 }
 
 void Client::messageReceived(const QByteArray& message, const QMqttTopicName& topic) {
@@ -96,6 +98,7 @@ void Client::messageReceived(const QByteArray& message, const QMqttTopicName& to
 void Client::publishProperties(QJsonObject propertyJson) {
 
     this->m_mqtt->publish(QString(MQTT_TOPIC_GAME_PROPERTIES), QJsonDocument(propertyJson).toJson());
+    //this->m_mqtt->publish(QString(MQTT_TOPIC_MAP), QString(EXAMPLE_MAP).toUtf8());
 
 }
 

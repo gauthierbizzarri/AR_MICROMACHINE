@@ -59,7 +59,7 @@ GameEngine::~GameEngine() {
 // ////////////////////////////////////////////////////////////////////////////
 
 void GameEngine::map(QJsonObject json) {
-    qDebug() << "map : " << json;
+    //qDebug() << "map : " << json;
 
     // handle map size
 
@@ -85,7 +85,7 @@ void GameEngine::map(QJsonObject json) {
             auto obstacle = obstacles[i].toObject();
             int id = obstacle["id"].toInt();
 
-            if(id %2)
+            if(id %2 == 0)
                 this->m_map->insert(QString::number(id), new GameCircle(this->m_ihm, obstacle["x"].toInt(), obstacle["y"].toInt()));
             else
                 this->m_map->insert(QString::number(id), new GameRectangle(this->m_ihm, obstacle["x"].toInt(), obstacle["y"].toInt(), obstacle["angle"].toDouble()));
@@ -114,12 +114,29 @@ void GameEngine::playerRegister(QJsonObject json) {
         this->m_entitites.append(new GamePlayer(this->m_ihm, uuid,
                 json["pseudo"].toString(), json["controller"].toString(),
                 json["vehicle"].toString(), json["team"].toInt()));
+        this->m_ihm->m_mapView->update();
     }
 
 }
 
 void GameEngine::playerControl(QJsonObject json) {
-    qDebug() << "control : " << json;
+    //qDebug() << "control : " << json;
+
+    QString uuid = json["uuid"].toString();
+    ;
+    json["power"];
+    for(GameEntity* entity : this->m_entitites) {
+        GamePlayer* player = qobject_cast<GamePlayer*>(entity);
+        if(player != nullptr) {
+            if(player->getUuid() == uuid) {
+                qDebug() << uuid << " control " << json;
+                player->setSteering(json["angle"].toDouble());
+                player->setPower(json["power"].toInt());
+                break;
+            }
+        }
+    }
+
 }
 
 void GameEngine::sendProperties() {
@@ -134,15 +151,13 @@ void GameEngine::sendProperties() {
 void GameEngine::update() {
 
     if(this->m_running) {
-        QTimer::singleShot(1000, this, &GameEngine::update);
+        QTimer::singleShot(50, this, &GameEngine::update);
 
 
         for(GameEntity* entity : this->m_entitites) {
             entity->update();
         }
 
-
-        qDebug() << "entity nb : " << this->m_entitites.length() << "object nb : " << gameObjects.length();
         this->m_client->publishGame(this->toJson());
 
     }

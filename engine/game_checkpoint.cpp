@@ -3,18 +3,23 @@
 #include <QPen>
 #include "game_checkpoint.h"
 
+QList<GameCheckpoint*> gameCheckpoints;
+
 GameCheckpoint::GameCheckpoint(QWidget *parent, int x, int y)
     : GameMapObject{parent, x, y}
 {
     QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-12.5, -12.5, 25, 25);
-
-    item->setBrush(QBrush(Qt::red));
     QPen pen;
-    pen.setWidth(5);
+    pen.setWidth(2);
     item->setPen(pen);
-    //rect->setBrush(Qt::red);
-    //item->setBrush(Qt::red);
+    //item->setBrush(QBrush(Qt::red));
     item->moveBy(x*0.6, y*0.6);
 
     this->m_item = item;
+
+    gameCheckpoints.append(this);
+}
+
+GameCheckpoint::~GameCheckpoint() {
+    gameCheckpoints.removeOne(this);
 }
