@@ -18,6 +18,7 @@ debug/options.o
 debug/optionslayer.o
 debug/player.o
 debug/registerlayer.o
+debug/power.o
 debug/rocket.o
 debug/rectangle.o
 debug/startscreenlayer.o

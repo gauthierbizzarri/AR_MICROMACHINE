@@ -18,6 +18,7 @@ release/options.o
 release/optionslayer.o
 release/player.o
 release/registerlayer.o
+release/power.o
 release/rocket.o
 release/rectangle.o
 release/startscreenlayer.o

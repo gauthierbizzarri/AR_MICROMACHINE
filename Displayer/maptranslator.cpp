@@ -2,7 +2,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <circle.h>
-
+#include <power.h>
 MapTranslator::MapTranslator(MapInfo* info)
 {
     minfo = info;
@@ -57,8 +57,20 @@ void MapTranslator::update_game(QJsonDocument message)
     minfo->clear_players();
     for(int i = 0; i<players.size(); i++)
     {
+
         QJsonObject PlayerObj = players[i].toObject();
         QString uuid = PlayerObj["uuid"].toString();
+
+        int bananas = players[i].toObject().value("items").toObject().value("banana").toInt();
+        int bombs = players[i].toObject().value("items").toObject().value("bomb").toInt();
+        int rockets = players[i].toObject().value("items").toObject().value("rocket").toInt();
+
+        Power* banana_power = new Power(1200,50,"banana",bananas);
+        minfo->addObject("banana_power_1",banana_power);
+
+
+        qDebug()<<banana_power;
+
         float angle = PlayerObj.value("angle").toDouble();
         Player* player = new Player(PlayerObj.value("x").toInt(), PlayerObj.value("y").toInt(),angle);
 

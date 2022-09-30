@@ -29,6 +29,7 @@ SOURCES += \
     optionslayer.cpp \
     player.cpp\
     registerlayer.cpp \
+    power.cpp \
     rocket.cpp\
     rectangle.cpp \
     startscreenlayer.cpp
@@ -37,6 +38,7 @@ HEADERS += \
     appstate.h \
     connectionlayer.h \
     gamepadcontroller.h \
+    power.h \
     rocket.h\
     player.h\
     options.h\
