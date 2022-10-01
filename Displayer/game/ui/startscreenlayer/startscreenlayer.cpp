@@ -1,29 +1,42 @@
 #include "startscreenlayer.h"
+#include <game/utils/resourceloader.h>
+#include <game/ui/animatedbackground.h>
 
 StartScreenLayer::StartScreenLayer(QWidget* parent):DisplayView(parent)
 {
+    int buttonwidth = 200;
+    int buttonheight= 100;
+    QString style = "QPushButton{ border: 5px solid #9B7D5B; border-radius:25px; background-color : rgba(255, 206, 150, 0.6); } QPushButton:hover{background-color : rgba(255, 206, 150, 0.9)} QPushButton:target{background-color : rgba(170, 138, 100, 1)}";
     ingame = false;
     mroot = new QVBoxLayout(this);
     mstart = new QPushButton("Start game");
-    mstart->setFixedWidth(100);
-    mstart->setFixedHeight(50);
+    mstart->setFixedWidth(buttonwidth);
+    mstart->setFixedHeight(buttonheight);
+    mstart->setStyleSheet(style);
     connect(mstart, &QPushButton::clicked, this, &StartScreenLayer::onStartClicked);
     mroot->addWidget(mstart);
 
     moptions = new QPushButton("Options");
-    moptions->setFixedWidth(100);
-    moptions->setFixedHeight(50);
+    moptions->setFixedWidth(buttonwidth);
+    moptions->setFixedHeight(buttonheight);
+    moptions->setStyleSheet(style);
     connect(moptions, &QPushButton::clicked, this, &StartScreenLayer::onOptionClicked);
     mroot->addWidget(moptions);
 
     mquit = new QPushButton("Quit game");
-    mquit->setFixedWidth(100);
-    mquit->setFixedHeight(50);
+    mquit->setFixedWidth(buttonwidth);
+    mquit->setFixedHeight(buttonheight);
+    mquit->setStyleSheet(style);
     connect(mquit, &QPushButton::clicked, this, &StartScreenLayer::onQuitClicked);
     mroot->addWidget(mquit);
-    mroot->setSpacing(10);
+    mroot->setSpacing(25);
     mroot->setAlignment(Qt::AlignCenter);
-    setLayout(mroot);
+
+    QWidget* widget = new AnimatedBackground(mroot, ResourceLoader::getInstance()->getAnimation("ui:start:background"));
+    QHBoxLayout* root = new QHBoxLayout();
+    root->addWidget(widget);
+    setContentsMargins(0, 0, 0, 0);
+    setLayout(root);
 }
 
 StartScreenLayer::~StartScreenLayer()

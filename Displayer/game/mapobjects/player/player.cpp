@@ -48,7 +48,7 @@ void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 QImage Player::get_vehicle(){
      QString color_str = this->get_color(this->color);
      qDebug()<<this->vehicule;
-     return ResourceLoader::getInstance()->get("vehicle:"+this->vehicule+":"+color_str);
+     return ResourceLoader::getInstance()->getImage("vehicle:"+this->vehicule+":"+color_str);
 }
 
 QString Player::get_color(QColor color)

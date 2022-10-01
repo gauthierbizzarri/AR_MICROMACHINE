@@ -19,6 +19,9 @@ ResourceLoader::ResourceLoader()
     resources.insert("power:banana", QImage(":/ressources/banana_power.png"));
     resources.insert("power:bomb", QImage(":/ressources/bomb_power.png"));
     resources.insert("power:rocket", QImage(":/ressources/rocket_power.png"));
+
+    animations.insert("missing_texture", new QMovie(":/ressources/missing_texture.jpg"));
+    animations.insert("ui:start:background", new QMovie(":/ressources/start_background.gif"));
 }
 
 ResourceLoader *ResourceLoader::getInstance()
@@ -30,11 +33,22 @@ ResourceLoader *ResourceLoader::getInstance()
     return instance;
 }
 
-QImage ResourceLoader::get(QString id)
+QImage ResourceLoader::getImage(QString id)
 {
     if(!resources.contains(id))
     {
+        qDebug()<<"failed to load texture"<<id;
         return resources["missing_texture"];
     }
     return resources[id];
+}
+
+QMovie* ResourceLoader::getAnimation(QString id)
+{
+    if(!animations.contains(id))
+    {
+        qDebug()<<"failed to load animation"<<id;
+        return animations["missing_texture"];
+    }
+    return animations[id];
 }

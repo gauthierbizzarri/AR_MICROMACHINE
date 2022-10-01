@@ -25,6 +25,6 @@ void Power::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 QImage Power::get_image()
 {
-    return ResourceLoader::getInstance()->get("power:"+this->property("TYPE").toString());
+    return ResourceLoader::getInstance()->getImage("power:"+this->property("TYPE").toString());
 
 }
