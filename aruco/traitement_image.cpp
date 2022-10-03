@@ -18,7 +18,7 @@ void Traitement_Image::rect(){
 
 
 
-    VideoCapture inputVideo(5);
+    VideoCapture inputVideo(6);
     vector< vector< Point2f > > corners, rejected;
     vector< vector< Point2f > > corners_final, rejected_final;
     vector< Vec3d > rvecs_final, tvecs_final;
@@ -184,8 +184,8 @@ void Traitement_Image::rect(){
 
 
 
-        map.insert("mapWidth", QJsonValue::fromVariant(width));
-        map.insert("mapHeight", QJsonValue::fromVariant(height));
+        map.insert("mapWidth", QJsonValue::fromVariant(1000));
+        map.insert("mapHeight", QJsonValue::fromVariant(1000));
 
 
         map.insert("checkpoints",checkpoints);
@@ -202,12 +202,12 @@ void Traitement_Image::rect(){
         qDebug() << Qt::endl;
         qDebug() << Qt::endl;
 
-        //emit jsonmap(doc);
+        emit jsonmap(doc);
 
         //afficher la sortie
         cv::imshow("out", imageCopy);
 
-        waitKey(4000);//ms
+        waitKey(1000);//ms
 
 
     }
