@@ -129,7 +129,7 @@ void GameEngine::playerControl(QJsonObject json) {
         GamePlayer* player = qobject_cast<GamePlayer*>(entity);
         if(player != nullptr) {
             if(player->getUuid() == uuid) {
-                qDebug() << uuid << " control " << json;
+                //qDebug() << uuid << " control " << json;
                 player->setSteering(json["angle"].toDouble());
                 player->setPower(json["power"].toInt());
                 break;

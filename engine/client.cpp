@@ -7,10 +7,10 @@
 #include <QJsonDocument>
 #include "client.h"
 
-#define MQTT_IP "localhost"
+#define MQTT_IP "10.3.0.218"
 #define MQTT_PORT 1883
-#define MQTT_USERNAME "belzorium"
-#define MQTT_PASSWORD "bb"
+#define MQTT_USERNAME "phoenix"
+#define MQTT_PASSWORD "ardent"
 
 #define MQTT_TOPIC_MAP "map"
 #define MQTT_TOPIC_PLAYER_REGISTER "player/register"
@@ -98,7 +98,6 @@ void Client::messageReceived(const QByteArray& message, const QMqttTopicName& to
 void Client::publishProperties(QJsonObject propertyJson) {
 
     this->m_mqtt->publish(QString(MQTT_TOPIC_GAME_PROPERTIES), QJsonDocument(propertyJson).toJson());
-    //this->m_mqtt->publish(QString(MQTT_TOPIC_MAP), QString(EXAMPLE_MAP).toUtf8());
 
 }
 
