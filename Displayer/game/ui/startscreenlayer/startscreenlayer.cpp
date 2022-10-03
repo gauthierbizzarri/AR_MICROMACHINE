@@ -4,38 +4,29 @@
 
 StartScreenLayer::StartScreenLayer(QWidget* parent):DisplayView(parent)
 {
-    int buttonwidth = 200;
+    int buttonwidth = 400;
     int buttonheight= 100;
-    QString style = "QPushButton{ border: 5px solid #9B7D5B; border-radius:25px; background-color : rgba(255, 206, 150, 0.6); } QPushButton:hover{background-color : rgba(255, 206, 150, 0.9)} QPushButton:target{background-color : rgba(170, 138, 100, 1)}";
     ingame = false;
     mroot = new QVBoxLayout(this);
-    mstart = new QPushButton("Start game");
-    mstart->setFixedWidth(buttonwidth);
-    mstart->setFixedHeight(buttonheight);
-    mstart->setStyleSheet(style);
+    mstart = new UiButton("Start game", buttonwidth, buttonheight);
     connect(mstart, &QPushButton::clicked, this, &StartScreenLayer::onStartClicked);
     mroot->addWidget(mstart);
 
-    moptions = new QPushButton("Options");
-    moptions->setFixedWidth(buttonwidth);
-    moptions->setFixedHeight(buttonheight);
-    moptions->setStyleSheet(style);
+    moptions = new UiButton("Options", buttonwidth, buttonheight);
     connect(moptions, &QPushButton::clicked, this, &StartScreenLayer::onOptionClicked);
     mroot->addWidget(moptions);
 
-    mquit = new QPushButton("Quit game");
-    mquit->setFixedWidth(buttonwidth);
-    mquit->setFixedHeight(buttonheight);
-    mquit->setStyleSheet(style);
+    mquit = new UiButton("Quit game", buttonwidth, buttonheight);
     connect(mquit, &QPushButton::clicked, this, &StartScreenLayer::onQuitClicked);
     mroot->addWidget(mquit);
+
     mroot->setSpacing(25);
     mroot->setAlignment(Qt::AlignCenter);
 
     QWidget* widget = new AnimatedBackground(mroot, ResourceLoader::getInstance()->getAnimation("ui:start:background"));
     QHBoxLayout* root = new QHBoxLayout();
     root->addWidget(widget);
-    setContentsMargins(0, 0, 0, 0);
+    root->setMargin(0);
     setLayout(root);
 }
 

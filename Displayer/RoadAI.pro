@@ -16,6 +16,7 @@ SOURCES += \
     game/ui/animatedbackground.cpp \
     game/ui/connectionlayer/connectionlayer.cpp \
     game/ui/gamescreen/gamescreen.cpp \
+    game/ui/generics/uibutton.cpp \
     game/ui/mainwindow.cpp \
     game/ui/optionslayer/optionslayer.cpp \
     game/ui/registerlayer/registerlayer.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 
 HEADERS += \
     game/ui/animatedbackground.h \
+    game/ui/generics/uibutton.h \
     game/utils/appstate.h \
     game/utils/resourceloader.h \
     game/utils/options.h \

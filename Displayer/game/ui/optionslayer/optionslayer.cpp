@@ -1,4 +1,5 @@
 #include "optionslayer.h"
+#include <game/ui/generics/uibutton.h>
 
 OptionsLayer::OptionsLayer(QWidget* parent) : DisplayView(parent)
 {
@@ -6,7 +7,7 @@ OptionsLayer::OptionsLayer(QWidget* parent) : DisplayView(parent)
 
     mfullscreen = new QHBoxLayout();
     QLabel* fullscreenLabel = new QLabel(QString("Fullscreen:"));
-    QPushButton* isFullscreenButton = new QPushButton(Options::getInstance()->fullScreen ? "ON" : "OFF");
+    QPushButton* isFullscreenButton = new UiButton(Options::getInstance()->fullScreen ? "ON" : "OFF", 300, 60);
     connect(isFullscreenButton, &QCheckBox::clicked, this, &OptionsLayer::setFullScreen);
     isFullscreenButton->setChecked(Options::getInstance()->fullScreen);
     mfullscreen->addWidget(fullscreenLabel);
@@ -23,7 +24,7 @@ OptionsLayer::OptionsLayer(QWidget* parent) : DisplayView(parent)
     mroot->addLayout(mmusic);
 
     mbuttons = new QHBoxLayout();
-    QPushButton* save = new QPushButton("Save");
+    QPushButton* save = new UiButton("Save", 300, 100);
     connect(save, &QPushButton::clicked, this, &OptionsLayer::onSave);
     mbuttons->addWidget(save);
     mroot->addLayout(mbuttons);

@@ -6,14 +6,15 @@
 #include <QDebug>
 #include <QKeyEvent>
 #include <game/ui/displayview.h>
+#include <game/ui/generics/uibutton.h>
 
 class StartScreenLayer : public DisplayView{
     Q_OBJECT
 private:
     QVBoxLayout* mroot;
-    QPushButton* mstart;
-    QPushButton* moptions;
-    QPushButton* mquit;
+    UiButton* mstart;
+    UiButton* moptions;
+    UiButton* mquit;
     bool ingame;
 public:
     StartScreenLayer(QWidget* parent = nullptr);

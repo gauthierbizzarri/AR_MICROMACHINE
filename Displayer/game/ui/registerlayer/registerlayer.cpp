@@ -1,4 +1,5 @@
 #include "registerlayer.h"
+#include <game/ui/generics/uibutton.h>
 
 RegisterLayer::RegisterLayer(QWidget* parent): DisplayView(parent)
 {
@@ -79,9 +80,9 @@ RegisterLayer::RegisterLayer(QWidget* parent): DisplayView(parent)
     mroot->addWidget(hostGroup);
 
     QHBoxLayout* buttonLayout = new QHBoxLayout();
-    QPushButton* ok = new QPushButton("Launch");
+    UiButton* ok = new UiButton("Launch", 300, 60);
     connect(ok, &QPushButton::clicked, this, &RegisterLayer::accept);
-    QPushButton* back = new QPushButton("Back");
+    UiButton* back = new UiButton("Back", 300, 60);
     connect(back, &QPushButton::clicked, this, &RegisterLayer::goBack);
     buttonLayout->addWidget(back);
     buttonLayout->addWidget(ok);

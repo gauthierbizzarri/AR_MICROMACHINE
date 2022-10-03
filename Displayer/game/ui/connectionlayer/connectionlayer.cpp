@@ -3,6 +3,8 @@
 #include <QPushButton>
 #include <game/utils/properties/gameproperties.h>
 #include <QJsonDocument>
+#include <game/ui/generics/uibutton.h>
+#include <QHBoxLayout>
 
 ConnectionLayer::ConnectionLayer(MqttDialog *diag, QWidget* parent) : DisplayView(parent)
 {
@@ -11,9 +13,11 @@ ConnectionLayer::ConnectionLayer(MqttDialog *diag, QWidget* parent) : DisplayVie
     root = new QVBoxLayout(this);
     label = new QLabel("Game is connecting lol ...");
     root->addWidget(label);
-    QPushButton* back = new QPushButton("Back");
+    QPushButton* back = new UiButton("Back", 400, 60);
     connect(back, &QPushButton::clicked, this, &ConnectionLayer::backBtnClicked);
-    root->addWidget(back);
+    QHBoxLayout* backLayer = new QHBoxLayout();
+    backLayer->addWidget(back);
+    root->addLayout(backLayer);
 
     setLayout(root);
 }

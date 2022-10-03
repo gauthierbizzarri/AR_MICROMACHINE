@@ -5,6 +5,7 @@ debug/rectangle.o
 debug/animatedbackground.o
 debug/connectionlayer.o
 debug/gamescreen.o
+debug/uibutton.o
 debug/mainwindow.o
 debug/optionslayer.o
 debug/registerlayer.o
@@ -34,7 +35,6 @@ debug/qrc_car.o
 debug/qrc_missing_texture.o
 debug/qrc_truck.o
 debug/qrc_start_background.o
-debug/moc_animatedbackground.o
 debug/moc_options.o
 debug/moc_mqttdialog.o
 debug/moc_mapinfo.o
