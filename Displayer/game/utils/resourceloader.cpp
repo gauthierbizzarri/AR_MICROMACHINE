@@ -19,6 +19,7 @@ ResourceLoader::ResourceLoader()
     resources.insert("power:banana", QImage(":/ressources/banana_power.png"));
     resources.insert("power:bomb", QImage(":/ressources/bomb_power.png"));
     resources.insert("power:rocket", QImage(":/ressources/rocket_power.png"));
+    resources.insert("ui:spotcar", QImage(":/ressources/spotcar.png"));
 
     animations.insert("missing_texture", new QMovie(":/ressources/missing_texture.jpg"));
     animations.insert("ui:start:background", new QMovie(":/ressources/start_background.gif"));

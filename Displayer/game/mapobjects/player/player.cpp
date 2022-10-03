@@ -14,7 +14,7 @@ Player::Player(int x, int y, float angle, QGraphicsItem* parent) : CircuitElemen
     this->setProperty("TYPE","Player");
     // ROTATE
     this->setTransformOriginPoint(GameProperties::getInstance()->rectangleWidth/2, GameProperties::getInstance()->rectangleHeight/2);
-    this->setRotation((qRadiansToDegrees(angle)+90)*-1+180);
+    this->setRotation((qRadiansToDegrees(angle)+90)*-1);
 
 }
 

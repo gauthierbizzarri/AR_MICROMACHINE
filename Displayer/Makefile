@@ -292,6 +292,7 @@ Makefile: RoadAI.pro D:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf D:/Qt/
 		game/mapobjects/vehicles/car.qrc \
 		game/mapobjects/vehicles/missing_texture.qrc \
 		game/mapobjects/vehicles/truck.qrc \
+		game/ui/generics/uibutton.qrc \
 		game/ui/startscreenlayer/start_background.qrc
 	$(QMAKE) -o Makefile RoadAI.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 D:/Qt/5.15.2/mingw81_64/mkspecs/features/spec_pre.prf:
@@ -516,6 +517,7 @@ game/mapobjects/vehicles/bike.qrc:
 game/mapobjects/vehicles/car.qrc:
 game/mapobjects/vehicles/missing_texture.qrc:
 game/mapobjects/vehicles/truck.qrc:
+game/ui/generics/uibutton.qrc:
 game/ui/startscreenlayer/start_background.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile RoadAI.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"

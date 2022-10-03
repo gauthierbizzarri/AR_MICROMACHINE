@@ -34,6 +34,7 @@ debug/qrc_bike.o
 debug/qrc_car.o
 debug/qrc_missing_texture.o
 debug/qrc_truck.o
+debug/qrc_uibutton.o
 debug/qrc_start_background.o
 debug/moc_options.o
 debug/moc_mqttdialog.o

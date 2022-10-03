@@ -83,6 +83,7 @@ RESOURCES += \
     game/mapobjects/vehicles/car.qrc \
     game/mapobjects/vehicles/missing_texture.qrc \
     game/mapobjects/vehicles/truck.qrc \
+    game/ui/generics/uibutton.qrc \
     game/ui/startscreenlayer/start_background.qrc
 
 # Default rules for deployment.
