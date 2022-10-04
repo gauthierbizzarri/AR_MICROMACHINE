@@ -9,7 +9,12 @@ class GameCheckpoint : public GameMapObject
     Q_OBJECT
 
 public:
-    GameCheckpoint(QWidget *parent, int x, int y);
+
+    GameCheckpoint* next;
+    int id;
+
+
+    GameCheckpoint(QWidget *parent, int x, int y, int r);
     ~GameCheckpoint();
 };
 

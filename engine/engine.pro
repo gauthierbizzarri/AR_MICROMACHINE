@@ -1,4 +1,4 @@
-QT       += core gui widgets mqtt
+QT       += core gui widgets mqtt gamepad
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,11 +20,13 @@ SOURCES += \
     game_player.cpp \
     game_properties.cpp \
     game_rectangle.cpp \
+    game_sketch.cpp \
     main.cpp \
     ihm.cpp
 
 HEADERS += \
     client.h \
+    controller.h \
     game_checkpoint.h \
     game_circle.h \
     game_engine.h \
@@ -35,7 +37,9 @@ HEADERS += \
     game_player.h \
     game_properties.h \
     game_rectangle.h \
-    ihm.h
+    game_sketch.h \
+    ihm.h \
+    main.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -14,6 +14,8 @@ public:
 
     virtual QJsonObject toJson() = 0;
     virtual void update() = 0;
+    virtual void checkCollision() = 0;
+    virtual void collideWith(GameMapObject* object) = 0;
 
 };
 

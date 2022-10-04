@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QJsonArray>
 #include <QTimer>
+#include <QRandomGenerator>
 
 #include "game_engine.h"
 #include "game_checkpoint.h"
@@ -27,6 +28,7 @@ GameEngine::GameEngine(QObject *parent)
     this->m_client = new Client(this);
 
     this->m_map = nullptr;
+    this->m_checkpoint = nullptr;
 
     // Connect
 
@@ -39,8 +41,9 @@ GameEngine::GameEngine(QObject *parent)
     this->m_running = true;
     this->m_ihm->show();
 
-    this->sendProperties();
-    this->update();
+    this->loopProperties();
+    this->loopUpdate();
+    this->loopIA();
 }
 
 GameEngine::~GameEngine() {
@@ -54,12 +57,42 @@ GameEngine::~GameEngine() {
 // Methods
 // ////////////////////////////////////////////////////////////////////////////
 
+QJsonObject GameEngine::toJson() {
+
+    QJsonObject json;
+
+    json.insert(QString("elapsedTime"), QJsonValue(0));
+    json.insert(QString("infoMessage"), QJsonValue("Serveur fonctionnel, et oui"));
+    json.insert(QString("status"), QJsonValue("progress"));
+
+    QJsonArray players;
+    QJsonArray items;
+
+    for(GameEntity* entity : this->m_entitites) {
+
+        if(qobject_cast<GamePlayer*>(entity) != nullptr) {
+            players.append(entity->toJson());
+        }
+        else {
+            // Handle game item
+        }
+
+    }
+
+    json.insert(QString("players"), players);
+    json.insert(QString("items"), items);
+
+    return json;
+}
 // ////////////////////////////////////////////////////////////////////////////
 // Slots - GameEngine
 // ////////////////////////////////////////////////////////////////////////////
 
 void GameEngine::map(QJsonObject json) {
     //qDebug() << "map : " << json;
+
+    GameCheckpoint* firstCP = nullptr;
+    GameCheckpoint* currentCP = nullptr;
 
     // handle map size
 
@@ -75,8 +108,21 @@ void GameEngine::map(QJsonObject json) {
         QJsonArray checkpoints = json["checkpoints"].toArray();
         for(int i = 0; i < checkpoints.size(); i++) {
             auto checkpoint = checkpoints[i].toObject();
-            this->m_map->insert(QString::number(checkpoint["id"].toInt()), new GameCheckpoint(this->m_ihm, checkpoint["x"].toInt(), checkpoint["y"].toInt()));
+            auto gameCP = new GameCheckpoint(this->m_ihm, checkpoint["x"].toInt(), checkpoint["y"].toInt(), this->m_properties.checkpointRadius);
+            gameCP->id = checkpoint["id"].toInt();
+
+            if(firstCP == nullptr) {
+                firstCP = gameCP;
+                this->m_checkpoint = gameCP;
+            }
+            else {
+                currentCP->next = gameCP;
+            }
+            currentCP = gameCP;
+
+            this->m_map->insert(QString::number(checkpoint["id"].toInt()), gameCP);
         }
+        currentCP->next = firstCP;
     }
     // handle obstacle
     {
@@ -86,9 +132,9 @@ void GameEngine::map(QJsonObject json) {
             int id = obstacle["id"].toInt();
 
             if(id %2 == 0)
-                this->m_map->insert(QString::number(id), new GameCircle(this->m_ihm, obstacle["x"].toInt(), obstacle["y"].toInt()));
+                this->m_map->insert(QString::number(id), new GameCircle(this->m_ihm, obstacle["x"].toInt(), obstacle["y"].toInt(), this->m_properties.circleRadius));
             else
-                this->m_map->insert(QString::number(id), new GameRectangle(this->m_ihm, obstacle["x"].toInt(), obstacle["y"].toInt(), obstacle["angle"].toDouble()));
+                this->m_map->insert(QString::number(id), new GameRectangle(this->m_ihm, obstacle["x"].toInt(), obstacle["y"].toInt(), obstacle["angle"].toDouble(), this->m_properties.rectangleWidth, this->m_properties.rectangleHeight));
         }
     }
 
@@ -111,9 +157,15 @@ void GameEngine::playerRegister(QJsonObject json) {
     }
 
     if(!alreadyLog) {
-        this->m_entitites.append(new GamePlayer(this->m_ihm, uuid,
-                json["pseudo"].toString(), json["controller"].toString(),
-                json["vehicle"].toString(), json["team"].toInt()));
+        auto rand = QRandomGenerator::global();
+        auto x = (rand->generate()*1.0 /rand->max()) *1000.0;
+        auto y = (rand->generate()*1.0 /rand->max()) *1000.0;
+
+        auto player = new GamePlayer(this->m_ihm, (int) x, (int) y, uuid,
+                         json["pseudo"].toString().left(16), json["controller"].toString(),
+                         json["vehicle"].toString(), json["team"].toInt());
+        player->setCheckpoint(this->m_checkpoint);
+        this->m_entitites.append(player);
         this->m_ihm->m_mapView->update();
     }
 
@@ -129,7 +181,7 @@ void GameEngine::playerControl(QJsonObject json) {
         GamePlayer* player = qobject_cast<GamePlayer*>(entity);
         if(player != nullptr) {
             if(player->getUuid() == uuid) {
-                qDebug() << uuid << " control " << json;
+                //qDebug() << uuid << " control " << json;
                 player->setSteering(json["angle"].toDouble());
                 player->setPower(json["power"].toInt());
                 break;
@@ -139,23 +191,26 @@ void GameEngine::playerControl(QJsonObject json) {
 
 }
 
-void GameEngine::sendProperties() {
+void GameEngine::loopProperties() {
 
     if(this->m_running) {
-        QTimer::singleShot(1000, this, &GameEngine::sendProperties);
+        QTimer::singleShot(1000, this, &GameEngine::loopProperties);
         this->m_client->publishProperties(this->m_properties.toJson());
     }
 
 }
 
-void GameEngine::update() {
+void GameEngine::loopUpdate() {
 
     if(this->m_running) {
-        QTimer::singleShot(50, this, &GameEngine::update);
-
+        QTimer::singleShot(50, this, &GameEngine::loopUpdate);
 
         for(GameEntity* entity : this->m_entitites) {
             entity->update();
+        }
+
+        for(GameEntity* entity : this->m_entitites) {
+            entity->checkCollision();
         }
 
         this->m_client->publishGame(this->toJson());
@@ -163,30 +218,13 @@ void GameEngine::update() {
     }
 }
 
-QJsonObject GameEngine::toJson() {
+void GameEngine::loopIA() {
 
-    QJsonObject json;
+    if(this->m_running) {
+        QTimer::singleShot(1000, this, &GameEngine::loopIA);
 
-    json.insert(QString("elapsedTime"), QJsonValue(0));
-    json.insert(QString("infoMessage"), QJsonValue("Serveur pas prêêêêêêêêêêêêt, et oui"));
-    json.insert(QString("status"), QJsonValue("not ready yet"));
-
-    QJsonArray players;
-    QJsonArray items;
-
-    for(GameEntity* entity : this->m_entitites) {
-
-        if(qobject_cast<GamePlayer*>(entity) != nullptr) {
-            players.append(entity->toJson());
-        }
-        else {
-            // Handle game item
-        }
-
+        this->m_client->publishMap();
     }
 
-    json.insert(QString("players"), players);
-    json.insert(QString("items"), items);
-
-    return json;
 }
+

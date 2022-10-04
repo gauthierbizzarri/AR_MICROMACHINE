@@ -30,6 +30,7 @@ public slots:
     void connected();
     void messageReceived(const QByteArray& message, const QMqttTopicName& topic);
     void publishProperties(QJsonObject properties);
+    void publishMap();
     void publishGame(QJsonObject engine);
 
 signals:

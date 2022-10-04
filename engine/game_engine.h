@@ -14,6 +14,7 @@
 #include "game_properties.h"
 #include "game_map.h"
 #include "game_entity.h"
+#include "game_checkpoint.h"
 
 // ////////////////////////////////////////////////////////////////////////////
 // Class
@@ -31,6 +32,8 @@ class GameEngine : public QObject
     GameProperties m_properties;
     GameMap* m_map;
 
+    GameCheckpoint* m_checkpoint;
+
 public:
     explicit GameEngine(QObject *parent = nullptr);
     ~GameEngine();
@@ -41,8 +44,9 @@ public slots:
     void map(QJsonObject object);
     void playerRegister(QJsonObject object);
     void playerControl(QJsonObject object);
-    void sendProperties();
-    void update();
+    void loopProperties();
+    void loopUpdate();
+    void loopIA();
 
 };
 

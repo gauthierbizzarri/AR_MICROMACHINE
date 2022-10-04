@@ -5,15 +5,18 @@
 
 QList<GameCheckpoint*> gameCheckpoints;
 
-GameCheckpoint::GameCheckpoint(QWidget *parent, int x, int y)
+GameCheckpoint::GameCheckpoint(QWidget *parent, int x, int y, int r)
     : GameMapObject{parent, x, y}
 {
-    QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-12.5, -12.5, 25, 25);
+
+    this->next = nullptr;
+    this->id = 0;
+
+    QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-r, -r, r*2, r*2);
     QPen pen;
     pen.setWidth(2);
     item->setPen(pen);
-    //item->setBrush(QBrush(Qt::red));
-    item->moveBy(x*0.6, y*0.6);
+    item->moveBy(x, y);
 
     this->m_item = item;
 

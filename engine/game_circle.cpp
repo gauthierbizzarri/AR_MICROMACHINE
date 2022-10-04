@@ -2,15 +2,16 @@
 #include <QPen>
 #include "game_circle.h"
 
-GameCircle::GameCircle(QWidget *parent, int x, int y)
+GameCircle::GameCircle(QWidget *parent, int x, int y, int r)
     : GameObstacle{parent, x, y}
 {
-    QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-25, -25, 50, 50);
+    QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-r, -r, r*2, r*2);
     QPen pen;
     pen.setWidth(1);
+    pen.setColor(Qt::red);
     item->setPen(pen);
     item->setBrush(QBrush(Qt::red));
-    item->moveBy(x*0.6, y*0.6);
+    item->moveBy(x, y);
 
     this->m_item = item;
 }
