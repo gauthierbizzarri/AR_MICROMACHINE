@@ -10,14 +10,16 @@ class GameCheckpoint : public GameMapObject
 
 public:
 
-    GameCheckpoint* next;
     int id;
+    int pos;
 
 
-    GameCheckpoint(QWidget *parent, int x, int y, int r);
+    GameCheckpoint(QWidget *parent, int x, int y, int r, int id, int pos);
     ~GameCheckpoint();
 };
 
 extern QList<GameCheckpoint*> gameCheckpoints;
+
+int previousCheckpointId(int pos);
 
 #endif // GAMECHECKPOINT_H

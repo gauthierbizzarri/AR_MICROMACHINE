@@ -15,7 +15,8 @@ class GamePlayer : public GameEntity
     QString m_vehicle;
     int m_team;
 
-    GameCheckpoint* m_checkpoint;
+    int m_checkpoint;
+    int m_lap;
 
     QString m_color;
     double m_steering;
@@ -23,7 +24,7 @@ class GamePlayer : public GameEntity
     int m_power;
     int m_width;
     int m_height;
-    QPointF m_collisionF;
+    QPointF m_speed;
 
     GameSketch c1;
     GameSketch c2;
@@ -43,7 +44,8 @@ public:
 
     void setSteering(double value);
     void setPower(int value);
-    void setCheckpoint(GameCheckpoint* checkpoint);
+
+    void reset(int x, int y);
 
     QJsonObject toJson();
     void update();

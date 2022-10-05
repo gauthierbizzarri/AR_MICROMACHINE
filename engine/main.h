@@ -1,10 +1,10 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define MQTT_HOST "localhost"
-#define MQTT_PORT 1883
-#define MQTT_USER ""
-#define MQTT_PASS ""
+#define MQTT_HOST "10.3.3.240"
+#define MQTT_PORT 6942
+#define MQTT_USER "baratoux"
+#define MQTT_PASS "lebg"
 #define MQTT_TOPIC_MAP "map"
 #define MQTT_TOPIC_PLAYER_CONTROL "player/control"
 #define MQTT_TOPIC_PLAYER_REGISTER "player/register"

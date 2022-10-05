@@ -5,12 +5,9 @@
 
 QList<GameCheckpoint*> gameCheckpoints;
 
-GameCheckpoint::GameCheckpoint(QWidget *parent, int x, int y, int r)
-    : GameMapObject{parent, x, y}
+GameCheckpoint::GameCheckpoint(QWidget *parent, int x, int y, int r, int id, int pos)
+    : GameMapObject{parent, x, y}, id(id), pos(pos)
 {
-
-    this->next = nullptr;
-    this->id = 0;
 
     QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-r, -r, r*2, r*2);
     QPen pen;
@@ -25,4 +22,13 @@ GameCheckpoint::GameCheckpoint(QWidget *parent, int x, int y, int r)
 
 GameCheckpoint::~GameCheckpoint() {
     gameCheckpoints.removeOne(this);
+}
+
+int previousCheckpointId(int pos) {
+
+    pos = pos -1;
+    if(pos < 0)
+        pos += gameCheckpoints.length();
+
+    return gameCheckpoints[pos]->id;
 }
