@@ -10,7 +10,7 @@
 QPointF pointFA(double angle);
 double scalar(QPointF p1, QPointF p2);
 
-GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseudo, QString controller, QString vehicle, int team)
+GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseudo, QString controller, QString vehicle, int team, GameProperties* properties)
     : GameEntity(parent, x, y), m_uuid(uuid), m_pseudo(pseudo), m_conrtoller(controller), m_vehicle(vehicle), m_team(team)
     , c1(parent, x, y), c2(parent, x, y), c3(parent, x, y), c4(parent, x, y)
 {
@@ -21,8 +21,30 @@ GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseu
     this->m_checkpoint = 0;
     this->m_lap = -1;
 
-    this->m_width = 12;
-    this->m_height = 25;
+    if(vehicle == "bike") {
+        this->m_maxSpeed = properties->bike.maxSpeed;
+        this->m_acceleration = properties->bike.acceleration;
+        this->m_weight = properties->bike.weight;
+        this->m_maxSteering = properties->bike.steeringAngle;
+        this->m_width = properties->bike.width;
+        this->m_height = properties->bike.height;
+    }
+    else if(vehicle == "car") {
+        this->m_maxSpeed = properties->car.maxSpeed;
+        this->m_acceleration = properties->car.acceleration;
+        this->m_weight = properties->car.weight;
+        this->m_maxSteering = properties->car.steeringAngle;
+        this->m_width = properties->car.width;
+        this->m_height = properties->car.height;
+    }
+    else if(vehicle == "truck") {
+        this->m_maxSpeed = properties->truck.maxSpeed;
+        this->m_acceleration = properties->truck.acceleration;
+        this->m_weight = properties->truck.weight;
+        this->m_maxSteering = properties->truck.steeringAngle;
+        this->m_width = properties->truck.width;
+        this->m_height = properties->truck.height;
+    }
 
     QGraphicsRectItem* item = new QGraphicsRectItem(-this->m_height/2, -this->m_width/2, this->m_height, this->m_width);
     QPen pen;
@@ -81,6 +103,15 @@ void GamePlayer::reset(int x, int y) {
     this->m_checkpoint = 0;
     this->m_lap = -1;
 
+}
+
+void GamePlayer::updateProperties(GameProperties* properties) {
+
+    this->m_width = properties->bike.width;
+    this->m_height = properties->bike.height;
+
+    auto item = (QGraphicsRectItem*) this->m_item;
+    item->setRect(-this->m_height/2, -this->m_width/2, this->m_height, this->m_width);
 }
 
 QJsonObject GamePlayer::toJson() {

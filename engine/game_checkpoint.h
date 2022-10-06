@@ -16,6 +16,8 @@ public:
 
     GameCheckpoint(QWidget *parent, int x, int y, int r, int id, int pos);
     ~GameCheckpoint();
+
+    void updateProperties(GameProperties* properties);
 };
 
 extern QList<GameCheckpoint*> gameCheckpoints;

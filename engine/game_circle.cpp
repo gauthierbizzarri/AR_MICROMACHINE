@@ -15,3 +15,10 @@ GameCircle::GameCircle(QWidget *parent, int x, int y, int r)
 
     this->m_item = item;
 }
+
+void GameCircle::updateProperties(GameProperties* properties) {
+
+    auto item = (QGraphicsEllipseItem*) this->m_item;
+    item->setRect(-properties->circleRadius, -properties->circleRadius, 2*properties->circleRadius, 2*properties->circleRadius);
+
+}

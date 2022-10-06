@@ -51,16 +51,20 @@ GameProperties::GameProperties()
     this->bananaNb = 10;
     this->bananaCd = 1; // s
     this->bananaTtl = 60; // s
+    this->bananaRadius = 5; // m
     this->bombNb = 10;
     this->bombCd = 1; // s
     this->bombTtl = 1; // s
+    this->bombSize = 5; // m
+    this->bombExplostionSize = 50; // m
     this->rocketNb = 3;
     this->rocketCd = 1; // s
     this->rocketSpeed = 160; // m/s
+    this->rocketRadius = 5; // m
 
-    this->bike = VehicleProperties(55, 6.9, 180, 1.6, 1, 2);
-    this->car = VehicleProperties(69, 5.0, 1460, 1.2, 2, 4);
-    this->truck = VehicleProperties(44, 3.3, 35000, 1, 3, 9);
+    this->bike = VehicleProperties(55, 6.9, 180, 1.6, 10, 20);
+    this->car = VehicleProperties(69, 5.0, 1460, 1.2, 20, 40);
+    this->truck = VehicleProperties(44, 3.3, 35000, 1, 30, 90);
 
 }
 

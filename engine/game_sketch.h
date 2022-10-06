@@ -11,6 +11,8 @@ public:
 
     void setXY(int x, int y);
     void set(QPointF point);
+
+    void updateProperties(GameProperties* properties);
 };
 
 #endif // GAMESKETCH_H

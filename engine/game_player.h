@@ -22,9 +22,14 @@ class GamePlayer : public GameEntity
     double m_steering;
     double m_angle;
     int m_power;
+    QPointF m_speed;
+
+    int m_maxSpeed;
+    double m_acceleration;
+    int m_weight;
+    double m_maxSteering;
     int m_width;
     int m_height;
-    QPointF m_speed;
 
     GameSketch c1;
     GameSketch c2;
@@ -32,7 +37,7 @@ class GamePlayer : public GameEntity
     GameSketch c4;
 
 public:
-    GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseudo, QString controller, QString vehicle, int team);
+    GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseudo, QString controller, QString vehicle, int team, GameProperties* properties);
     ~GamePlayer();
 
     QString getUuid();
@@ -46,6 +51,8 @@ public:
     void setPower(int value);
 
     void reset(int x, int y);
+
+    void updateProperties(GameProperties* properties);
 
     QJsonObject toJson();
     void update();

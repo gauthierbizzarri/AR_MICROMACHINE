@@ -17,6 +17,12 @@
 #include "time.h"
 
 // ////////////////////////////////////////////////////////////////////////////
+// Global
+// ////////////////////////////////////////////////////////////////////////////
+
+GameEngine* GameEngine::s_instance = nullptr;
+
+// ////////////////////////////////////////////////////////////////////////////
 // Constructor - GameEngine
 // ////////////////////////////////////////////////////////////////////////////
 
@@ -87,6 +93,20 @@ QJsonObject GameEngine::toJson() {
 
     return json;
 }
+
+GameProperties* GameEngine::getProperties() {
+    return &(this->m_properties);
+}
+
+GameEngine* GameEngine::instance() {
+
+    if(GameEngine::s_instance == nullptr) {
+        GameEngine::s_instance = new GameEngine();
+    }
+
+    return GameEngine::s_instance;
+}
+
 // ////////////////////////////////////////////////////////////////////////////
 // Slots - GameEngine
 // ////////////////////////////////////////////////////////////////////////////
@@ -132,7 +152,7 @@ void GameEngine::map(QJsonObject json) {
         }
     }
 
-    this->m_ihm->m_mapView->update();
+    this->m_ihm->m_map->update();
 }
 
 void GameEngine::playerRegister(QJsonObject json) {
@@ -157,10 +177,11 @@ void GameEngine::playerRegister(QJsonObject json) {
 
         auto player = new GamePlayer(this->m_ihm, (int) x, (int) y, uuid,
                          json["pseudo"].toString().left(16), json["controller"].toString(),
-                         json["vehicle"].toString(), json["team"].toInt());
+                         json["vehicle"].toString(), json["team"].toInt(),
+                         &(this->m_properties));
         //player->setCheckpoint(this->m_checkpoint);
         this->m_entitites.append(player);
-        this->m_ihm->m_mapView->update();
+        this->m_ihm->m_map->update();
     }
 
 }
@@ -220,15 +241,17 @@ void GameEngine::loopUpdate() {
 void GameEngine::loopIA() {
 
     if(this->m_running) {
+#ifdef IA_TRAINING
         QTimer::singleShot(1000*30, this, &GameEngine::loopIA);
         auto rand = QRandomGenerator::global();
-
         for(auto entity : this->m_entitites) {
             auto x = (rand->generate()*1.0 /rand->max()) *1000.0;
             auto y = (rand->generate()*1.0 /rand->max()) *1000.0;
-
             ((GamePlayer*) entity)->reset(x, y);
         }
+#else
+        QTimer::singleShot(1000, this, &GameEngine::loopIA);
+#endif
         this->m_client->publishMap();
     }
 

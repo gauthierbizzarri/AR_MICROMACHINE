@@ -31,3 +31,9 @@ int GameRectangle::W() {
 int GameRectangle::H() {
     return this->m_height;
 }
+
+void GameRectangle::updateProperties(GameProperties* properties) {
+
+    auto item = (QGraphicsRectItem*) this->m_item;
+    item->setRect(-properties->rectangleWidth/2, -properties->rectangleHeight/2, properties->rectangleWidth, properties->rectangleHeight);
+}

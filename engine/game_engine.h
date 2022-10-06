@@ -24,6 +24,8 @@ class GameEngine : public QObject
 {
     Q_OBJECT
 
+    static GameEngine* s_instance;
+
     bool m_running;
 
     IHM* m_ihm;
@@ -34,11 +36,15 @@ class GameEngine : public QObject
 
     GameCheckpoint* m_checkpoint;
 
-public:
     explicit GameEngine(QObject *parent = nullptr);
+
+public:
     ~GameEngine();
 
     QJsonObject toJson();
+    GameProperties* getProperties();
+    static GameEngine* instance();
+
 
 public slots:
     void map(QJsonObject object);

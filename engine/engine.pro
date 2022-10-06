@@ -21,6 +21,9 @@ SOURCES += \
     game_properties.cpp \
     game_rectangle.cpp \
     game_sketch.cpp \
+    ihm_map.cpp \
+    ihm_section_properties.cpp \
+    ihm_sections.cpp \
     main.cpp \
     ihm.cpp
 
@@ -39,6 +42,9 @@ HEADERS += \
     game_rectangle.h \
     game_sketch.h \
     ihm.h \
+    ihm_map.h \
+    ihm_section_properties.h \
+    ihm_sections.h \
     main.h
 
 # Default rules for deployment.

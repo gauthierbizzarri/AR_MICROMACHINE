@@ -9,6 +9,8 @@ class GameCircle : public GameObstacle
 
 public:
     GameCircle(QWidget *parent, int x, int y, int r);
+
+    void updateProperties(GameProperties* properties);
 };
 
 #endif // GAMECIRCLE_H

@@ -29,3 +29,7 @@ void GameSketch::set(QPointF point) {
     this->setXY(point.x(), point.y());
 
 }
+
+void GameSketch::updateProperties(GameProperties* properties) {
+
+}

@@ -9,6 +9,8 @@
 #include <QDebug>
 #include <QPointF>
 
+#include "game_properties.h"
+
 // ////////////////////////////////////////////////////////////////////////////
 // Class
 // ////////////////////////////////////////////////////////////////////////////
@@ -31,6 +33,7 @@ public:
     int Y();
     QGraphicsItem* getItem();
     QPointF point();
+    virtual void updateProperties(GameProperties* properties) = 0;
 
 };
 

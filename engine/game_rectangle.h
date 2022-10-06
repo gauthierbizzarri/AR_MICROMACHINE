@@ -19,6 +19,8 @@ public:
     int W();
     int H();
 
+    void updateProperties(GameProperties* properties);
+
 };
 
 #endif // GAMERECTANGLE_H
