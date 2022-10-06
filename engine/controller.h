@@ -22,7 +22,7 @@
 // ////////////////////////////////////////////////////////////////////////////
 
 #define CONTROLLER_UUID "hehehe"
-#define CONTROLLER_REGISTER "{\"uuid\":\"<uuid>\",\"pseudo\":\"<name>\",\"controller\":\"gamepad\",\"vehicle\":\"car\",\"team\":0}"
+#define CONTROLLER_REGISTER "{\"uuid\":\"<uuid>\",\"pseudo\":\"<name>\",\"controller\":\"gamepad\",\"vehicle\":\"truck\",\"team\":0}"
 
 // ////////////////////////////////////////////////////////////////////////////
 // Class

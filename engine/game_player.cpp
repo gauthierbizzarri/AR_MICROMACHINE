@@ -21,32 +21,7 @@ GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseu
     this->m_checkpoint = 0;
     this->m_lap = -1;
 
-    if(vehicle == "bike") {
-        this->m_maxSpeed = properties->bike.maxSpeed;
-        this->m_acceleration = properties->bike.acceleration;
-        this->m_weight = properties->bike.weight;
-        this->m_maxSteering = properties->bike.steeringAngle;
-        this->m_width = properties->bike.width;
-        this->m_height = properties->bike.height;
-    }
-    else if(vehicle == "car") {
-        this->m_maxSpeed = properties->car.maxSpeed;
-        this->m_acceleration = properties->car.acceleration;
-        this->m_weight = properties->car.weight;
-        this->m_maxSteering = properties->car.steeringAngle;
-        this->m_width = properties->car.width;
-        this->m_height = properties->car.height;
-    }
-    else if(vehicle == "truck") {
-        this->m_maxSpeed = properties->truck.maxSpeed;
-        this->m_acceleration = properties->truck.acceleration;
-        this->m_weight = properties->truck.weight;
-        this->m_maxSteering = properties->truck.steeringAngle;
-        this->m_width = properties->truck.width;
-        this->m_height = properties->truck.height;
-    }
-
-    QGraphicsRectItem* item = new QGraphicsRectItem(-this->m_height/2, -this->m_width/2, this->m_height, this->m_width);
+    QGraphicsRectItem* item = new QGraphicsRectItem(-1, -1, 2, 2);
     QPen pen;
     pen.setWidth(1);
     item->setPen(pen);
@@ -55,6 +30,8 @@ GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseu
     item->setRotation(0);
 
     this->m_item = item;
+
+    this->updateProperties(properties);
 
 }
 
@@ -87,7 +64,14 @@ int GamePlayer::getTeam() {
 }
 
 void GamePlayer::setSteering(double value) {
-    this->m_steering = value;
+
+    if(abs(value) > this->m_maxSteering)
+        if(value > 0)
+            this->m_steering = this->m_maxSteering;
+        else
+            this->m_steering = -this->m_maxSteering;
+    else
+        this->m_steering = value;
 }
 
 void GamePlayer::setPower(int value) {
@@ -107,8 +91,38 @@ void GamePlayer::reset(int x, int y) {
 
 void GamePlayer::updateProperties(GameProperties* properties) {
 
-    this->m_width = properties->bike.width;
-    this->m_height = properties->bike.height;
+    if(this->m_vehicle == "bike") {
+        this->m_maxSpeed = properties->bike.maxSpeed;
+        this->m_acceleration = properties->bike.acceleration;
+        this->m_weight = properties->bike.weight;
+        this->m_maxSteering = properties->bike.steeringAngle;
+        this->m_width = properties->bike.width;
+        this->m_height = properties->bike.height;
+    }
+    else if(this->m_vehicle == "car") {
+        this->m_maxSpeed = properties->car.maxSpeed;
+        this->m_acceleration = properties->car.acceleration;
+        this->m_weight = properties->car.weight;
+        this->m_maxSteering = properties->car.steeringAngle;
+        this->m_width = properties->car.width;
+        this->m_height = properties->car.height;
+    }
+    else if(this->m_vehicle == "truck") {
+        this->m_maxSpeed = properties->truck.maxSpeed;
+        this->m_acceleration = properties->truck.acceleration;
+        this->m_weight = properties->truck.weight;
+        this->m_maxSteering = properties->truck.steeringAngle;
+        this->m_width = properties->truck.width;
+        this->m_height = properties->truck.height;
+    }
+    else {
+        this->m_maxSpeed = properties->car.maxSpeed;
+        this->m_acceleration = properties->car.acceleration;
+        this->m_weight = properties->car.weight;
+        this->m_maxSteering = properties->car.steeringAngle;
+        this->m_width = properties->car.width;
+        this->m_height = properties->car.height;
+    }
 
     auto item = (QGraphicsRectItem*) this->m_item;
     item->setRect(-this->m_height/2, -this->m_width/2, this->m_height, this->m_width);
@@ -148,11 +162,18 @@ QJsonObject GamePlayer::toJson() {
 
 void GamePlayer::update() {
 
-    // Move
+    // Angle
 
-    this->m_angle += this->m_steering;
+    auto percent = sqrt(this->m_speed.x()*this->m_speed.x() +this->m_speed.y()*this->m_speed.y()) /this->m_maxSpeed;
+    if(percent < 0.001)
+        percent = 0;
+    auto steering = this->m_steering *percent;
 
-    auto F = pointFA(this->m_angle) *(this->m_power/100.0) *5.0;
+    this->m_angle += steering;
+
+    // Speed
+
+    auto F = pointFA(this->m_angle) *(this->m_power/1000.0) *this->m_maxSpeed;
     F = (this->m_speed + F) *0.5;
     auto P = this->m_point +F;
 

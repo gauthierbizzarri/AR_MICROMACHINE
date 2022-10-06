@@ -51,8 +51,8 @@ GameEngine::GameEngine(QObject *parent)
 
     this->loopProperties();
     this->loopUpdate();
-    QTimer::singleShot(1000, this, &GameEngine::loopIA);
-    //this->loopIA();
+    //QTimer::singleShot(1000, this, &GameEngine::loopIA);
+    this->loopIA();
 }
 
 GameEngine::~GameEngine() {
