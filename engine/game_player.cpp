@@ -169,7 +169,10 @@ void GamePlayer::update() {
         percent = 0;
     auto steering = this->m_steering *percent;
 
-    this->m_angle += steering;
+    if(this->m_power < 0)
+        this->m_angle -= steering;
+    else
+        this->m_angle += steering;
 
     // Speed
 
@@ -219,6 +222,8 @@ void GamePlayer::collideWith(GameMapObject *object) {
             qDebug() << "checkpoint passed";
             if(this->m_checkpoint == gameCheckpoints.length()) {
                 this->m_checkpoint = 0;
+            }
+            if(this->m_checkpoint == 1) {
                 this->m_lap += 1;
                 qDebug() << "lap done";
             }
