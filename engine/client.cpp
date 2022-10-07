@@ -20,7 +20,6 @@ Client::Client(QObject* parent)
     : QObject{parent}
 {
 
-
     this->m_mqtt = new QMqttClient();
     this->m_mqtt->setHostname(QString(MQTT_HOST));
     this->m_mqtt->setPort(MQTT_PORT);

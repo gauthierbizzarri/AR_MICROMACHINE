@@ -15,6 +15,7 @@
 #include "game_player.h"
 
 #include "time.h"
+#include "main.h"
 
 // ////////////////////////////////////////////////////////////////////////////
 // Global
@@ -51,8 +52,15 @@ GameEngine::GameEngine(QObject *parent)
 
     this->loopProperties();
     this->loopUpdate();
-    //QTimer::singleShot(1000, this, &GameEngine::loopIA);
+#ifdef IA_TRAINING
+    QTimer::singleShot(1000, this, &GameEngine::loopIA);
+#else
+
+#ifdef ENGINE_SEND_MAP
     this->loopIA();
+#endif
+
+#endif
 }
 
 GameEngine::~GameEngine() {

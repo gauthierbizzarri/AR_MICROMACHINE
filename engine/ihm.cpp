@@ -5,6 +5,7 @@
 
 #include <QGraphicsRectItem>
 #include <QHBoxLayout>
+#include <QStackedLayout>
 #include <QDebug>
 #include "ihm.h"
 #include "game_map_object.h"
@@ -18,6 +19,7 @@ IHM::IHM(QWidget *parent)
     : QMainWindow(parent)
 {
 
+    //QStackedLayout* layout = new QStackedLayout();
     QHBoxLayout* layout = new QHBoxLayout();
     this->m_map = new IHM_Map(this);
     this->m_sections = new IHM_Sections(this);

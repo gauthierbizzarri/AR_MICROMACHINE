@@ -84,6 +84,7 @@ void GamePlayer::reset(int x, int y) {
     this->m_point.setY(gameCheckpoints[0]->Y());
     this->m_speed.setX(0);
     this->m_speed.setY(0);
+    this->m_angle = 0;
     this->m_checkpoint = 0;
     this->m_lap = -1;
 

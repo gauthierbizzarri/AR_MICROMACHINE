@@ -14,4 +14,8 @@
 #define IHM_WIDTH 1000
 #define IHM_HEIGHT 1000
 
+//#define IA_TRAINING
+#define ENGINE_SEND_MAP
+//#define GAMEPAD_ONLY
+
 #endif // MAIN_H
