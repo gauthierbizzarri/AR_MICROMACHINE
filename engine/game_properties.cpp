@@ -54,7 +54,7 @@ GameProperties::GameProperties()
     this->bananaRadius = 5; // m
     this->bombNb = 10;
     this->bombCd = 1; // s
-    this->bombTtl = 1; // s
+    this->bombTtl = 2; // s
     this->bombSize = 5; // m
     this->bombExplostionSize = 50; // m
     this->rocketNb = 3;

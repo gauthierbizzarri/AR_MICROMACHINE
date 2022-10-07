@@ -53,6 +53,7 @@ public slots:
     void loopProperties();
     void loopUpdate();
     void loopIA();
+    void entityDie(GameEntity* entity);
 
 };
 

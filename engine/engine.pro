@@ -14,6 +14,9 @@ SOURCES += \
     game_circle.cpp \
     game_engine.cpp \
     game_entity.cpp \
+    game_item_banana.cpp \
+    game_item_bomb.cpp \
+    game_item_rocket.cpp \
     game_map.cpp \
     game_map_object.cpp \
     game_obstacle.cpp \
@@ -34,6 +37,9 @@ HEADERS += \
     game_circle.h \
     game_engine.h \
     game_entity.h \
+    game_item_banana.h \
+    game_item_bomb.h \
+    game_item_rocket.h \
     game_map.h \
     game_map_object.h \
     game_obstacle.h \

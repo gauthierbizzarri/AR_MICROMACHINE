@@ -8,9 +8,9 @@ GameCircle::GameCircle(QWidget *parent, int x, int y, int r)
     QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-r, -r, r*2, r*2);
     QPen pen;
     pen.setWidth(1);
-    pen.setColor(Qt::red);
+    pen.setColor(Qt::darkBlue);
     item->setPen(pen);
-    item->setBrush(QBrush(Qt::red));
+    item->setBrush(QBrush(Qt::darkBlue));
     item->moveBy(x, y);
 
     this->m_item = item;

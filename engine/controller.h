@@ -22,7 +22,7 @@
 // ////////////////////////////////////////////////////////////////////////////
 
 #define CONTROLLER_UUID "hehehe"
-#define CONTROLLER_REGISTER "{\"uuid\":\"<uuid>\",\"pseudo\":\"<name>\",\"controller\":\"gamepad\",\"vehicle\":\"truck\",\"team\":0}"
+#define CONTROLLER_REGISTER "{\"uuid\":\"<uuid>\",\"pseudo\":\"<name>\",\"controller\":\"gamepad\",\"vehicle\":\"bike\",\"team\":0}"
 
 // ////////////////////////////////////////////////////////////////////////////
 // Class
@@ -115,7 +115,7 @@ public:
         if(this->m_rocket)
             this->m_rocket = false;
 
-        this->m_mqtt->publish(QString(MQTT_TOPIC_PLAYER_CONTROL), QJsonDocument(json).toJson());
+        this->m_mqtt->publish(QString(MQTT_TOPIC_PLAYER_CONTROL), QJsonDocument(json).toJson(QJsonDocument::Compact));
 
     }
 

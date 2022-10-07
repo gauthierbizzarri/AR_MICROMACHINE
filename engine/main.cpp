@@ -15,6 +15,5 @@ int main(int argc, char *argv[])
 
     Controller::createGamepad();
 
-
     return a.exec();
 }

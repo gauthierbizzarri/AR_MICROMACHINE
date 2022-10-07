@@ -86,7 +86,7 @@ void Client::messageReceived(const QByteArray& message, const QMqttTopicName& to
 
 void Client::publishProperties(QJsonObject propertyJson) {
 
-    this->m_mqtt->publish(QString(MQTT_TOPIC_GAME_PROPERTIES), QJsonDocument(propertyJson).toJson());
+    this->m_mqtt->publish(QString(MQTT_TOPIC_GAME_PROPERTIES), QJsonDocument(propertyJson).toJson(QJsonDocument::Compact));
 
 }
 
@@ -98,7 +98,7 @@ void Client::publishMap() {
 
 void Client::publishGame(QJsonObject engineJson) {
 
-    this->m_mqtt->publish(QString(MQTT_TOPIC_GAME), QJsonDocument(engineJson).toJson());
+    this->m_mqtt->publish(QString(MQTT_TOPIC_GAME), QJsonDocument(engineJson).toJson(QJsonDocument::Compact));
 
 }
 

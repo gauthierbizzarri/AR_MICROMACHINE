@@ -4,6 +4,9 @@
 #include "game_entity.h"
 #include "game_checkpoint.h"
 #include "game_sketch.h"
+#include "game_item_banana.h"
+#include "game_item_bomb.h"
+#include "game_item_rocket.h"
 
 class GamePlayer : public GameEntity
 {
@@ -23,6 +26,7 @@ class GamePlayer : public GameEntity
     double m_angle;
     int m_power;
     QPointF m_speed;
+    int m_stunnedAge;
 
     int m_maxSpeed;
     double m_acceleration;
@@ -46,22 +50,23 @@ public:
     QString getController();
     QString getVehicle();
     int getTeam();
+    bool isStun();
 
     void setSteering(double value);
     void setPower(int value);
+    void placeBanana(GameBanana* prop);
+    void placeBomb(GameBomb* prop);
+    void fireRocket(GameRocket* prop);
 
     void reset(int x, int y);
+    void checkCollision();
+    void collideWith(GameMapObject* object);
 
     void updateProperties(GameProperties* properties);
 
     QJsonObject toJson();
     void update();
-    void checkCollision();
-    void collideWith(GameMapObject* object);
-
-
-signals:
-    void endOfLife();
+    void getHit();
 
 };
 

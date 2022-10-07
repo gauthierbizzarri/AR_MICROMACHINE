@@ -13,9 +13,9 @@ GameRectangle::GameRectangle(QWidget *parent, int x, int y, double angle, int w,
     QGraphicsRectItem* item = new QGraphicsRectItem(-w/2, -h/2, w, h);
     QPen pen;
     pen.setWidth(1);
-    pen.setColor(Qt::red);
+    pen.setColor(Qt::darkBlue);
     item->setPen(pen);
-    item->setBrush(QBrush(Qt::red));
+    item->setBrush(QBrush(Qt::darkBlue));
     item->moveBy(x, y);
     item->setRotation(-angle/M_PI*180);
 

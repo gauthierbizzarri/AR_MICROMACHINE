@@ -6,6 +6,7 @@
 #include "game_player.h"
 #include "game_rectangle.h"
 #include "game_circle.h"
+#include "main.h"
 
 QPointF pointFA(double angle);
 double scalar(QPointF p1, QPointF p2);
@@ -20,6 +21,7 @@ GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseu
     this->m_power = 0;
     this->m_checkpoint = 0;
     this->m_lap = -1;
+    this->m_stunnedAge = false;
 
     QGraphicsRectItem* item = new QGraphicsRectItem(-1, -1, 2, 2);
     QPen pen;
@@ -63,6 +65,10 @@ int GamePlayer::getTeam() {
     return this->m_team;
 }
 
+bool GamePlayer::isStun() {
+    return this->m_stunnedAge > 0;
+}
+
 void GamePlayer::setSteering(double value) {
 
     if(abs(value) > this->m_maxSteering)
@@ -76,6 +82,27 @@ void GamePlayer::setSteering(double value) {
 
 void GamePlayer::setPower(int value) {
     this->m_power = value;
+}
+
+void GamePlayer::placeBanana(GameBanana* banana) {
+
+    auto point = this->point() +pointFA(this->m_angle) *-this->m_height *1.1;
+    banana->set(point.x(), point.y());
+
+}
+
+void GamePlayer::placeBomb(GameBomb* bomb) {
+
+    auto point = this->point() +pointFA(this->m_angle) *-this->m_height *1.1;
+    bomb->set(point.x(), point.y());
+
+}
+
+void GamePlayer::fireRocket(GameRocket* rocket) {
+
+    auto point = this->point() +pointFA(this->m_angle) *this->m_height *1.1;
+    rocket->set(point.x(), point.y(), this->m_angle +this->m_steering);
+
 }
 
 void GamePlayer::reset(int x, int y) {
@@ -170,14 +197,15 @@ void GamePlayer::update() {
         percent = 0;
     auto steering = this->m_steering *percent;
 
-    if(this->m_power < 0)
-        this->m_angle -= steering;
-    else
-        this->m_angle += steering;
-
     // Speed
 
     auto F = pointFA(this->m_angle) *(this->m_power/1000.0) *this->m_maxSpeed;
+    if(this->m_stunnedAge > 0) {
+        F = F*0.0;
+        steering = 1;
+        this->m_stunnedAge -= GAME_TICK;
+    }
+
     F = (this->m_speed + F) *0.5;
     auto P = this->m_point +F;
 
@@ -190,6 +218,13 @@ void GamePlayer::update() {
     if(P.y() > 1000)
         F.setY(-(P.y()-1000));
 
+    // Updates
+
+    if(this->m_power < 0)
+        this->m_angle -= steering;
+    else
+        this->m_angle += steering;
+
     this->m_speed = F;
     this->m_point = P +this->m_speed;
 
@@ -198,6 +233,12 @@ void GamePlayer::update() {
     this->m_item->setX(this->X());
     this->m_item->setY(this->Y());
     this->m_item->setRotation(-this->m_angle *57.2974);
+
+    this->checkCollision();
+
+}
+
+void GamePlayer::getHit() {
 
 }
 
@@ -317,6 +358,7 @@ void GamePlayer::collideWith(GameMapObject *object) {
     }
 
     // Collision with circle
+
     auto circle = qobject_cast<GameCircle*>(object);
     if(circle) {
 
@@ -360,12 +402,34 @@ void GamePlayer::collideWith(GameMapObject *object) {
 
         }
 
+        return;
     }
+
+    // Collision with banana
+
+    auto banana = qobject_cast<GameBanana*>(object);
+    if(banana) {
+        banana->getHit();
+        this->m_stunnedAge = 1000;
+        return;
+    }
+
+    // Collision with banana
+
+    auto bomb = qobject_cast<GameBomb*>(object);
+    if(bomb) {
+        bomb->getHit();
+        this->m_stunnedAge = 1000;
+        return;
+    }
+
+
 }
 
 ///
-/// \brief pointFA Point From Angle
-/// \return A point with a lenght of 1
+/// \brief pointFA : Point From Angle
+/// \param angle
+/// \return
 ///
 QPointF pointFA(double angle) {
     return QPointF(cos(angle), -sin(angle));

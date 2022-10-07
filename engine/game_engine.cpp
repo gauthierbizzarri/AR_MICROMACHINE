@@ -187,6 +187,7 @@ void GameEngine::playerRegister(QJsonObject json) {
                          json["pseudo"].toString().left(16), json["controller"].toString(),
                          json["vehicle"].toString(), json["team"].toInt(),
                          &(this->m_properties));
+        connect(player, &GamePlayer::endOfLife, this, &GameEngine::entityDie);
         //player->setCheckpoint(this->m_checkpoint);
         this->m_entitites.append(player);
         this->m_ihm->m_map->update();
@@ -207,6 +208,32 @@ void GameEngine::playerControl(QJsonObject json) {
                 //qDebug() << uuid << " control " << json;
                 player->setSteering(json["angle"].toDouble());
                 player->setPower(json["power"].toInt());
+
+                if(!player->isStun()) {
+                    auto buttons = json["buttons"].toObject();
+                    if(buttons["banana"].toBool()) {
+                        auto banana = new GameBanana(this->m_ihm, &(this->m_properties));
+                        player->placeBanana(banana);
+                        connect(banana, &GameBanana::endOfLife, this, &GameEngine::entityDie);
+                        this->m_entitites.append(banana);
+                        this->m_ihm->m_map->update();
+                    }
+                    if(buttons["bomb"].toBool()) {
+                        auto bomb = new GameBomb(this->m_ihm, &(this->m_properties));
+                        player->placeBomb(bomb);
+                        connect(bomb, &GameBomb::endOfLife, this, &GameEngine::entityDie);
+                        this->m_entitites.append(bomb);
+                        this->m_ihm->m_map->update();
+                    }
+                    if(buttons["rocket"].toBool()) {
+                        auto rocket = new GameRocket(this->m_ihm, &(this->m_properties));
+                        player->fireRocket(rocket);
+                        connect(rocket, &GameRocket::endOfLife, this, &GameEngine::entityDie);
+                        this->m_entitites.append(rocket);
+                        this->m_ihm->m_map->update();
+                    }
+                }
+
                 break;
             }
         }
@@ -217,7 +244,7 @@ void GameEngine::playerControl(QJsonObject json) {
 void GameEngine::loopProperties() {
 
     if(this->m_running) {
-        QTimer::singleShot(1000, this, &GameEngine::loopProperties);
+        QTimer::singleShot(GAME_PROPERTY_TICK, this, &GameEngine::loopProperties);
         this->m_client->publishProperties(this->m_properties.toJson());
     }
 
@@ -228,14 +255,11 @@ void GameEngine::loopUpdate() {
     if(this->m_running) {
         auto start = clock();
 
-        QTimer::singleShot(50, this, &GameEngine::loopUpdate);
+        QTimer::singleShot(GAME_TICK, this, &GameEngine::loopUpdate);
 
         for(GameEntity* entity : this->m_entitites) {
-            entity->update();
-        }
 
-        for(GameEntity* entity : this->m_entitites) {
-            entity->checkCollision();
+                entity->update();
         }
 
         this->m_client->publishGame(this->toJson());
@@ -263,5 +287,14 @@ void GameEngine::loopIA() {
         this->m_client->publishMap();
     }
 
+}
+
+void GameEngine::entityDie(GameEntity* entity) {
+
+    this->m_entitites.removeOne(entity);
+    delete entity;
+    this->m_ihm->m_map->update();
+
+    qDebug() << "end delete";
 }
 

@@ -37,7 +37,7 @@ IHM_Map::IHM_Map(QWidget *parent)
     this->m_group_player = new QGraphicsItemGroup();
     this->m_group_default = new QGraphicsItemGroup();
 
-    this->m_scene->setBackgroundBrush(Qt::yellow);
+    this->m_scene->setBackgroundBrush(Qt::darkGreen);
     this->m_scene->addItem(this->m_group_player);
     this->m_scene->addItem(this->m_group_default);
 
