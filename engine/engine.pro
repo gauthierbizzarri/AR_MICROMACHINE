@@ -25,6 +25,7 @@ SOURCES += \
     game_rectangle.cpp \
     game_sketch.cpp \
     ihm_map.cpp \
+    ihm_section_mqtt.cpp \
     ihm_section_properties.cpp \
     ihm_sections.cpp \
     main.cpp \
@@ -49,6 +50,7 @@ HEADERS += \
     game_sketch.h \
     ihm.h \
     ihm_map.h \
+    ihm_section_mqtt.h \
     ihm_section_properties.h \
     ihm_sections.h \
     main.h

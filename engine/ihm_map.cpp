@@ -34,12 +34,12 @@ IHM_Map::IHM_Map(QWidget *parent)
         this->m_scene->addLine(i*MAP_SIZE/10, 0, i*MAP_SIZE/10, MAP_SIZE);
     }
 
-    this->m_group_player = new QGraphicsItemGroup();
-    this->m_group_default = new QGraphicsItemGroup();
+    this->m_group_entity = new QGraphicsItemGroup();
+    this->m_group_map = new QGraphicsItemGroup();
 
     this->m_scene->setBackgroundBrush(Qt::darkGreen);
-    this->m_scene->addItem(this->m_group_player);
-    this->m_scene->addItem(this->m_group_default);
+    this->m_scene->addItem(this->m_group_map);
+    this->m_scene->addItem(this->m_group_entity);
 
     // Init view
 
@@ -55,13 +55,25 @@ void IHM_Map::update() {
 
     // remove everything from the group
 
-    for(auto item : this->m_group_default->childItems())
-        this->m_group_default->removeFromGroup(item);
+    for(auto item : this->m_group_map->childItems())
+        this->m_group_map->removeFromGroup(item);
 
     // add everything that need to be added
 
     for(int i = 0; i < gameObjects.length(); i++) {
         //qDebug() << gameObjects[i];
-        this->m_group_default->addToGroup(gameObjects[i]->getItem());
+        this->m_group_map->addToGroup(gameObjects[i]->getItem());
     }
+}
+
+void IHM_Map::addEntity(GameEntity* entity) {
+
+    this->m_group_entity->addToGroup(entity->getItem());
+
+}
+
+void IHM_Map::removeEntity(GameEntity* entity) {
+
+    this->m_group_entity->removeFromGroup(entity->getItem());
+
 }

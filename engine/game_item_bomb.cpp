@@ -69,15 +69,14 @@ QJsonObject GameBomb::toJson() {
 void GameBomb::update() {
     this->m_age += GAME_TICK;
 
-    qDebug().nospace() << this->m_age << "/" << this->m_ttl;
-
     if(!this->m_exploding && (this->m_age >= this->m_ttl)) {
         this->m_exploding = true;
-        this->checkCollision();
 
         auto item = (QGraphicsEllipseItem*) this->m_item;
         item->setRect(-this->m_explosionRadius, -this->m_explosionRadius, 2*this->m_explosionRadius, 2*this->m_explosionRadius);
         item->setBrush(QBrush(Qt::red));
+
+        this->checkCollision();
     }
 
     if(this->m_age >= this->m_explosionTtl) {
@@ -104,7 +103,7 @@ void GameBomb::checkCollision() {
 void GameBomb::getHit() {
 
     if(!this->m_exploding) {
-        this->m_age = this->m_ttl;
+        this->m_age = this->m_ttl -GAME_TICK *2;
     }
 
 }

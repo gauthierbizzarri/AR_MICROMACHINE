@@ -86,6 +86,8 @@ void GameRocket::checkCollision() {
                 auto entity = qobject_cast<GameEntity*>(object);
                 if(entity) {
                     entity->getHit();
+                    emit this->endOfLife(this);
+                    break;
                 }
 
                 auto check = qobject_cast<GameCheckpoint*>(object);
@@ -98,5 +100,5 @@ void GameRocket::checkCollision() {
 }
 
 void GameRocket::getHit() {
-
+    emit this->endOfLife(this);
 }

@@ -30,7 +30,7 @@ class GameEngine : public QObject
 
     IHM* m_ihm;
     Client* m_client;
-    QList<GameEntity*> m_entitites;
+    GameEntity* m_entityRoot;
     GameProperties m_properties;
     GameMap* m_map;
 
@@ -45,7 +45,6 @@ public:
     GameProperties* getProperties();
     static GameEngine* instance();
 
-
 public slots:
     void map(QJsonObject object);
     void playerRegister(QJsonObject object);
@@ -54,6 +53,7 @@ public slots:
     void loopUpdate();
     void loopIA();
     void entityDie(GameEntity* entity);
+    void addEntity(GameEntity* entity);
 
 };
 

@@ -19,6 +19,7 @@ class Client : public QObject
     Q_OBJECT
 
     QMqttClient* m_mqtt;
+    bool m_connected;
 
 public:
     Client(QObject* parent);
@@ -27,6 +28,7 @@ public:
 public slots:
     void debugStatus(QMqttClient::ClientState state);
     void debugError(QMqttClient::ClientError error);
+    void connectTo(QString host, int port, QString user, QString pass);
     void connected();
     void messageReceived(const QByteArray& message, const QMqttTopicName& topic);
     void publishProperties(QJsonObject properties);

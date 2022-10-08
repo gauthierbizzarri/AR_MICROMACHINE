@@ -10,7 +10,6 @@ GameBanana::GameBanana(QWidget* parent, GameProperties* properties)
 
     this->m_ttl = properties->bananaTtl *1000;
     this->m_age = 0;
-    this->m_hit = false;
 
     // QItem
 
@@ -59,11 +58,11 @@ QJsonObject GameBanana::toJson() {
 void GameBanana::update() {
     this->m_age += GAME_TICK;
 
-    if(this->m_age > this->m_ttl || this->m_hit)
+    if(this->m_age > this->m_ttl)
         emit this->endOfLife(this);
 
 }
 
 void GameBanana::getHit() {
-    this->m_hit = true;
+    emit this->endOfLife(this);
 }

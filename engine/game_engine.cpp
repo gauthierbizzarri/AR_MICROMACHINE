@@ -35,7 +35,7 @@ GameEngine::GameEngine(QObject *parent)
 
     this->m_ihm = new IHM();
     this->m_client = new Client(this);
-
+    this->m_entityRoot = nullptr;
     this->m_map = nullptr;
     this->m_checkpoint = nullptr;
 
@@ -44,6 +44,8 @@ GameEngine::GameEngine(QObject *parent)
     connect(this->m_client, &Client::receivedMap, this, &GameEngine::map);
     connect(this->m_client, &Client::receivedPlayerRegister, this, &GameEngine::playerRegister);
     connect(this->m_client, &Client::receivedPlayerControl, this, &GameEngine::playerControl);
+
+    connect(this->m_ihm->m_sections->m_mqtt, &IHM_SectionMqtt::connectTo, this->m_client, &Client::connectTo);
 
     // Post init
 
@@ -85,15 +87,16 @@ QJsonObject GameEngine::toJson() {
     QJsonArray players;
     QJsonArray items;
 
-    for(GameEntity* entity : this->m_entitites) {
-
+    auto entity = this->m_entityRoot;
+    while(entity != nullptr) {
         if(qobject_cast<GamePlayer*>(entity) != nullptr) {
             players.append(entity->toJson());
         }
         else {
-            // Handle game item
+            items.append(entity->toJson());
         }
 
+        entity = entity->next;
     }
 
     json.insert(QString("players"), players);
@@ -168,7 +171,9 @@ void GameEngine::playerRegister(QJsonObject json) {
     QString uuid = json["uuid"].toString();
     bool alreadyLog = false;
 
-    for(GameEntity* entity : this->m_entitites) {
+    auto entity = this->m_entityRoot;
+    while(entity != nullptr) {
+
         GamePlayer* player = qobject_cast<GamePlayer*>(entity);
         if(player != nullptr) {
             if(player->getUuid() == uuid) {
@@ -176,6 +181,8 @@ void GameEngine::playerRegister(QJsonObject json) {
                 break;
             }
         }
+
+        entity = entity->next;
     }
 
     if(!alreadyLog) {
@@ -188,9 +195,9 @@ void GameEngine::playerRegister(QJsonObject json) {
                          json["vehicle"].toString(), json["team"].toInt(),
                          &(this->m_properties));
         connect(player, &GamePlayer::endOfLife, this, &GameEngine::entityDie);
-        //player->setCheckpoint(this->m_checkpoint);
-        this->m_entitites.append(player);
-        this->m_ihm->m_map->update();
+
+        this->addEntity(player);
+        this->m_ihm->m_map->addEntity(player);
     }
 
 }
@@ -201,7 +208,8 @@ void GameEngine::playerControl(QJsonObject json) {
     QString uuid = json["uuid"].toString();
     ;
     json["power"];
-    for(GameEntity* entity : this->m_entitites) {
+    auto entity = this->m_entityRoot;
+    while(entity != nullptr) {
         GamePlayer* player = qobject_cast<GamePlayer*>(entity);
         if(player != nullptr) {
             if(player->getUuid() == uuid) {
@@ -215,28 +223,30 @@ void GameEngine::playerControl(QJsonObject json) {
                         auto banana = new GameBanana(this->m_ihm, &(this->m_properties));
                         player->placeBanana(banana);
                         connect(banana, &GameBanana::endOfLife, this, &GameEngine::entityDie);
-                        this->m_entitites.append(banana);
-                        this->m_ihm->m_map->update();
+                        this->addEntity(banana);
+                        this->m_ihm->m_map->addEntity(banana);
                     }
                     if(buttons["bomb"].toBool()) {
                         auto bomb = new GameBomb(this->m_ihm, &(this->m_properties));
                         player->placeBomb(bomb);
                         connect(bomb, &GameBomb::endOfLife, this, &GameEngine::entityDie);
-                        this->m_entitites.append(bomb);
-                        this->m_ihm->m_map->update();
+                        this->addEntity(bomb);
+                        this->m_ihm->m_map->addEntity(bomb);
                     }
                     if(buttons["rocket"].toBool()) {
                         auto rocket = new GameRocket(this->m_ihm, &(this->m_properties));
                         player->fireRocket(rocket);
                         connect(rocket, &GameRocket::endOfLife, this, &GameEngine::entityDie);
-                        this->m_entitites.append(rocket);
-                        this->m_ihm->m_map->update();
+                        this->addEntity(rocket);
+                        this->m_ihm->m_map->addEntity(rocket);
                     }
                 }
 
                 break;
             }
         }
+
+        entity = entity->next;
     }
 
 }
@@ -257,9 +267,11 @@ void GameEngine::loopUpdate() {
 
         QTimer::singleShot(GAME_TICK, this, &GameEngine::loopUpdate);
 
-        for(GameEntity* entity : this->m_entitites) {
+        auto entity = this->m_entityRoot;
+        while(entity != nullptr) {
 
-                entity->update();
+            entity->update(); // TODO : ça peut planter
+            entity = entity->next;
         }
 
         this->m_client->publishGame(this->toJson());
@@ -276,10 +288,12 @@ void GameEngine::loopIA() {
 #ifdef IA_TRAINING
         QTimer::singleShot(1000*30, this, &GameEngine::loopIA);
         auto rand = QRandomGenerator::global();
-        for(auto entity : this->m_entitites) {
+        auto entity = this->m_entityRoot;
+        while(entity != nullptr) {
             auto x = (rand->generate()*1.0 /rand->max()) *1000.0;
             auto y = (rand->generate()*1.0 /rand->max()) *1000.0;
             ((GamePlayer*) entity)->reset(x, y);
+            entity = entity.next;
         }
 #else
         QTimer::singleShot(1000, this, &GameEngine::loopIA);
@@ -291,10 +305,23 @@ void GameEngine::loopIA() {
 
 void GameEngine::entityDie(GameEntity* entity) {
 
-    this->m_entitites.removeOne(entity);
-    delete entity;
-    this->m_ihm->m_map->update();
+    if(entity->next != nullptr)
+        entity->next->prev = entity->prev;
+    if(entity->prev != nullptr)
+        entity->prev->next = entity->next;
+    if(this->m_entityRoot == entity) {
+        this->m_entityRoot = entity->next;
+    }
 
-    qDebug() << "end delete";
+    this->m_ihm->m_map->removeEntity(entity);
+    delete entity;
 }
 
+void GameEngine::addEntity(GameEntity* entity) {
+
+    entity->next = this->m_entityRoot;
+    if(this->m_entityRoot != nullptr)
+        this->m_entityRoot->prev = entity;
+    this->m_entityRoot = entity;
+
+}

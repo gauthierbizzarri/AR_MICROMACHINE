@@ -240,6 +240,8 @@ void GamePlayer::update() {
 
 void GamePlayer::getHit() {
 
+    this->m_stunnedAge = 1000;
+
 }
 
 void GamePlayer::checkCollision() {

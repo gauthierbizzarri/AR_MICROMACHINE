@@ -7,7 +7,6 @@
 #include <QDebug>
 
 #include "ihm_sections.h"
-#include "ihm_section_properties.h"
 
 // ////////////////////////////////////////////////////////////////////////////
 // Prototypes
@@ -23,7 +22,15 @@ IHM_Sections::IHM_Sections(QWidget *parent)
     : QTabWidget{parent}
 {
 
-    this->addTab(new IHM_SectionProperties(this), QString("Properties"));
+    this->m_properties = new IHM_SectionProperties(this);
+    this->m_mqtt = new IHM_SectionMqtt(this);
+
+    this->addTab(this->m_properties, QString("Properties"));
+    this->addTab(this->m_mqtt, QString("MQTT"));
+
+    this->setCurrentWidget(this->m_mqtt);
+
+    //this->addTab(new IHM_SectionPlayers(this), QString("Players"));
 
 }
 

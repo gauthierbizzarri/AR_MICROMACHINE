@@ -9,7 +9,6 @@ class GameBanana : public GameEntity
 
     int m_ttl;
     int m_age;
-    bool m_hit;
 
 public:
     GameBanana(QWidget* parent, GameProperties* properties);

@@ -46,7 +46,7 @@ class IHM_SectionProperties : public QWidget
     QLineEdit* leTruckHeight;
 
 public:
-    explicit IHM_SectionProperties(QWidget *parent = nullptr);
+    explicit IHM_SectionProperties(QWidget *parent);
 
 signals:
 

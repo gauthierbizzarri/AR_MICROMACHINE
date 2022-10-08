@@ -10,6 +10,10 @@ class GameEntity : public GameObstacle
     Q_OBJECT
 
 public:
+
+    GameEntity* next;
+    GameEntity* prev;
+
     GameEntity(QWidget* parent, int x, int y);
 
     virtual QJsonObject toJson() = 0;

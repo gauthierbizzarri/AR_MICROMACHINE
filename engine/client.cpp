@@ -21,28 +21,25 @@ Client::Client(QObject* parent)
 {
 
     this->m_mqtt = new QMqttClient();
-    this->m_mqtt->setHostname(QString(MQTT_HOST));
-    this->m_mqtt->setPort(MQTT_PORT);
-    this->m_mqtt->setUsername(MQTT_USER);
-    this->m_mqtt->setPassword(MQTT_PASS);
+    this->m_connected = false;
 
     connect(this->m_mqtt, &QMqttClient::stateChanged, this, &Client::debugStatus);
     connect(this->m_mqtt, &QMqttClient::errorChanged, this, &Client::debugError);
     connect(this->m_mqtt, &QMqttClient::connected, this, &Client::connected);
     connect(this->m_mqtt, &QMqttClient::messageReceived, this, &Client::messageReceived);
 
-    this->m_mqtt->connectToHost();
+    this->connectTo(MQTT_HOST, MQTT_PORT, MQTT_USER, MQTT_PASS);
 
 }
 
 Client::~Client() {
 
-    this->m_mqtt->disconnect();
+    this->m_mqtt->disconnectFromHost();
 
 }
 
 // ////////////////////////////////////////////////////////////////////////////
-// Constructor
+// Slots
 // ////////////////////////////////////////////////////////////////////////////
 
 void Client::debugStatus(QMqttClient::ClientState state) {
@@ -53,7 +50,23 @@ void Client::debugError(QMqttClient::ClientError error) {
     qDebug() << error;
 }
 
+void Client::connectTo(QString host, int port, QString user, QString pass) {
+
+    if(this->m_connected)
+        this->m_mqtt->disconnectFromHost();
+
+    this->m_mqtt->setHostname(host);
+    this->m_mqtt->setPort(port);
+    this->m_mqtt->setUsername(user);
+    this->m_mqtt->setPassword(pass);
+
+    this->m_mqtt->connectToHost();
+}
+
 void Client::connected() {
+
+    this->m_connected = true;
+
     if(!this->m_mqtt->subscribe(QString(MQTT_TOPIC_MAP)))
         qDebug() << "Subscription to /map failed";
 
@@ -64,8 +77,6 @@ void Client::connected() {
         qDebug() << "Subscription to /player/control failed";
 
     qDebug() << "MQTT Client is ready";
-
-    //this->m_mqtt->publish(QString("player/register"), QString(EXAMPLE_REGISTER).toUtf8());
 
 }
 
@@ -101,5 +112,3 @@ void Client::publishGame(QJsonObject engineJson) {
     this->m_mqtt->publish(QString(MQTT_TOPIC_GAME), QJsonDocument(engineJson).toJson(QJsonDocument::Compact));
 
 }
-
-
