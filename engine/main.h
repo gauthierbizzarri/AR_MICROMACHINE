@@ -1,10 +1,10 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define MQTT_HOST "localhost"
+#define MQTT_HOST "gerald.imerir.org"
 #define MQTT_PORT 1883
-#define MQTT_USER ""
-#define MQTT_PASS ""
+#define MQTT_USER "username"
+#define MQTT_PASS "Test"
 #define MQTT_TOPIC_MAP "map"
 #define MQTT_TOPIC_PLAYER_CONTROL "player/control"
 #define MQTT_TOPIC_PLAYER_REGISTER "player/register"
@@ -15,8 +15,8 @@
 #define IHM_HEIGHT 1000
 
 //#define IA_TRAINING
-//#define ENGINE_SEND_MAP
-//#define GAMEPAD_ONLY
+#define ENGINE_SEND_MAP
+#define GAMEPAD_ONLY
 
 #define GAME_TICK 50
 #define GAME_PROPERTY_TICK 1000

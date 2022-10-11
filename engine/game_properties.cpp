@@ -80,14 +80,18 @@ QJsonObject GameProperties::toJson() {
     json.insert(QString("checkpointRadius"), QJsonValue(this->checkpointRadius));
 
     json.insert(QString("bananaNb"), QJsonValue(this->bananaNb));
-    json.insert(QString("bombNb"), QJsonValue(this->bombNb));
-    json.insert(QString("rocketNb"), QJsonValue(this->rocketNb));
     json.insert(QString("bananaCd"), QJsonValue(this->bananaCd));
-    json.insert(QString("bombCd"), QJsonValue(this->bombCd));
-    json.insert(QString("rocketCd"), QJsonValue(this->rocketCd));
-    json.insert(QString("rocketSpeed"), QJsonValue(this->rocketSpeed));
     json.insert(QString("bananaTtl"), QJsonValue(this->bananaTtl));
+    json.insert(QString("bananaRadius"), QJsonValue(this->bananaRadius));
+    json.insert(QString("bombNb"), QJsonValue(this->bombNb));
     json.insert(QString("bombTtl"), QJsonValue(this->bombTtl));
+    json.insert(QString("bombCd"), QJsonValue(this->bombCd));
+    json.insert(QString("bombRadius"), QJsonValue(this->bombSize));
+    json.insert(QString("bombExplosionRadius"), QJsonValue(this->bombExplostionSize));
+    json.insert(QString("rocketSpeed"), QJsonValue(this->rocketSpeed));
+    json.insert(QString("rocketCd"), QJsonValue(this->rocketCd));
+    json.insert(QString("rocketNb"), QJsonValue(this->rocketNb));
+    json.insert(QString("rocketRadius"), QJsonValue(this->rocketRadius));
 
     QJsonObject vehicles;
 

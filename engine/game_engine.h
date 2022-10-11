@@ -35,6 +35,7 @@ class GameEngine : public QObject
     GameMap* m_map;
 
     GameCheckpoint* m_checkpoint;
+    int m_time;
 
     explicit GameEngine(QObject *parent = nullptr);
 

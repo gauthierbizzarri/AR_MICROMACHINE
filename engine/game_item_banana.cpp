@@ -28,6 +28,8 @@ GameBanana::GameBanana(QWidget* parent, GameProperties* properties)
 
 void GameBanana::set(int x, int y) {
 
+    this->m_point.setX(x);
+    this->m_point.setY(y);
     this->m_item->setPos(x, y);
 
 }
@@ -45,8 +47,8 @@ QJsonObject GameBanana::toJson() {
 
     QJsonObject json
     {
-        {"x", this->point().x()},
-        {"y", this->point().y()},
+        {"x", this->m_point.x()},
+        {"y", this->m_point.y()},
         {"angle", 0.0},
         {"status", "placed"},
         {"type", "banana"}
@@ -57,6 +59,8 @@ QJsonObject GameBanana::toJson() {
 
 void GameBanana::update() {
     this->m_age += GAME_TICK;
+
+    qDebug() << this->m_point;
 
     if(this->m_age > this->m_ttl)
         emit this->endOfLife(this);

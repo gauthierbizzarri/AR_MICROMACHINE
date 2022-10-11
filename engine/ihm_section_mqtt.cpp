@@ -6,7 +6,7 @@
 #include "main.h"
 
 IHM_SectionMqtt::IHM_SectionMqtt(QWidget *parent)
-    : QTabWidget{parent}
+    : QWidget{parent}
 {
 
     auto layout = new QVBoxLayout();

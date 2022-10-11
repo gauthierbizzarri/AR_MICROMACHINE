@@ -27,6 +27,12 @@ class GamePlayer : public GameEntity
     int m_power;
     QPointF m_speed;
     int m_stunnedAge;
+    int m_bananaCd;
+    int m_bombCd;
+    int m_rocketCd;
+    int m_bananaCdMax;
+    int m_bombCdMax;
+    int m_rocketCdMax;
 
     int m_maxSpeed;
     double m_acceleration;
@@ -50,12 +56,17 @@ public:
     QString getController();
     QString getVehicle();
     int getTeam();
+    int getCheckpoint();
+    int getLap();
     bool isStun();
 
     void setSteering(double value);
     void setPower(int value);
+    bool canPlaceBanana();
     void placeBanana(GameBanana* prop);
+    bool canPlaceBomb();
     void placeBomb(GameBomb* prop);
+    bool canFireRocket();
     void fireRocket(GameRocket* prop);
 
     void reset(int x, int y);
@@ -67,6 +78,9 @@ public:
     QJsonObject toJson();
     void update();
     void getHit();
+
+signals:
+    void statsChanged(GamePlayer* player);
 
 };
 

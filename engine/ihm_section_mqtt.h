@@ -4,7 +4,7 @@
 #include <QTabWidget>
 #include <QLineEdit>
 
-class IHM_SectionMqtt : public QTabWidget
+class IHM_SectionMqtt : public QWidget
 {
     Q_OBJECT
 

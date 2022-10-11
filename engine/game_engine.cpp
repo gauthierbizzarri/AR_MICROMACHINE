@@ -38,6 +38,7 @@ GameEngine::GameEngine(QObject *parent)
     this->m_entityRoot = nullptr;
     this->m_map = nullptr;
     this->m_checkpoint = nullptr;
+    this->m_time = 0;
 
     // Connect
 
@@ -80,7 +81,7 @@ QJsonObject GameEngine::toJson() {
 
     QJsonObject json;
 
-    json.insert(QString("elapsedTime"), QJsonValue(0));
+    json.insert(QString("elapsedTime"), QJsonValue(this->m_time));
     json.insert(QString("infoMessage"), QJsonValue("Serveur fonctionnel, et oui"));
     json.insert(QString("status"), QJsonValue("progress"));
 
@@ -198,6 +199,7 @@ void GameEngine::playerRegister(QJsonObject json) {
 
         this->addEntity(player);
         this->m_ihm->m_map->addEntity(player);
+        this->m_ihm->m_sections->m_stats->addPlayer(player);
     }
 
 }
@@ -206,34 +208,33 @@ void GameEngine::playerControl(QJsonObject json) {
     //qDebug() << "control : " << json;
 
     QString uuid = json["uuid"].toString();
-    ;
-    json["power"];
+
     auto entity = this->m_entityRoot;
     while(entity != nullptr) {
         GamePlayer* player = qobject_cast<GamePlayer*>(entity);
-        if(player != nullptr) {
+        if(player) {
             if(player->getUuid() == uuid) {
-                //qDebug() << uuid << " control " << json;
+
                 player->setSteering(json["angle"].toDouble());
                 player->setPower(json["power"].toInt());
 
                 if(!player->isStun()) {
                     auto buttons = json["buttons"].toObject();
-                    if(buttons["banana"].toBool()) {
+                    if(buttons["banana"].toBool() && player->canPlaceBanana()) {
                         auto banana = new GameBanana(this->m_ihm, &(this->m_properties));
                         player->placeBanana(banana);
                         connect(banana, &GameBanana::endOfLife, this, &GameEngine::entityDie);
                         this->addEntity(banana);
                         this->m_ihm->m_map->addEntity(banana);
                     }
-                    if(buttons["bomb"].toBool()) {
+                    if(buttons["bomb"].toBool() && player->canPlaceBomb()) {
                         auto bomb = new GameBomb(this->m_ihm, &(this->m_properties));
                         player->placeBomb(bomb);
                         connect(bomb, &GameBomb::endOfLife, this, &GameEngine::entityDie);
                         this->addEntity(bomb);
                         this->m_ihm->m_map->addEntity(bomb);
                     }
-                    if(buttons["rocket"].toBool()) {
+                    if(buttons["rocket"].toBool() && player->canFireRocket()) {
                         auto rocket = new GameRocket(this->m_ihm, &(this->m_properties));
                         player->fireRocket(rocket);
                         connect(rocket, &GameRocket::endOfLife, this, &GameEngine::entityDie);
@@ -263,6 +264,7 @@ void GameEngine::loopProperties() {
 void GameEngine::loopUpdate() {
 
     if(this->m_running) {
+        this->m_time += GAME_TICK;
         auto start = clock();
 
         QTimer::singleShot(GAME_TICK, this, &GameEngine::loopUpdate);

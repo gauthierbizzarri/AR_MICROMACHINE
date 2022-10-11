@@ -22,6 +22,12 @@ GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseu
     this->m_checkpoint = 0;
     this->m_lap = -1;
     this->m_stunnedAge = false;
+    this->m_bananaCd = 0;
+    this->m_bombCd = 0;
+    this->m_rocketCd = 0;
+    this->m_bananaCdMax = properties->bananaCd *1000;
+    this->m_bombCdMax = properties->bombCd *1000;
+    this->m_rocketCdMax = properties->rocketCd *1000;
 
     QGraphicsRectItem* item = new QGraphicsRectItem(-1, -1, 2, 2);
     QPen pen;
@@ -65,6 +71,14 @@ int GamePlayer::getTeam() {
     return this->m_team;
 }
 
+int GamePlayer::getCheckpoint() {
+    return this->m_checkpoint;
+}
+
+int GamePlayer::getLap() {
+    return this->m_lap;
+}
+
 bool GamePlayer::isStun() {
     return this->m_stunnedAge > 0;
 }
@@ -84,24 +98,39 @@ void GamePlayer::setPower(int value) {
     this->m_power = value;
 }
 
+bool GamePlayer::canPlaceBanana() {
+    return this->m_bananaCd <= 0;
+}
+
 void GamePlayer::placeBanana(GameBanana* banana) {
 
     auto point = this->point() +pointFA(this->m_angle) *-this->m_height *1.1;
     banana->set(point.x(), point.y());
+    this->m_bananaCd = this->m_bananaCdMax;
 
+}
+
+bool GamePlayer::canPlaceBomb() {
+    return this->m_bombCd <= 0;
 }
 
 void GamePlayer::placeBomb(GameBomb* bomb) {
 
     auto point = this->point() +pointFA(this->m_angle) *-this->m_height *1.1;
     bomb->set(point.x(), point.y());
+    this->m_bombCd = this->m_bombCdMax;
 
+}
+
+bool GamePlayer::canFireRocket() {
+    return this->m_rocketCd <= 0;
 }
 
 void GamePlayer::fireRocket(GameRocket* rocket) {
 
     auto point = this->point() +pointFA(this->m_angle) *this->m_height *1.1;
     rocket->set(point.x(), point.y(), this->m_angle +this->m_steering);
+    this->m_rocketCd = this->m_rocketCdMax;
 
 }
 
@@ -118,6 +147,10 @@ void GamePlayer::reset(int x, int y) {
 }
 
 void GamePlayer::updateProperties(GameProperties* properties) {
+
+    this->m_bananaCdMax = properties->bananaCd *1000;
+    this->m_bombCdMax = properties->bombCd *1000;
+    this->m_rocketCdMax = properties->rocketCd *1000;
 
     if(this->m_vehicle == "bike") {
         this->m_maxSpeed = properties->bike.maxSpeed;
@@ -174,7 +207,7 @@ QJsonObject GamePlayer::toJson() {
     json.insert(QString("speed"), QJsonValue(this->m_power));
     json.insert(QString("vehicle"), QJsonValue(this->m_vehicle));
     json.insert(QString("currentLap"), QJsonValue(lap));
-    json.insert(QString("status"), QJsonValue("driving"));
+    json.insert(QString("status"), QJsonValue(this->m_stunnedAge <= 0 ? "driving" : "accident"));
     json.insert(QString("controller"), QJsonValue(this->m_conrtoller));
     json.insert(QString("lastCheckpoint"), QJsonValue(previousCheckpointId(this->m_checkpoint)) );
 
@@ -189,6 +222,15 @@ QJsonObject GamePlayer::toJson() {
 }
 
 void GamePlayer::update() {
+
+    // Cooldowns
+
+    if(this->m_bananaCd > 0)
+        this->m_bananaCd -= GAME_TICK;
+    if(this->m_bombCd > 0)
+        this->m_bombCd -= GAME_TICK;
+    if(this->m_rocketCd > 0)
+        this->m_rocketCd -= GAME_TICK;
 
     // Angle
 
@@ -271,6 +313,8 @@ void GamePlayer::collideWith(GameMapObject *object) {
                 this->m_lap += 1;
                 qDebug() << "lap done";
             }
+
+            emit this->statsChanged(this);
         }
 
         return;

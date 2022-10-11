@@ -31,6 +31,8 @@ GameBomb::GameBomb(QWidget* parent, GameProperties* properties)
 
 void GameBomb::set(int x, int y) {
 
+    this->m_point.setX(x);
+    this->m_point.setY(y);
     this->m_item->setPos(x, y);
 
 }
@@ -102,7 +104,7 @@ void GameBomb::checkCollision() {
 
 void GameBomb::getHit() {
 
-    if(!this->m_exploding) {
+    if(!this->m_exploding && this->m_age < this->m_ttl -GAME_TICK*2) {
         this->m_age = this->m_ttl -GAME_TICK *2;
     }
 

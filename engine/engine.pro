@@ -27,6 +27,7 @@ SOURCES += \
     ihm_map.cpp \
     ihm_section_mqtt.cpp \
     ihm_section_properties.cpp \
+    ihm_section_statistics.cpp \
     ihm_sections.cpp \
     main.cpp \
     ihm.cpp
@@ -52,6 +53,7 @@ HEADERS += \
     ihm_map.h \
     ihm_section_mqtt.h \
     ihm_section_properties.h \
+    ihm_section_statistics.h \
     ihm_sections.h \
     main.h
 
