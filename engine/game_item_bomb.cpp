@@ -8,6 +8,7 @@ GameBomb::GameBomb(QWidget* parent, GameProperties* properties)
     : GameEntity(parent, 0, 0)
 {
 
+    this->m_uuid = QUuid::createUuid().toString();
     this->m_ttl = properties->bombTtl *1000;
     this->m_explosionTtl = this->m_ttl +1000;
     this->m_age = 0;
@@ -62,7 +63,8 @@ QJsonObject GameBomb::toJson() {
         {"y", this->point().y()},
         {"angle", 0.0},
         {"status", this->m_exploding ? "exploding" : "waiting"},
-        {"type", "bomb"}
+        {"type", "bomb"},
+        {"uuid", this->m_uuid}
     };
 
     return json;

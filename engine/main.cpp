@@ -13,7 +13,9 @@ int main(int argc, char *argv[])
     GameEngine::instance();
 #endif
 
+#ifndef NO_GAMEPAD
     Controller::createGamepad();
+#endif
 
     return a.exec();
 }

@@ -10,6 +10,7 @@ GameBanana::GameBanana(QWidget* parent, GameProperties* properties)
 
     this->m_ttl = properties->bananaTtl *1000;
     this->m_age = 0;
+    this->m_uuid = QUuid::createUuid().toString();
 
     // QItem
 
@@ -51,7 +52,8 @@ QJsonObject GameBanana::toJson() {
         {"y", this->m_point.y()},
         {"angle", 0.0},
         {"status", "placed"},
-        {"type", "banana"}
+        {"type", "banana"},
+        {"uuid", this->m_uuid}
     };
 
     return json;

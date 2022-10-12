@@ -15,11 +15,13 @@
 #define IHM_HEIGHT 1000
 
 //#define IA_TRAINING
-#define ENGINE_SEND_MAP
-#define GAMEPAD_ONLY
+//#define ENGINE_SEND_MAP
+//#define GAMEPAD_ONLY
+#define NO_GAMEPAD
 
 #define GAME_TICK 50
 #define GAME_PROPERTY_TICK 1000
+#define PLAYER_TTL 10000
 
 
 #endif // MAIN_H

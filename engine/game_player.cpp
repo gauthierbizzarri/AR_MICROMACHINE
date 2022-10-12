@@ -28,6 +28,7 @@ GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseu
     this->m_bananaCdMax = properties->bananaCd *1000;
     this->m_bombCdMax = properties->bombCd *1000;
     this->m_rocketCdMax = properties->rocketCd *1000;
+    this->m_ttl = PLAYER_TTL;
 
     QGraphicsRectItem* item = new QGraphicsRectItem(-1, -1, 2, 2);
     QPen pen;
@@ -85,6 +86,8 @@ bool GamePlayer::isStun() {
 
 void GamePlayer::setSteering(double value) {
 
+    this->m_ttl = PLAYER_TTL;
+
     if(abs(value) > this->m_maxSteering)
         if(value > 0)
             this->m_steering = this->m_maxSteering;
@@ -95,6 +98,9 @@ void GamePlayer::setSteering(double value) {
 }
 
 void GamePlayer::setPower(int value) {
+
+    this->m_ttl = PLAYER_TTL;
+
     this->m_power = value;
 }
 
@@ -203,7 +209,7 @@ QJsonObject GamePlayer::toJson() {
     json.insert(QString("team"), QJsonValue(this->m_team));
     json.insert(QString("x"), QJsonValue(this->X()));
     json.insert(QString("y"), QJsonValue(this->Y()));
-    json.insert(QString("angle"), QJsonValue(this->m_angle));
+    json.insert(QString("angle"), QJsonValue(-this->m_angle));
     json.insert(QString("speed"), QJsonValue(this->m_power));
     json.insert(QString("vehicle"), QJsonValue(this->m_vehicle));
     json.insert(QString("currentLap"), QJsonValue(lap));
@@ -222,6 +228,11 @@ QJsonObject GamePlayer::toJson() {
 }
 
 void GamePlayer::update() {
+    this->m_ttl -= GAME_TICK;
+    if(this->m_ttl <= 0) {
+        emit this->endOfLife(this);
+        return;
+    }
 
     // Cooldowns
 

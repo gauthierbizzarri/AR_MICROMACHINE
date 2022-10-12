@@ -9,6 +9,7 @@ class GameRocket : public GameEntity
 
     int m_speed;
     double m_angle;
+    QString m_uuid;
 
 public:
     GameRocket(QWidget* parent, GameProperties* properties);

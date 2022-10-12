@@ -43,6 +43,7 @@ class Controller : public QObject
     Q_OBJECT
 
     QMqttClient* m_mqtt;
+    bool m_mqttConnected;
     QGamepad* m_gamepad;
     QString m_name;
     QString m_uuid;
@@ -108,28 +109,47 @@ public:
 
         // Init mqtt
 
+        this->m_mqttConnected = false;
         this->m_mqtt=new QMqttClient(this);
         this->m_mqtt->setHostname(MQTT_HOST);
         this->m_mqtt->setPort(MQTT_PORT);
         this->m_mqtt->setUsername(MQTT_USER);
         this->m_mqtt->setPassword(MQTT_PASS);
-        this->m_mqtt->connectToHost();
-        connect(this->m_mqtt, &QMqttClient::connected, this, [this]() {
+        this->connectMqtt();
 
-            //this->m_mqtt->publish(QString(MQTT_TOPIC_PLAYER_REGISTER), QString(CONTROLLER_REGISTER).toUtf8());
-            qDebug() << "connected";
+        connect(this->m_mqtt, &QMqttClient::stateChanged, this, [this]() {
+
+            qDebug() << this->m_mqtt->state();
+            if(this->m_mqtt->state() == QMqttClient::Disconnected) {
+                emit this->statusMqtt("disconnected");
+                this->connectMqtt();
+            }
 
         });
+        connect(this->m_mqtt, &QMqttClient::connected, this, [this]() {
+            this->m_mqttConnected = true;
+            emit this->statusMqtt("connected");
+        });
+
         qDebug() << "connect to" << MQTT_HOST << ":" << MQTT_PORT << MQTT_USER << MQTT_PASS << " - " << this->m_uuid;
 
     }
-
     virtual ~Controller() {
         delete this->m_gamepad;
     }
 
     // ////////////////////////////////////////////////////////////////////////
     // Methods
+
+
+    void connectMqtt() {
+
+        if(this->m_mqttConnected)
+            this->m_mqtt->disconnectFromHost();
+
+        this->m_mqtt->connectToHost();
+
+    }
 
     void publish() {
 
@@ -211,6 +231,7 @@ public:
         auto wBanana = new QPushButton("BANANA !", root);
         auto wBomb = new QPushButton("GRENADA !", root);
         auto wRocket = new QPushButton("FIRE !", root);
+        auto wMqtt = new QLabel("", root);
 
         layoutVBtn->addWidget(wBanana);
         layoutVBtn->addWidget(wBomb);
@@ -220,6 +241,7 @@ public:
         layoutH->addWidget(wAcc);
         layoutH->addLayout(layoutVBtn);
         layoutV->addLayout(layoutH);
+        layoutV->addWidget(wMqtt);
         root->setLayout(layoutV);
 
         connect(this, &Controller::brake, wBrake, &QProgressBar::setValue);
@@ -228,6 +250,7 @@ public:
         connect(this, &Controller::banana, wBanana, &QPushButton::setDisabled);
         connect(this, &Controller::bomb, wBomb, &QPushButton::setDisabled);
         connect(this, &Controller::rocket, wRocket, &QPushButton::setDisabled);
+        connect(this, &Controller::statusMqtt, wMqtt, &QLabel::setText);
 
         auto widget = this->m_wRoot->takeCentralWidget();
         if(widget)
@@ -348,6 +371,7 @@ signals:
     void banana(bool);
     void bomb(bool);
     void rocket(bool);
+    void statusMqtt(QString);
 
 };
 

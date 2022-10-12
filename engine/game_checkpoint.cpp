@@ -57,5 +57,5 @@ int previousCheckpointId(int pos) {
     if(pos < 0)
         pos += gameCheckpoints.length();
 
-    return gameCheckpoints[pos]->id;
+    return pos >= 0 ? gameCheckpoints[pos]->id : -1;
 }

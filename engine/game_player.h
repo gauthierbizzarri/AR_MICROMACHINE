@@ -41,6 +41,8 @@ class GamePlayer : public GameEntity
     int m_width;
     int m_height;
 
+    int m_ttl;
+
     GameSketch c1;
     GameSketch c2;
     GameSketch c3;

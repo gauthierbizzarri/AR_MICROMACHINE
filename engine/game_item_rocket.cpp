@@ -9,6 +9,7 @@ GameRocket::GameRocket(QWidget* parent, GameProperties* properties)
     : GameEntity(parent, 0, 0)
 {
 
+    this->m_uuid = QUuid::createUuid().toString();
     this->m_speed = properties->rocketSpeed;
     this->m_angle = 0;
 
@@ -53,7 +54,8 @@ QJsonObject GameRocket::toJson() {
         {"y", this->point().y()},
         {"angle", this->m_angle},
         {"status", "flying"},
-        {"type", "rocket"}
+        {"type", "rocket"},
+        {"uuid", this->m_uuid}
     };
 
     return json;

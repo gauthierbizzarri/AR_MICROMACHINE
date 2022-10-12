@@ -25,14 +25,14 @@ IHM_Sections::IHM_Sections(QWidget *parent)
     this->m_properties = new IHM_SectionProperties(this);
     this->m_mqtt = new IHM_SectionMqtt(this);
     this->m_stats = new IHM_SectionStatistics(this);
+    this->m_engine = new IHM_SectionEngine(this);
 
     this->addTab(this->m_properties, QString("Properties"));
     this->addTab(this->m_mqtt, QString("MQTT"));
     this->addTab(this->m_stats, QString("Statistics"));
+    this->addTab(this->m_engine, QString("Engine"));
 
-    this->setCurrentWidget(this->m_stats);
-
-    //this->addTab(new IHM_SectionPlayers(this), QString("Players"));
+    this->setCurrentWidget(this->m_engine);
 
 }
 

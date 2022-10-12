@@ -9,6 +9,7 @@ class GameBomb : public GameEntity
 
     int m_ttl;
     int m_age;
+    QString m_uuid;
     int m_explosionTtl;
     int m_explosionRadius;
     bool m_exploding;
