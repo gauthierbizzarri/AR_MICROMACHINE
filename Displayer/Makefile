@@ -283,15 +283,17 @@ Makefile: RoadAI.pro D:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf D:/Qt/
 		D:/Qt/5.15.2/mingw81_64/lib/Qt5Core.prl \
 		D:/Qt/5.15.2/mingw81_64/lib/qtmain.prl \
 		D:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf \
-		banana.qrc \
-		banana2.qrc \
-		bike.qrc \
-		bomb.qrc \
-		car.qrc \
-		powers.qrc \
-		missing_texture.qrc \
-		rocket.qrc \
-		truck.qrc
+		game/powerups/banana/banana.qrc \
+		game/powerups/banana/banana2.qrc \
+		game/powerups/bomb/bomb.qrc \
+		game/powerups/powers.qrc \
+		game/powerups/rocket/rocket.qrc \
+		game/mapobjects/vehicles/bike.qrc \
+		game/mapobjects/vehicles/car.qrc \
+		game/mapobjects/vehicles/missing_texture.qrc \
+		game/mapobjects/vehicles/truck.qrc \
+		game/ui/generics/uibutton.qrc \
+		game/ui/startscreenlayer/start_background.qrc
 	$(QMAKE) -o Makefile RoadAI.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 D:/Qt/5.15.2/mingw81_64/mkspecs/features/spec_pre.prf:
 D:/Qt/5.15.2/mingw81_64/mkspecs/qdevice.pri:
@@ -506,15 +508,17 @@ D:/Qt/5.15.2/mingw81_64/lib/Qt5Network.prl:
 D:/Qt/5.15.2/mingw81_64/lib/Qt5Core.prl:
 D:/Qt/5.15.2/mingw81_64/lib/qtmain.prl:
 D:/Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
-banana.qrc:
-banana2.qrc:
-bike.qrc:
-bomb.qrc:
-car.qrc:
-powers.qrc:
-missing_texture.qrc:
-rocket.qrc:
-truck.qrc:
+game/powerups/banana/banana.qrc:
+game/powerups/banana/banana2.qrc:
+game/powerups/bomb/bomb.qrc:
+game/powerups/powers.qrc:
+game/powerups/rocket/rocket.qrc:
+game/mapobjects/vehicles/bike.qrc:
+game/mapobjects/vehicles/car.qrc:
+game/mapobjects/vehicles/missing_texture.qrc:
+game/mapobjects/vehicles/truck.qrc:
+game/ui/generics/uibutton.qrc:
+game/ui/startscreenlayer/start_background.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile RoadAI.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 
