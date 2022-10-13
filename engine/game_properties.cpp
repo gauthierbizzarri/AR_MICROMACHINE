@@ -43,10 +43,10 @@ GameProperties::GameProperties()
     this->lapsNb = 3;
     this->teamNb = 0;
 
-    this->circleRadius = 100; // m
-    this->rectangleWidth = 200; // m
+    this->circleRadius = 20; // m
+    this->rectangleWidth = 10; // m
     this->rectangleHeight = 40; // m
-    this->checkpointRadius = 50; // m
+    this->checkpointRadius = 10; // m
 
     this->bananaNb = 10;
     this->bananaCd = 1; // s

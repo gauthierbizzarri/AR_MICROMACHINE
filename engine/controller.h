@@ -122,12 +122,14 @@ public:
             qDebug() << this->m_mqtt->state();
             if(this->m_mqtt->state() == QMqttClient::Disconnected) {
                 emit this->statusMqtt("disconnected");
+                this->m_mqttConnected  = false;
                 this->connectMqtt();
             }
 
         });
         connect(this->m_mqtt, &QMqttClient::connected, this, [this]() {
             this->m_mqttConnected = true;
+            this->keepAlive();
             emit this->statusMqtt("connected");
         });
 
@@ -231,7 +233,7 @@ public:
         auto wBanana = new QPushButton("BANANA !", root);
         auto wBomb = new QPushButton("GRENADA !", root);
         auto wRocket = new QPushButton("FIRE !", root);
-        auto wMqtt = new QLabel("", root);
+        auto wMqtt = new QLabel("...", root);
 
         layoutVBtn->addWidget(wBanana);
         layoutVBtn->addWidget(wBomb);
@@ -362,6 +364,13 @@ public slots:
             this->m_choice = (this->m_choice +1) %3;
             this->m_wVehicle->setText(QString(this->m_choice == 0 ? "bike" : (this->m_choice == 1 ? "car" : "truck")));
         }
+    }
+
+    void keepAlive() {
+
+        QTimer::singleShot(1000, this, &Controller::keepAlive);
+        this->m_mqtt->publish(QString("gamepad"), QString("keepAlive").toUtf8());
+
     }
 
 signals:

@@ -7,7 +7,7 @@ class GameSketch : public GameMapObject
 {
 public:
     GameSketch();
-    GameSketch(QWidget *parent, int x, int y);
+    GameSketch(QWidget *parent, int x, int y, bool front);
 
     void setXY(int x, int y);
     void set(QPointF point);

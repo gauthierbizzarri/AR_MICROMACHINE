@@ -124,7 +124,6 @@ GameEngine* GameEngine::instance() {
 // ////////////////////////////////////////////////////////////////////////////
 
 void GameEngine::map(QJsonObject json) {
-    //qDebug() << "map : " << json;
 
     GameCheckpoint* firstCP = nullptr;
 
@@ -187,6 +186,7 @@ void GameEngine::playerRegister(QJsonObject json) {
     }
 
     if(!alreadyLog) {
+
         auto rand = QRandomGenerator::global();
         auto x = (rand->generate()*1.0 /rand->max()) *1000.0;
         auto y = (rand->generate()*1.0 /rand->max()) *1000.0;
@@ -205,7 +205,6 @@ void GameEngine::playerRegister(QJsonObject json) {
 }
 
 void GameEngine::playerControl(QJsonObject json) {
-    //qDebug() << "control : " << json;
 
     QString uuid = json["uuid"].toString();
 
@@ -279,7 +278,6 @@ void GameEngine::loopUpdate() {
         this->m_client->publishGame(this->toJson());
 
         auto end = clock();
-        //qDebug() << (end-start)*1000.0 / CLOCKS_PER_SEC << "µs";
 
     }
 }

@@ -3,12 +3,12 @@
 #include <QBrush>
 #include "game_sketch.h"
 
-GameSketch::GameSketch(QWidget *parent, int x, int y)
+GameSketch::GameSketch(QWidget *parent, int x, int y, bool front)
     :GameMapObject(parent, x, y)
 {
 
-    QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-1, -1, 2, 2);
-    item->setBrush(QBrush(Qt::green));
+    QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-3, -3, 6, 6);
+    item->setBrush(QBrush(front ? Qt::yellow : Qt::red));
     item->moveBy(x, y);
     this->m_item = item;
 

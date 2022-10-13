@@ -43,6 +43,7 @@ Client::~Client() {
 // ////////////////////////////////////////////////////////////////////////////
 
 void Client::debugStatus(QMqttClient::ClientState state) {
+
     qDebug() << state;
 }
 
@@ -52,8 +53,10 @@ void Client::debugError(QMqttClient::ClientError error) {
 
 void Client::connectTo(QString host, int port, QString user, QString pass) {
 
-    if(this->m_connected)
+    if(this->m_connected) {
         this->m_mqtt->disconnectFromHost();
+        this->m_connected = false;
+    }
 
     this->m_mqtt->setHostname(host);
     this->m_mqtt->setPort(port);
@@ -97,18 +100,21 @@ void Client::messageReceived(const QByteArray& message, const QMqttTopicName& to
 
 void Client::publishProperties(QJsonObject propertyJson) {
 
-    this->m_mqtt->publish(QString(MQTT_TOPIC_GAME_PROPERTIES), QJsonDocument(propertyJson).toJson(QJsonDocument::Compact));
+    if(this->m_connected)
+        this->m_mqtt->publish(QString(MQTT_TOPIC_GAME_PROPERTIES), QJsonDocument(propertyJson).toJson(QJsonDocument::Compact));
 
 }
 
 void Client::publishMap() {
 
-    this->m_mqtt->publish(QString(MQTT_TOPIC_MAP), QString(EXAMPLE_MAP).toUtf8());
+    if(this->m_connected)
+        this->m_mqtt->publish(QString(MQTT_TOPIC_MAP), QString(EXAMPLE_MAP).toUtf8());
 
 }
 
 void Client::publishGame(QJsonObject engineJson) {
 
-    this->m_mqtt->publish(QString(MQTT_TOPIC_GAME), QJsonDocument(engineJson).toJson(QJsonDocument::Compact));
+    if(this->m_connected)
+        this->m_mqtt->publish(QString(MQTT_TOPIC_GAME), QJsonDocument(engineJson).toJson(QJsonDocument::Compact));
 
 }

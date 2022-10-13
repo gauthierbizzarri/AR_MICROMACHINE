@@ -6,7 +6,6 @@
 #include <QGraphicsRectItem>
 #include <QHBoxLayout>
 #include <QStackedLayout>
-#include <QDebug>
 #include "ihm.h"
 #include "game_map_object.h"
 #include "main.h"

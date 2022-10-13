@@ -8,14 +8,24 @@
 #include "game_circle.h"
 #include "main.h"
 
+const QString teamNames[] = {
+    "white",
+    "cyan",
+    "yellow",
+    "magenta",
+    "orange",
+    "brown",
+    "purple"
+};
+
 QPointF pointFA(double angle);
 double scalar(QPointF p1, QPointF p2);
 
 GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseudo, QString controller, QString vehicle, int team, GameProperties* properties)
     : GameEntity(parent, x, y), m_uuid(uuid), m_pseudo(pseudo), m_conrtoller(controller), m_vehicle(vehicle), m_team(team)
-    , c1(parent, x, y), c2(parent, x, y), c3(parent, x, y), c4(parent, x, y)
+    , c1(parent, x, y, true), c2(parent, x, y, false), c3(parent, x, y, false), c4(parent, x, y, true)
 {
-    this->m_color = "blue"; // TODO : donner une couleur qui dépend du nom du joueur, ou de l'équipe s'il y en a plusieurs
+    this->m_color = teamNames[team]; // TODO : donner une couleur qui dépend du nom du joueur, ou de l'équipe s'il y en a plusieurs
     this->m_steering = 0;
     this->m_angle = 0;
     this->m_power = 0;
@@ -34,7 +44,7 @@ GamePlayer::GamePlayer(QWidget* parent, int x, int y, QString uuid, QString pseu
     QPen pen;
     pen.setWidth(1);
     item->setPen(pen);
-    item->setBrush(QBrush(Qt::blue));
+    item->setBrush(QBrush(QColor(teamNames[team])));
     item->moveBy(this->X(), this->Y());
     item->setRotation(0);
 
@@ -209,7 +219,7 @@ QJsonObject GamePlayer::toJson() {
     json.insert(QString("team"), QJsonValue(this->m_team));
     json.insert(QString("x"), QJsonValue(this->X()));
     json.insert(QString("y"), QJsonValue(this->Y()));
-    json.insert(QString("angle"), QJsonValue(-this->m_angle));
+    json.insert(QString("angle"), QJsonValue(this->m_angle));
     json.insert(QString("speed"), QJsonValue(this->m_power));
     json.insert(QString("vehicle"), QJsonValue(this->m_vehicle));
     json.insert(QString("currentLap"), QJsonValue(lap));
@@ -252,14 +262,14 @@ void GamePlayer::update() {
 
     // Speed
 
-    auto F = pointFA(this->m_angle) *(this->m_power/1000.0) *this->m_maxSpeed;
+    auto F = pointFA(this->m_angle) *(this->m_power/10000.0) *this->m_maxSpeed;
     if(this->m_stunnedAge > 0) {
         F = F*0.0;
         steering = 1;
         this->m_stunnedAge -= GAME_TICK;
     }
 
-    F = (this->m_speed + F) *0.5;
+    F = (this->m_speed + F) *0.95;
     auto P = this->m_point +F;
 
     if(P.x() < 0)
@@ -301,13 +311,21 @@ void GamePlayer::checkCollision() {
 
     for(GameMapObject* object : gameObjects) {
         if(this != object)
-            if(this->m_item->collidesWithItem(object->getItem())) {
+            if(this->m_item->collidesWithItem(object->getItem())) { // TODO : CRASH HERE
                 this->collideWith(object);
             }
     }
 }
 
 void GamePlayer::collideWith(GameMapObject *object) {
+
+    auto norme = sqrt(this->m_width*this->m_width +this->m_height*this->m_height) /2.0;
+    auto angle = atan2(this->m_width, this->m_height);
+
+    this->c1.set((pointFA(angle +this->m_angle) *norme) +this->m_point);
+    this->c2.set((pointFA(M_PI -angle +this->m_angle) *norme) +this->m_point);
+    this->c3.set((pointFA(M_PI +angle +this->m_angle) *norme) +this->m_point);
+    this->c4.set((pointFA(-angle +this->m_angle) *norme) +this->m_point);
 
     // Collision with checkpoint
 
@@ -336,13 +354,13 @@ void GamePlayer::collideWith(GameMapObject *object) {
     auto rect = qobject_cast<GameRectangle*>(object);
     if(rect) {
 
-        auto norme = sqrt(this->m_width*this->m_width +this->m_height*this->m_height) /2.0;
-        auto angle = atan2(this->m_width, this->m_height);
+//        auto norme = sqrt(this->m_width*this->m_width +this->m_height*this->m_height) /2.0;
+//        auto angle = atan2(this->m_width, this->m_height);
 
-        this->c1.set((pointFA(angle +this->m_angle) *norme) +this->m_point);
-        this->c2.set((pointFA(M_PI -angle +this->m_angle) *norme) +this->m_point);
-        this->c3.set((pointFA(M_PI +angle +this->m_angle) *norme) +this->m_point);
-        this->c4.set((pointFA(-angle +this->m_angle) *norme) +this->m_point);
+//        this->c1.set((pointFA(angle +this->m_angle) *norme) +this->m_point);
+//        this->c2.set((pointFA(M_PI -angle +this->m_angle) *norme) +this->m_point);
+//        this->c3.set((pointFA(M_PI +angle +this->m_angle) *norme) +this->m_point);
+//        this->c4.set((pointFA(-angle +this->m_angle) *norme) +this->m_point);
 
         GameSketch* collidingCorner = nullptr;
 
@@ -419,13 +437,13 @@ void GamePlayer::collideWith(GameMapObject *object) {
     auto circle = qobject_cast<GameCircle*>(object);
     if(circle) {
 
-        auto norme = sqrt(this->m_width*this->m_width +this->m_height*this->m_height) /2.0;
-        auto angle = atan2(this->m_width, this->m_height);
+//        auto norme = sqrt(this->m_width*this->m_width +this->m_height*this->m_height) /2.0;
+//        auto angle = atan2(this->m_width, this->m_height);
 
-        this->c1.set((pointFA(angle +this->m_angle) *norme) +this->m_point);
-        this->c2.set((pointFA(M_PI -angle +this->m_angle) *norme) +this->m_point);
-        this->c3.set((pointFA(M_PI +angle +this->m_angle) *norme) +this->m_point);
-        this->c4.set((pointFA(-angle +this->m_angle) *norme) +this->m_point);
+//        this->c1.set((pointFA(angle +this->m_angle) *norme) +this->m_point);
+//        this->c2.set((pointFA(M_PI -angle +this->m_angle) *norme) +this->m_point);
+//        this->c3.set((pointFA(M_PI +angle +this->m_angle) *norme) +this->m_point);
+//        this->c4.set((pointFA(-angle +this->m_angle) *norme) +this->m_point);
 
         GameSketch* collidingCorner = nullptr;
 

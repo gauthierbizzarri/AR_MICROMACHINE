@@ -62,8 +62,6 @@ QJsonObject GameBanana::toJson() {
 void GameBanana::update() {
     this->m_age += GAME_TICK;
 
-    qDebug() << this->m_point;
-
     if(this->m_age > this->m_ttl)
         emit this->endOfLife(this);
 
