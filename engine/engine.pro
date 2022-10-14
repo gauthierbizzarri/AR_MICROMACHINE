@@ -1,4 +1,4 @@
-QT       += core gui widgets mqtt
+QT       += core gui widgets mqtt gamepad
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,28 +14,50 @@ SOURCES += \
     game_circle.cpp \
     game_engine.cpp \
     game_entity.cpp \
+    game_item_banana.cpp \
+    game_item_bomb.cpp \
+    game_item_rocket.cpp \
     game_map.cpp \
     game_map_object.cpp \
     game_obstacle.cpp \
     game_player.cpp \
     game_properties.cpp \
     game_rectangle.cpp \
+    game_sketch.cpp \
+    ihm_map.cpp \
+    ihm_section_engine.cpp \
+    ihm_section_mqtt.cpp \
+    ihm_section_properties.cpp \
+    ihm_section_statistics.cpp \
+    ihm_sections.cpp \
     main.cpp \
     ihm.cpp
 
 HEADERS += \
     client.h \
+    controller.h \
     game_checkpoint.h \
     game_circle.h \
     game_engine.h \
     game_entity.h \
+    game_item_banana.h \
+    game_item_bomb.h \
+    game_item_rocket.h \
     game_map.h \
     game_map_object.h \
     game_obstacle.h \
     game_player.h \
     game_properties.h \
     game_rectangle.h \
-    ihm.h
+    game_sketch.h \
+    ihm.h \
+    ihm_map.h \
+    ihm_section_engine.h \
+    ihm_section_mqtt.h \
+    ihm_section_properties.h \
+    ihm_section_statistics.h \
+    ihm_sections.h \
+    main.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

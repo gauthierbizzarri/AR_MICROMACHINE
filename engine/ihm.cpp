@@ -1,88 +1,38 @@
 
 // ////////////////////////////////////////////////////////////////////////////
-// Class MapView
+// Includes
 // ////////////////////////////////////////////////////////////////////////////
 
 #include <QGraphicsRectItem>
 #include <QHBoxLayout>
-#include <QDebug>
+#include <QStackedLayout>
 #include "ihm.h"
 #include "game_map_object.h"
+#include "main.h"
 
 // ////////////////////////////////////////////////////////////////////////////
-// Class MapView
-// ////////////////////////////////////////////////////////////////////////////
-
-MapView::MapView(QWidget *parent) : QWidget(parent) {
-
-    this->setMinimumSize(600, 600);
-    this->setMaximumSize(600, 600);
-
-    this->m_scene = new QGraphicsScene(this);
-    this->m_scene->setSceneRect(0, 0, 600, 600);
-
-    this->m_view = new QGraphicsView(this);
-    this->m_view->setScene(this->m_scene);
-
-    this->m_group_player = new QGraphicsItemGroup();
-    this->m_group_default = new QGraphicsItemGroup();
-
-    this->m_scene->setBackgroundBrush(Qt::darkYellow);
-    this->m_scene->addItem(this->m_group_player);
-    this->m_scene->addItem(this->m_group_default);
-}
-
-MapView::~MapView() {
-
-}
-
-void MapView::update() {
-
-    // remove everything from the group
-
-    for(auto item : this->m_group_default->childItems())
-        this->m_group_default->removeFromGroup(item);
-
-    // add everything that need to be added
-
-    for(int i = 0; i < gameObjects.length(); i++) {
-        //qDebug() << gameObjects[i];
-        this->m_group_default->addToGroup(gameObjects[i]->getItem());
-    }
-}
-
-// ////////////////////////////////////////////////////////////////////////////
-// Class TabView
-// ////////////////////////////////////////////////////////////////////////////
-
-TabView::TabView(QWidget *parent) {
-
-}
-
-TabView::~TabView() {
-
-}
-
-// ////////////////////////////////////////////////////////////////////////////
-// Class IHM
+// Constructor
 // ////////////////////////////////////////////////////////////////////////////
 
 IHM::IHM(QWidget *parent)
     : QMainWindow(parent)
 {
 
+    //QStackedLayout* layout = new QStackedLayout();
     QHBoxLayout* layout = new QHBoxLayout();
-    this->m_mapView = new MapView(this);
-    this->m_tabView = new TabView(this);
+    this->m_map = new IHM_Map(this);
+    this->m_sections = new IHM_Sections(this);
+    this->m_sections->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-    layout->addWidget(this->m_mapView);
-    layout->addWidget(this->m_tabView);
+    layout->addWidget(this->m_map);
+    layout->addWidget(this->m_sections);
     layout->setMargin(10);
 
     QWidget* root = new QWidget();
     root->setLayout(layout);
 
     this->setCentralWidget(root);
+    //this->setMinimumSize(1100, 850);
 
 }
 

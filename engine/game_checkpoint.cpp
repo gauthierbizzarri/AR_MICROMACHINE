@@ -1,19 +1,32 @@
+
+// ////////////////////////////////////////////////////////////////////////////
+// Includes
+// ////////////////////////////////////////////////////////////////////////////
+
 #include <QGraphicsEllipseItem>
 #include <QBrush>
 #include <QPen>
 #include "game_checkpoint.h"
 
+// ////////////////////////////////////////////////////////////////////////////
+// Globals
+// ////////////////////////////////////////////////////////////////////////////
+
 QList<GameCheckpoint*> gameCheckpoints;
 
-GameCheckpoint::GameCheckpoint(QWidget *parent, int x, int y)
-    : GameMapObject{parent, x, y}
+// ////////////////////////////////////////////////////////////////////////////
+// Constructor
+// ////////////////////////////////////////////////////////////////////////////
+
+GameCheckpoint::GameCheckpoint(QWidget *parent, int x, int y, int r, int id, int pos)
+    : GameMapObject{parent, x, y}, id(id), pos(pos)
 {
-    QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-12.5, -12.5, 25, 25);
+
+    QGraphicsEllipseItem* item = new QGraphicsEllipseItem(-r, -r, r*2, r*2);
     QPen pen;
     pen.setWidth(2);
     item->setPen(pen);
-    //item->setBrush(QBrush(Qt::red));
-    item->moveBy(x*0.6, y*0.6);
+    item->moveBy(x, y);
 
     this->m_item = item;
 
@@ -22,4 +35,27 @@ GameCheckpoint::GameCheckpoint(QWidget *parent, int x, int y)
 
 GameCheckpoint::~GameCheckpoint() {
     gameCheckpoints.removeOne(this);
+}
+
+// ////////////////////////////////////////////////////////////////////////////
+// Methods
+// ////////////////////////////////////////////////////////////////////////////
+
+void GameCheckpoint::updateProperties(GameProperties* properties) {
+
+    auto item = (QGraphicsEllipseItem*) this->m_item;
+    item->setRect(-properties->checkpointRadius, -properties->checkpointRadius, 2*properties->checkpointRadius, 2*properties->checkpointRadius);
+}
+
+// ////////////////////////////////////////////////////////////////////////////
+// Functions
+// ////////////////////////////////////////////////////////////////////////////
+
+int previousCheckpointId(int pos) {
+
+    pos = pos -1;
+    if(pos < 0)
+        pos += gameCheckpoints.length();
+
+    return pos >= 0 ? gameCheckpoints[pos]->id : -1;
 }

@@ -17,8 +17,9 @@ QList<GameMapObject*> gameObjects;
 // ////////////////////////////////////////////////////////////////////////////
 
 GameMapObject::GameMapObject(QWidget *parent, int x, int y)
-    : m_x(x), m_y(y), m_item(nullptr)
+    : m_item(nullptr)
 {
+    this->m_point = QPointF(x, y);
     gameObjects.append(this);
 }
 
@@ -34,15 +35,19 @@ GameMapObject::~GameMapObject() {
 }
 
 int GameMapObject::X() {
-    return this->m_x;
+    return this->m_point.x();
 }
 
 int GameMapObject::Y() {
-    return this->m_y;
+    return this->m_point.y();
 }
 
 QGraphicsItem* GameMapObject::getItem() {
     return this->m_item;
+}
+
+QPointF GameMapObject::point() {
+    return this->m_point;
 }
 
 // ////////////////////////////////////////////////////////////////////////////

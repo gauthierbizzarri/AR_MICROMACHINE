@@ -7,6 +7,9 @@
 
 #include <QGraphicsItem>
 #include <QDebug>
+#include <QPointF>
+
+#include "game_properties.h"
 
 // ////////////////////////////////////////////////////////////////////////////
 // Class
@@ -18,9 +21,7 @@ class GameMapObject : public QObject
 
 protected:
 
-    int m_x;
-    int m_y;
-
+    QPointF m_point;
     QGraphicsItem* m_item;
 
 public:
@@ -31,6 +32,8 @@ public:
     int X();
     int Y();
     QGraphicsItem* getItem();
+    QPointF point();
+    virtual void updateProperties(GameProperties* properties) = 0;
 
 };
 
