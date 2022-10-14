@@ -5,11 +5,11 @@
 
 monqtmqtt::monqtmqtt()
 {
-        this->m_client = new QMqttClient();
-        this->m_client->setHostname(QString("10.3.0.218"));
-        this->m_client->setPort(1883);
-        this->m_client->setUsername("phoenix");
-        this->m_client->setPassword("ardent");
+    this->m_client = new QMqttClient();
+    this->m_client->setHostname(QString("gerald.imerir.org"));
+    this->m_client->setPort(1883);
+    // this->m_client->setUsername("phoenix");
+    //this->m_client->setPassword("ardent");
 
     connect(this->m_client,&QMqttClient::messageReceived,this,&monqtmqtt::messageReceived);
     connect(this->m_client,&QMqttClient::connected,this,&monqtmqtt::online);

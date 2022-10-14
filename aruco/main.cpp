@@ -3,6 +3,7 @@
 
 
 manager* manage;
+Traitement_Image* ttr;
 
 
 int main(int argc, char *argv[])
@@ -10,8 +11,11 @@ int main(int argc, char *argv[])
 
    QCoreApplication a(argc, argv);
 
-    manage = new manager();
+   manage = new manager();
 
 
+
+   // ttr = new Traitement_Image;
+    //ttr->CameraId();
     return a.exec();
 }

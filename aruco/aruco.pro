@@ -1,5 +1,6 @@
-QT -= gui
+QT += gui
 QT += core mqtt
+
 
 CONFIG += c++17 console
 CONFIG -= app_bundle
@@ -20,7 +21,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 INCLUDEPATH += /usr/local/include/opencv4
-LIBS += -L/usr/local/lib -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_objdetect -lopencv_imgcodecs -lopencv_videoio -lopencv_aruco
+LIBS += -L/usr/local/lib -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_objdetect -lopencv_imgcodecs -lopencv_videoio -lopencv_aruco -lopencv_stitching
 
 HEADERS += \
     manager.h \
